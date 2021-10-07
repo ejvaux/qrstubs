@@ -7,9 +7,22 @@
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
+                <div class="card-body" > 
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+
+                        <div class="form-group row">
+                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                            
+                            <div class="col-md-6">
+                                <input id="uname" type="text" class="form-control{{ $errors->has('uname') ? ' is-invalid' : '' }}" value="{{ old('uname') }}" name="uname" required autofocus>
+                                @if ($errors->has('uname'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('uname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -26,18 +39,22 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
+                                <select id="role" name="role"  class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}"  required autofocus>
+                                    <option class="hidden" selected disabled>-- Select Role --</option>
+                                    <option value="HR">HR</option>
+                                    <option value="Canteen">Canteen</option>
+                                </select>
+                                @if ($errors->has('role'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('role') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
+
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
