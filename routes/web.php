@@ -18,3 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/*
+    EJ - Start
+*/
+Route::get ('/print', 'PrintController@index');
+/*
+    EJ - End
+*/
+
+// TEST
+Route::get('/students','PrintController@index');
+Route::get('/prnpreview','PrintController@prnpriview');
+// TEST

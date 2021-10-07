@@ -30,7 +30,7 @@
     <title>QR Scanner</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-    
+
 </head>
 <body>
     <div class="container">
@@ -40,7 +40,7 @@
             </div>
             <div class="col-md-6">
                 <label>SCAN QR CODE</label>
-                <input type="text" name="text" placeholder="Scan Qr here" id="text" readonly="readonly"> 
+                <input type="text" name="text" placeholder="Scan Qr here" id="text" readonly="readonly">
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
     <script type="text/javascript">
         let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
         scanner.addListener('scan', function (content) {
-        
+
         });
     Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
