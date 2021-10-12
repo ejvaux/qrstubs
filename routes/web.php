@@ -23,11 +23,12 @@ Route::get('/home', 'HomeController@index')->name('home');
     EJ - Start
 */
 Route::get ('/print', 'PrintController@index');
+Route::get ('/layout', 'PrintController@layout');
 /*
     EJ - End
 */
 
 // TEST
-Route::get('/students','PrintController@index');
+Route::get('/students','PrintController@index2');
 Route::get('/prnpreview','PrintController@prnpriview');
 // TEST

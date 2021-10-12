@@ -22,13 +22,17 @@ class PrintController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    /*public function index()
-    {
-        return view('pages.print');
-    }*/
-
-
     public function index()
+    {
+        return view('print.print');
+    }
+
+    public function layout()
+    {
+        return view('print.layoutStubs');
+    }
+
+    public function index2()
       {
             $students = Student::all();
             return view('printstudent')->with('students', $students);;
