@@ -24,6 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 */
 Route::get ('/print', 'PrintController@index');
 Route::get ('/layout', 'PrintController@layout');
+
+Route::get ('/emp', 'EmployeeController@index');
 /*
     EJ - End
 */
