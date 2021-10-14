@@ -27,12 +27,15 @@ Route::get('/userpage', 'HomeController@userhome')->name('userhome');
     EJ - Start
 */
 Route::get ('/print', 'PrintController@index');
+Route::get ('/layout', 'PrintController@layout');
+
+Route::get ('/emp', 'EmployeeController@index');
 /*
     EJ - End
 */
 
 // TEST
-Route::get('/students','PrintController@index');
+Route::get('/students','PrintController@index2');
 Route::get('/prnpreview','PrintController@prnpriview');
 // TEST
 

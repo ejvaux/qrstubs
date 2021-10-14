@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
-        "instascan": "^1.0.0"
+        "instascan": "^1.0.0",
+        "print-js": "^1.6.0"
     }
 }
