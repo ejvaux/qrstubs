@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Stubs;
 use Illuminate\Http\Request;
+use Picqer;
+use App\samplestub;
 
 class StubsController extends Controller
 {
@@ -33,10 +35,6 @@ class StubsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -82,4 +80,31 @@ class StubsController extends Controller
     {
         //
     }
+    public function makeBarcode(){
+        $number='122345';
+        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+        $barcode=$generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
+        return view('pages.barcode',compact('number','barcode'));
+    }
+    public function createBarcode(){
+        return view('pages.createbarcode');
+    }
+    public function store(Request $request)
+    {
+        $number=$request->number;
+        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+        $barcode=$generator->getBarcode($number, $generator::TYPE_CODE_128);
+
+        $data = new samplestubs;
+        $data->name = $request->name;
+        $data->number = $request->number;
+        $data->barcode = $request->barcode;
+        $data->save();
+
+        return view('barcodes');
+    }
+
+    // public function view(){
+    //     $barcode = samplestubs::all();  
+    // }
 }

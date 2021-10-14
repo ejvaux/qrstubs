@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Department;
+use App\role;
+use App\canteen;
+use App\credit;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
 
 class RegisterController extends Controller
 {
@@ -29,6 +34,15 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        $credits = credit::all();
+        $roles = Role::all();
+        $departments= Department::all();
+        $canteens= canteen::all();
+
+        return view('/home', compact('credits','roles','departments','canteens' ));
+    }
 
     /**
      * Create a new controller instance.
@@ -48,6 +62,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        
         return Validator::make($data, [
             'uname' => ['required', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
@@ -67,8 +82,13 @@ class RegisterController extends Controller
         return User::create([
             'uname' => $data['uname'],
             'name' => $data['name'],
-            'role' => $data['role'],
+            'qrcode' => $data['qrcode'],
+            'credit_id' => $data['credit_id'],
+            'role_id' => $data['role_id'],
+            'department_id' => $data['department_id'],
+            'credit_id' => $data['credit_id'],
             'password' => Hash::make($data['password']),
         ]);
+        
     }
 }

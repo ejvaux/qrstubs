@@ -1,26 +1,11 @@
 @extends('layouts.app')
 
+
+@section('js')
+    <script src="{{ asset('js\reg.js') }}" defer></script>
+@endsection
+
 @section('content')
-<!-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +15,8 @@
     <title>QR Scanner</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-
+    <!-- <title>Meal Stub</title>
+    <script type="text/javascript" src="{{ asset('js\instascan.min.js') }}" defer></script> -->
 </head>
 <body>
     <div class="container">
@@ -55,7 +41,7 @@
         });
     Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
-            scanner.start(cameras[1]);
+            scanner.start(cameras[0]);
         } else {
             console.error('No cameras found.');
         }
@@ -70,3 +56,25 @@
 </body>
 </html>
 @endsection
+
+
+
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    You are logged in!
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -17,7 +17,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('uname')->unique();
             $table->string('name');
-            $table->string('role');
+            $table->string('qrcode')->nullable();
+            $table->integer('credit_id')->nullable();
+            $table->integer('role_id');
+            $table->integer('department_id')->nullable();
+            $table->integer('canteen_id')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

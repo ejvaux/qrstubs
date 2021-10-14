@@ -1,5 +1,8 @@
 <?php
 
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/userpage', 'HomeController@userhome')->name('userhome');
 /*
     EJ - Start
 */
@@ -31,3 +35,4 @@ Route::get ('/print', 'PrintController@index');
 Route::get('/students','PrintController@index');
 Route::get('/prnpreview','PrintController@prnpriview');
 // TEST
+
