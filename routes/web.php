@@ -20,7 +20,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 
 // Void the Built in Register button
-Auth::routes(['register' => false]); 
+Auth::routes(['register' => false]);
 
 // Auth::routes();
 Route::get('/', 'HomeController@pages');
@@ -40,7 +40,7 @@ Route::get ('/print', 'PrintController@index');
 Route::get ('/layout', 'PrintController@layout');
 
 Route::get ('/emp', 'EmployeeController@index');
-Route::get ('/canteen-scanning', 'EmployeeController@cntn');
+Route::get ('/cntnform', 'EmployeeController@cntn');
 
 /*
     EJ - End
