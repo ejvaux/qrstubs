@@ -20,7 +20,7 @@
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
                             
                             <div class="col-md-6">
-                                <input id="uname" type="text" class="form-control{{ $errors->has('uname') ? ' is-invalid' : '' }}" value="{{ old('uname') }}" name="uname" required autofocus>
+                                <input id="uname" type="text" class="form-control{{ $errors->has('uname') ? ' is-invalid' : '' }}" placeholder="*Company ID No." value="{{ old('uname') }}" name="uname" required autofocus>
                                 @if ($errors->has('uname'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('uname') }}</strong>
@@ -44,53 +44,53 @@
                         </div>
 
                         
-                        <input type="hidden" name="qrcode">
-                        <input type="hidden" name="credit_id">
+                        <input type="hidden" id="qrcode" name="qrcode" value="wewe">
+                        <input type="hidden" name="credit_id" value="SP202115">
+                        <input type="hidden" name="role_id" value="1">
+                        <input type="hidden" name="department_id" value="">
+                        <input type="hidden" name="canteen_id" value="">
+                        
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
                                 <div class="row" style="font-size: 15px; margin-top: 8px;">
                                     <div class="col-md-3">
-                                        <input type="radio" name="role" value="hr" checked/> HR
+                                        <input type="radio" id="role" name="role" value="1" checked/> HR
                                     </div>
                                     <div class="col-md-5">
-                                        <input type="radio" name="role" value="canteen" />  Canteen
+                                        <input type="radio" id="role" name="role" value="2"/>  Canteen
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="radio" name="role" value="user" />  User
+                                        <input type="radio" id="role" name="role" value="3"/>  User
                                     </div>
                                 </div>
                                 
-                                <div class="canteen select" style="display:none;">
-                                    <select id="canteen" name="canteen" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-                                        <option class="hidden" selected disabled>-- Select Canteen --</option>
-                                        <option class="" >Canteen1</option>
-                                        <option class="" >Canteen2</option>
-                                    </select>
-                                </div>
-                                <div class="user select" style="display:none;">
-                                    <select id="department" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" name="department"  required autofocus>
+                                <div class="3 select" style="display:none;">
+                                    <select id="department_id" name="department_id" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" required autofocus>
                                         <option class="hidden" selected disabled>-- Select Department --</option>
-                                        <option class="" >Taiwanase Sup</option>
-                                        <option class="" >Chinese Sup</option>
+                                        <option value="1"> Taiwanase Sup</option>
+                                        <option value="2"> Chinese Sup</option> 
+                                        <option value="3"> Warehouse Hub</option> 
+                                        <option value="4"> Hr</option> 
+                                    </select>
+                                </div>
+                                <div class="2 select" style="display:none;">
+                                    <select id="canteen_id" name="canteen_id" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" required autofocus>
+                                        <option class="hidden" selected disabled>-- Select Canteen --</option>
+                                        <option value="1" >Canteen1</option>
+                                        <option value="2" >Canteen2</option>
                                     </select>
                                 </div>
                                 
-                                
-                                
-                                <!-- <select id="role" name="role"  class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}"  required autofocus>
-                                    <option class="hidden" selected disabled>-- Select Role --</option>
-                                    
-                                </select>
                                 @if ($errors->has('role'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('role') }}</strong>
                                     </span>
-                                @endif -->
+                                @endif
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="form-group row">

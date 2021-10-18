@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('js')
+    <!-- <script src="{{ asset('js\instascan.min.js') }}" defer></script> -->
+@endsection
+
 @section('content')
 
 <div class="container">

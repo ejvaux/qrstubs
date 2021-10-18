@@ -36,12 +36,10 @@ class RegisterController extends Controller
     protected $redirectTo = '/home';
     protected function redirectTo()
     {
-        $credits = credit::all();
-        $roles = Role::all();
         $departments= Department::all();
-        $canteens= canteen::all();
 
-        return view('/home', compact('credits','roles','departments','canteens' ));
+        // return view('/print', compact('departments'));
+        return view('home', compact('departments'));
     }
 
     /**
@@ -66,7 +64,11 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'uname' => ['required', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
-            'role' => ['required', 'string', 'max:20'],
+            'qrcode' => ['required', 'string', 'max:20'],
+            'credit_id' => ['nullable', 'string', 'max:20'],
+            'role_id' => ['required', 'integer', 'max:20'],
+            'department_id' => ['nullable', 'integer', 'max:20'],
+            'canteen_id' => ['nullable', 'integer', 'max:20'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -86,7 +88,7 @@ class RegisterController extends Controller
             'credit_id' => $data['credit_id'],
             'role_id' => $data['role_id'],
             'department_id' => $data['department_id'],
-            'credit_id' => $data['credit_id'],
+            'canteen_id' => $data['canteen_id'],
             'password' => Hash::make($data['password']),
         ]);
         
