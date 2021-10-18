@@ -13,16 +13,26 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Welcome
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
+// Void the Built in Register button
+Auth::routes(['register' => false]); 
 
+// Auth::routes();
+Route::get('/', 'HomeController@pages');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/userpage', 'HomeController@userhome')->name('userhome');
+
+
+// Pages
+Route::get('/hr', 'HomeController@hr');
+Route::get('/canteen', 'HomeController@canteen');
+Route::get('/user', 'HomeController@user');
+
 /*
     EJ - Start
 */

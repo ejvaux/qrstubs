@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
     public function role()
     {
-        return $this->belongsto('App\role','role_id');
+        return $this->belongsto('App\Role','role_id');
     }
     public function canteen()
     {

@@ -44,7 +44,7 @@
                         </div>
 
                         
-                        <input type="hidden" name="qrcode" value="SP2021">
+                        <input type="hidden" id="qrcode" name="qrcode" value="wewe">
                         <input type="hidden" name="credit_id" value="SP202115">
                         <input type="hidden" name="role_id" value="1">
                         <input type="hidden" name="department_id" value="">

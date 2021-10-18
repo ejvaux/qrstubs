@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\credit;
+use App\Role;
 use App\Department;
-use App\role;
 use App\canteen;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -26,12 +29,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $departments= Department::all();
-
-        return view('home', compact('departments'));
+        return view('home');
     }
-    public function userhome()
+    public function pages()
     {
-        return view('pages/userpage');
+        if((Auth::user()->role_id==1)){
+            return redirect('hr');
+        }
+        elseif((Auth::user()->role_id==2))
+        {
+            return redirect('canteen');
+        }
+        elseif((Auth::user()->role_id==3))
+        {
+            return redirect('user');
+        }
+    }
+    public function hr(Request $req)
+    {
+        return view('pages.hr.hr-home');
+    }
+    public function canteen(Request $req)
+    {
+        return view('pages.canteen.ctn-home');
+    }
+    public function user(Request $req)
+    {
+        return view('pages.user.user-qr');
     }
 }
