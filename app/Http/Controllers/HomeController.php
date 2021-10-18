@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Department;
+use App\role;
+use App\canteen;
 
 class HomeController extends Controller
 {
@@ -23,7 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $departments= Department::all();
+
+        return view('home', compact('departments'));
     }
     public function userhome()
     {

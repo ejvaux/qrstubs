@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'uname', 'role', 'name', 'password',
+        'uname',  'name', 'qrcode', 'role_id', 'password',
     ];
 
     /**
@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function department()
     {
-        return $this->belongsto('App\department','department_id');
+        return $this->belongsto('App\Department','department_id');
     }
     public function role()
     {

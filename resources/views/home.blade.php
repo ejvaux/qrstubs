@@ -1,10 +1,5 @@
 @extends('layouts.app')
 
-
-@section('js')
-    <script src="{{ asset('js\reg.js') }}" defer></script>
-@endsection
-
 @section('content')
 <!DOCTYPE html>
 <html lang="en">
