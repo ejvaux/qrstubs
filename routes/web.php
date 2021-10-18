@@ -30,6 +30,8 @@ Route::get ('/print', 'PrintController@index');
 Route::get ('/layout', 'PrintController@layout');
 
 Route::get ('/emp', 'EmployeeController@index');
+Route::get ('/canteen-scanning', 'EmployeeController@cntn');
+
 /*
     EJ - End
 */
