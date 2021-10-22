@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Department;
-use App\role;
+use App\Role;
 use App\canteen;
 use App\credit;
 use App\Http\Controllers\Controller;
@@ -33,13 +33,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-    protected function redirectTo()
+    protected $redirectTo = '/';
+    public function showRegistrationForm()
     {
         $departments= Department::all();
-
-        // return view('/print', compact('departments'));
-        return view('home', compact('departments'));
+        return view('auth.register', compact('departments'));
     }
 
     /**
@@ -62,9 +60,9 @@ class RegisterController extends Controller
     {
         
         return Validator::make($data, [
-            'uname' => ['required', 'string', 'max:20'],
+            'uname' => ['required', 'unique:users', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
-            'qrcode' => ['required', 'string', 'max:20'],
+            'qrcode' => ['nullable', 'string', 'max:20'],
             'credit_id' => ['nullable', 'string', 'max:20'],
             'role_id' => ['required', 'integer', 'max:20'],
             'department_id' => ['nullable', 'integer', 'max:20'],
@@ -81,11 +79,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $qrcode = 'SPO'.$data['uname'];
+        $credit = 1212123121;
         return User::create([
             'uname' => $data['uname'],
             'name' => $data['name'],
-            'qrcode' => $data['qrcode'],
-            'credit_id' => $data['credit_id'],
+            'qrcode' => Hash::make($qrcode),
+            'credit_id' => $credit,
             'role_id' => $data['role_id'],
             'department_id' => $data['department_id'],
             'canteen_id' => $data['canteen_id'],

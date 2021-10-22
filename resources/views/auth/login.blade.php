@@ -58,4 +58,7 @@
         </div>
     </div>
 </div>
+<footer style="position:absolute; width:100%;">
+    @include('includes.footer')
+</footer>
 @endsection

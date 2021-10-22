@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
     <!-- Scanner -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -60,6 +61,21 @@
                                 </li>
                             @endif
                         @else
+                            @if(Auth::user()->role_id==2 || Auth::user()->role_id==3)
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                            </li> 
+                            @endif
+                            @if(Auth::user()->role_id==2)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('ctntransact') }}">{{ __('Transactions') }}</a>
+                                </li>   
+                            @endif
+                            @if(Auth::user()->role_id==3)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('usrtransact') }}">{{ __('Transactions') }}</a>
+                                </li>   
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

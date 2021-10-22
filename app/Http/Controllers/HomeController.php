@@ -55,6 +55,15 @@ class HomeController extends Controller
     }
     public function user(Request $req)
     {
-        return view('pages.user.user-qr');
+        return view('pages.user.user-home');
     }
+    public function usrtransact(Request $req)
+    {
+        return view('pages.user.user-transaction');
+    }
+    public function ctntransact(Request $req)
+    {
+        return view('pages.canteen.ctn-transaction');
+    }
+    
 }
