@@ -6,8 +6,7 @@
 
 @section('content')
 
-<body class="body">
-<div class="container1">
+{{--<div class="container1">
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
@@ -21,11 +20,12 @@
             <label>SCAN QR CODE</label>
             <input type="text" name="text" placeholder="Scan Qr here" id="text" readonly="readonly">
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <button id="scann">scan</button>
+        </div>
     </div>
-</div>
-</body>
-
+</div>--}}
+@include('emp.canteenScanning')
 <footer style="position:absolute; width:100%;">
     @include('includes.footer')
 </footer>

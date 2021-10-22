@@ -1,10 +1,10 @@
-@extends('layouts.app')
+{{--@extends('layouts.app')
 
 @section('js')
     <script src="{{ asset('js/emp/emp.js') }}" defer></script>
 @endsection
 
-@section('content')
+@section('content')--}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -15,49 +15,27 @@
                     <!-- ____________ FORM __________________ -->
 
                 <div class="form-group row">
-                    <div class="col-6">
+                    <div class="col">
                         <div class="row">
-                            <div class="col-5">
-                                <label for="product_number" class="col-form-label">Amount:</label>
+                            <div class="col-4">
+                                <label for="product_number" class="col-form-label">Enter amount:</label>
                             </div>
-                            <div class="col-7">
+                            <div class="col-8">
                                 <input class='form-control form-control' type="text" name="product_number" id="product_number">
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col border mr-2">
-                                <video id ="preview">
-                            </div>
-                        </div>
-                    </div>
-                    {{--<div class="col-6">
-                        <div class="row">
-                            <div class="col-5">
-                                <label for="authorized_vendor" class="col-form-label">Authorized Vendor:</label>
-                            </div>
-                            <div class="col-7">
-                                <input class='form-control form-control' type="text" name="authorized_vendor" id="authorized_vendor">
-                            </div>
-                        </div>
-                    </div>--}}
                 </div>
-                {{--<div class="form-group row">
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-5">
-                                <label for="vendor_pn" class="col-form-label">Vendor P/N:</label>
-                            </div>
-                            <div class="col-7">
-                                <input class='form-control form-control' type="text" name="vendor_pn" id="vendor_pn">
-                            </div>
-                        </div>
-                    </div>
-                </div>--}}
                 <!-- ____________ FORM END __________________ -->
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="scanqrBtn" type="button" class="btn btn-primary">Scan QR</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
-@endsection
+</div>
+@include('includes.modal.scanModal')
+{{--@endsection--}}
