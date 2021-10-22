@@ -43,7 +43,6 @@
 
                         
                         <input type="hidden" id="qrcode" name="qrcode" value=" ">
-                        <input type="hidden" id="credit_id" name="credit_id" value=" ">
                         
 
                         <div class="form-group row">
@@ -51,10 +50,10 @@
                             <div class="col-md-6">
                             <select id="role_id" name="role_id" class="form-control{{ $errors->has('role_id') ? ' is-invalid' : '' }}" value="{{ old('role_id') }}" required autofocus>
                                     <option value=" "class="hidden" selected disabled>-- Select Role --</option>
-                                    <option value="1"> Hr</option>
-                                    <option value="2"> Canteen</option> 
-                                    <option value="3"> User</option> 
-                                </select>
+                                    @foreach ($roles as $role)
+                                        <option value="{{$role->id}}">{{$role->name}} </option>
+                                    @endforeach
+                            </select>
                                 @if ($errors->has('role'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('role') }}</strong>
@@ -68,10 +67,9 @@
                                 <select id="department_id" name="department_id" class="form-control{{ $errors->has('department') ? ' is-invalid' : '' }}" value="{{ old('department') }}" required autofocus>
                                     <!-- <option value="" class="hidden" selected disabled>-- Select Department --</option> -->
                                     <option value=" " selected> None</option> 
-                                    <option value="1"> Taiwanase Sup</option>
-                                    <option value="2"> Chinese Sup</option> 
-                                    <option value="3"> Warehouse Hub</option> 
-                                    <option value="4"> Hr</option> 
+                                    @foreach ($departments as $department)
+                                        <option value="{{$department->id}}">{{$department->name}} </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>       
@@ -82,8 +80,9 @@
                                 <select id="canteen_id" name="canteen_id" class="form-control{{ $errors->has('canteen') ? ' is-invalid' : '' }}" value="{{ old('canteen') }}" required autofocus>
                                     <!-- <option value=" " class="hidden" selected disabled>-- Select Canteen --</option> -->
                                     <option value=" " selected> None </option> 
-                                    <option value="1" > Canteen1</option>
-                                    <option value="2" > Canteen2</option>
+                                    @foreach ($canteens as $canteen)
+                                        <option value="{{$canteen->id}}">{{$canteen->name}} </option>
+                                    @endforeach
                                 </select>
                                 
                                 

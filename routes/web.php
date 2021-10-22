@@ -16,10 +16,12 @@
 // });
 
 
-// Void the Built in Register button
+// Hide the Built in Register button (Admin)
 // Auth::routes(['register' => false]);
 
+//Show the Auth
 Auth::routes();
+
 Route::get('/', 'HomeController@pages');
 Route::get('/home', 'HomeController@index')->name('home');
 

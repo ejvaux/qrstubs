@@ -16,11 +16,9 @@
                     @if ($employees->count() > 0)
                         @foreach ($employees as $employee)
                             <tr>
+                                <td>{{$employee->uname}}</td>
                                 <td>{{$employee->name}}</td>
-                                <td>{{$employee->gender}}</td>
-                                <td>{{$employee->email}}</td>
-                                <td>{{$employee->phone}}</td>
-                                <td>{{$employee->position->name}}</td>
+                                <td>{{$employee->credit->}}</td>
                                 <td>{{$employee->department->name}}</td>
                                 <td width="150" style="text-align:center">
                                     <button class="btn btn-success" data-myid="{{$employee->id}}" data-myname="{{$employee->name}}" data-myemail="{{$employee->email}}" data-myphone="{{$employee->phone}}" data-myposition="{{$employee->position->name}}" data-mydepartment="{{$employee->department->name}}"data-toggle="modal" data-target="#editModal" >Edit</button>
