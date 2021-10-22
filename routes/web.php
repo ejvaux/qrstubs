@@ -1,8 +1,5 @@
 <?php
 
-
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,19 +17,26 @@ use App\Http\Controllers\Auth\RegisterController;
 
 
 // Void the Built in Register button
-Auth::routes(['register' => false]);
+// Auth::routes(['register' => false]);
 
-// Auth::routes();
+Auth::routes();
 Route::get('/', 'HomeController@pages');
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 
 // Pages
 Route::get('/hr', 'HomeController@hr');
 Route::get('/canteen', 'HomeController@canteen');
 Route::get('/user', 'HomeController@user');
+Route::get('/usrtransact', 'HomeController@usrtransact');
+Route::get('/ctntransact', 'HomeController@ctntransact');
 
+Route::resources([
+    'employees' => 'UserController',
+]);
+
+// User Registration
+Route::post('registerUser', 'UserController@store');
 /*
     EJ - Start
 */
