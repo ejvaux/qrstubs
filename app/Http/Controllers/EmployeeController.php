@@ -28,4 +28,9 @@ class EmployeeController extends Controller
         $emps = $this->employee;
         return view('emp.emp',compact('emps'));
     }
+
+    public function cntn()
+    {
+        return view('emp.canteenScanning');
+    }
 }

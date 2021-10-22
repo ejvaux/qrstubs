@@ -40,7 +40,7 @@ Route::get ('/print', 'PrintController@index');
 Route::get ('/layout', 'PrintController@layout');
 
 Route::get ('/emp', 'EmployeeController@index');
-Route::get ('/cntnform', 'EmployeeController@cntn');
+Route::get ('/ctform', 'EmployeeController@cntn');
 
 /*
     EJ - End
