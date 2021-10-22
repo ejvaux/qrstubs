@@ -37,7 +37,9 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $departments= Department::all();
-        return view('auth.register', compact('departments'));
+        $roles = Role::all();
+        $canteens = canteen::all();
+        return view('auth.register', compact('departments', 'roles','canteens'));
     }
 
     /**
@@ -63,7 +65,6 @@ class RegisterController extends Controller
             'uname' => ['required', 'unique:users', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
             'qrcode' => ['nullable', 'string', 'max:20'],
-            'credit_id' => ['nullable', 'string', 'max:20'],
             'role_id' => ['required', 'integer', 'max:20'],
             'department_id' => ['nullable', 'integer', 'max:20'],
             'canteen_id' => ['nullable', 'integer', 'max:20'],
@@ -80,12 +81,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $qrcode = 'SPO'.$data['uname'];
-        $credit = 1212123121;
         return User::create([
             'uname' => $data['uname'],
             'name' => $data['name'],
             'qrcode' => Hash::make($qrcode),
-            'credit_id' => $credit,
             'role_id' => $data['role_id'],
             'department_id' => $data['department_id'],
             'canteen_id' => $data['canteen_id'],

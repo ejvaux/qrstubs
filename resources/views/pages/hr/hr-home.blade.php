@@ -68,6 +68,65 @@
                 </div>
             </div>             
             {{-- End of Registration --}}
+
+            {{-- Editing content--}}
+
+            <div class="modal modal-primary fade" id="editModal" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 style="margin-left:0.83em; margin-top:0.3em; font-size: 1.5em; font-weight: bold;">Edit Employee Data</h5>
+                            <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form id="editUserForm" action="{{route('employees.update','test')}}" method="post">
+                                {{csrf_field()}}
+                                {{method_field('patch')}}
+                            <div class="modal-body">
+                                @include('includes.editform')
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" id="editUserBtn" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>    
+                
+            {{--End of editing --}}
+            
+            {{--Start of deleting--}}
+
+            <div class="modal modal-danger fade" id="deleteModal" data-backdrop="false" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 style="margin-left:0.83em; margin-top:0.3em; font-size: 1.5em; font-weight: bold;">Delete Confirmation</h5>
+                            <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form id="deleteUserForm" action="{{route('employees.destroy','test')}}" method="post">
+                                {{csrf_field()}}
+                                {{method_field('delete')}}
+                        <div class="modal-body">
+                                <input type="hidden" name="employee_id" id="emp_id" value="">
+                                <p class="text-left"> Are you sure you want to delete this record?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
+                            <button type="submit" id="deleteUserBtn" class="btn btn-danger">Yes, Delete</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {{--End of deleting--}}
     </div>
 </div>
 </body>

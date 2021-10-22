@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStubsTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateStubsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stubs', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('control_number');
+            $table->integer('user_id');
+            $table->string('credit_id');
+            $table->string('control_no');
+            $table->integer('canteen_id');
             $table->integer('price');
-            $table->integer('department_id');
-            $table->string('start_date');
-            $table->string('expiration_date');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateStubsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stubs');
+        Schema::dropIfExists('transactions');
     }
 }
