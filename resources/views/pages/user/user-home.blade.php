@@ -16,12 +16,12 @@
                 </center>
             </div>
             <div class="col-md-3"></div>
-        </div><br><br>
+        </div><br><br><br>
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <h1 style="text-align: center;"> 
-                  <b>₱ {{ Auth::user()->department->name }} </b>
+                  
                 </h1>
             </div>
             <div class="col-md-3"></div>   

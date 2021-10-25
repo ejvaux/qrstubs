@@ -81,6 +81,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $qrcode = 'SPO'.$data['uname'];
+
         return User::create([
             'uname' => $data['uname'],
             'name' => $data['name'],

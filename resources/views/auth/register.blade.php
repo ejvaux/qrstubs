@@ -64,9 +64,8 @@
                         <div class="form-group row">
                             <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
                             <div class="col-md-6">
-                                <select id="department_id" name="department_id" class="form-control{{ $errors->has('department') ? ' is-invalid' : '' }}" value="{{ old('department') }}" required autofocus>
-                                    <!-- <option value="" class="hidden" selected disabled>-- Select Department --</option> -->
-                                    <option value=" " selected> None</option> 
+                                <select id="department_id" name="department_id" class="form-control{{ $errors->has('department_id') ? ' is-invalid' : '' }}" value="{{ old('department_id') }}" required autofocus>
+                                    <option value=" " class="hidden" selected>-- Select Department --</option>
                                     @foreach ($departments as $department)
                                         <option value="{{$department->id}}">{{$department->name}} </option>
                                     @endforeach
@@ -78,14 +77,11 @@
                             <label for="canteen" class="col-md-4 col-form-label text-md-right">{{ __('Canteen') }}</label>
                             <div class="col-md-6">
                                 <select id="canteen_id" name="canteen_id" class="form-control{{ $errors->has('canteen') ? ' is-invalid' : '' }}" value="{{ old('canteen') }}" required autofocus>
-                                    <!-- <option value=" " class="hidden" selected disabled>-- Select Canteen --</option> -->
-                                    <option value=" " selected> None </option> 
+                                    <option value=" " class="hidden" selected>-- Select Canteen --</option>
                                     @foreach ($canteens as $canteen)
-                                        <option value="{{$canteen->id}}">{{$canteen->name}} </option>
+                                        <option value="{{$canteen->id}}">{{$canteen->name}}</option>
                                     @endforeach
                                 </select>
-                                
-                                
                             </div>
                         </div>             
 
