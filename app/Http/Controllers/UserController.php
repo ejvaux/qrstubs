@@ -22,7 +22,6 @@ class UserController extends Controller
         $roles = Role::all();
         $credits = credit::all();
         $departments = Department::all();
-        $canteens = canteen::all();
         $name = $request->input('searchtxt');
         if($name == ""){
             $employees = User::paginate(10);
@@ -31,7 +30,7 @@ class UserController extends Controller
             $employees = User::where('name', 'like', '%'.$name.'%')->paginate(10);
         }
 
-        return view('',compact('employees','roles', 'credits', 'departments', 'canteens'));
+        return view('includes.table.userTbl',compact('employees','roles', 'credits', 'departments', ));
     }
 
     /**
@@ -56,15 +55,12 @@ class UserController extends Controller
             'uname' => ['required', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
             'qrcode' => ['required', 'string', 'max:20'],
-            'credit_id' => ['nullable', 'string', 'max:20'],
             'role_id' => ['required', 'integer', 'max:20'],
             'department_id' => ['nullable', 'integer', 'max:20'],
-            'canteen_id' => ['nullable', 'integer', 'max:20'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             
         ]);
 
-        $credit = 'SPI'.$request->uname;
         $qrcode = 'SPO'.$request->uname;
         $hashed = Hash::make($qrcode);
         $password = $request->password;
@@ -75,7 +71,6 @@ class UserController extends Controller
         $register->uname = $request->uname;
         $register->name = $request->name;
         $register->qrcode = $hashed;
-        $register->credit_id = $credit;
         $register->role_id = $request->role_id;
         $register->department_id = $request->department_id;
         $register->password = $hashed2;
@@ -119,8 +114,6 @@ class UserController extends Controller
         $employee = User::findOrFail($request->employee_id);
         $employee->name = $request->name;
         $employee->uname = $request->uname;
-        $employee->role_id = $request->role_id;
-        $employee->canteen_id = $request->canteen_id;
         $employee->department_id = $request->department_id;
         $employee->save();
        
