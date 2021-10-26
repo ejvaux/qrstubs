@@ -66,7 +66,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:20'],
             'qrcode' => ['nullable', 'string', 'max:20'],
             'role_id' => ['required', 'integer', 'max:20'],
-            'department_id2' => ['nullable', 'integer', 'max:20'],
+            'department_id' => ['nullable', 'integer', 'max:20'],
             'canteen_id' => ['nullable', 'integer', 'max:20'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
