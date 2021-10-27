@@ -3,14 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\credit;
-use App\Role;
-use App\Department;
-use App\canteen;
-use Auth;
 
-class UserController extends Controller
+class HrController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,13 +18,13 @@ class UserController extends Controller
         $departments = Department::all();
         $name = $request->input('searchtxt');
         if($name == ""){
-            $employees = User::paginate(10);
+            $users = User::paginate(10);
         }
         else{
-            $employees = User::where('name', 'like', '%'.$name.'%')->paginate(10);
+            $users = User::where('name', 'like', '%'.$name.'%')->paginate(10);
         }
 
-        return view('includes.table.userTbl',compact('employees','roles', 'credits', 'departments', ));
+        return view('includes.table.hrTbl',compact('users','roles', 'credits', 'departments', ));
     }
 
     /**
@@ -51,6 +45,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         $request->validate([
             'uname' => ['required', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
@@ -58,7 +53,7 @@ class UserController extends Controller
             'role_id' => ['required', 'integer', 'max:20'],
             'department_id' => ['nullable', 'integer', 'max:20'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-
+            
         ]);
 
         $qrcode = 'SPO'.$request->uname;
@@ -67,14 +62,14 @@ class UserController extends Controller
         $hashed2 = Hash::make($password);
 
         $register = new User;
-
+        
         $register->uname = $request->uname;
         $register->name = $request->name;
         $register->qrcode = $hashed;
         $register->role_id = $request->role_id;
         $register->department_id = $request->department_id;
         $register->password = $hashed2;
-
+        
         $register->save();
 
         return 'success';
@@ -116,7 +111,7 @@ class UserController extends Controller
         $employee->uname = $request->uname;
         $employee->department_id = $request->department_id;
         $employee->save();
-
+       
         return 'success';
     }
 
@@ -129,17 +124,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getUser($qr)
-    {
-        $user = User::with('department')->where('qrcode',$qr)->first();
-        return $user;
-    }
-
-    public function getUserCredit(Request $request)
-    {
-        $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
-        return $credit;
     }
 }

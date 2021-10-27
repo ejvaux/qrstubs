@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('js')
-    <script src="{{ asset('js\usr.js') }}" defer></script>
+    <script src="{{ asset('js\user.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -16,8 +16,9 @@
                 </div>
             </div>
             <div class="card-body">
-                <div id="transactionTable">
-                    {{-- // TABLE DIRECT JS SUPERVISOR --}}
+                <div id="usertransactTable">
+                    {{-- // TABLE DIRECT JS User Transaction --}}
+                    {{-- @include('includes.table.userTbl') --}}
                 </div>
             </div>
             

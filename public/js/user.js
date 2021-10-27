@@ -1,4 +1,4 @@
-function LoadUsrTbl(search, url = 'usr'){
+function LoadUsrTbl(search, url = 'usrtrct'){
     $.ajax({
       url: url,
       type:'get',
@@ -6,13 +6,15 @@ function LoadUsrTbl(search, url = 'usr'){
           
       },
       success: function (data) {
-          $('#transactionTable').html(data); 
+          $('#usertransactTable').html(data); 
       }
   });
 }
 LoadUsrTbl();
 
-$('#transactionTable').on('click', '.page-link', function(e){
+
+// TABLE RELOAD PAGINATE 
+$('#usertransactTable').on('click', '.page-link', function(e){
     e.preventDefault();
     LoadUsrTbl('',$(this).attr('href'));
 });

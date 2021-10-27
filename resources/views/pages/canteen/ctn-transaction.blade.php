@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('js')
-    <script src="{{ asset('js\canteen.js') }}" defer></script>
+    <script src="{{ asset('js\ctn.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <div id="transactionTable">
+                <div id="canteenTable">
                     {{-- // TABLE DIRECT JS SUPERVISOR --}}
                 </div>
             </div>
