@@ -4,25 +4,24 @@
         <tr> &nbsp; &nbsp; 
             <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;USERNAME</th>
             <th>NAME</th>
-            <th>CREDIT</th>
-            <th>ROLE</th>
+            <th>CREDIT AMOUNT</th>
             <th>DEPARTMENT</th>
             <th colspan="2" style="text-align:center">ACTION</th>
         </tr>
         </thead>
         <tbody>
             @if(Auth::check() && Auth::user()->role_id == 1)
-                @isset($employees)
-                    @if ($employees->count() > 0)
-                        @foreach ($employees as $employee)
+                @isset($users)
+                    @if ($users->count() > 0)
+                        @foreach ($users as $user)
                             <tr>
-                                <td>{{$employee->uname}}</td>
-                                <td>{{$employee->name}}</td>
-                                <td>{{$employee->credit->}}</td>
-                                <td>{{$employee->department->name}}</td>
+                                <td>{{$user->uname}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->credit->amount}}</td>
+                                <td>{{$user->department->name}}</td>
                                 <td width="150" style="text-align:center">
-                                    <button class="btn btn-success" data-myid="{{$employee->id}}" data-myname="{{$employee->name}}" data-myemail="{{$employee->email}}" data-myphone="{{$employee->phone}}" data-myposition="{{$employee->position->name}}" data-mydepartment="{{$employee->department->name}}"data-toggle="modal" data-target="#editModal" >Edit</button>
-                                    <button class="btn btn-danger" data-myid="{{$employee->id}}" data-toggle="modal" data-target="#deleteModal" >Delete</button>                                   
+                                    <button class="btn btn-success" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-amount="{{$user->credit->amount}}" data-mydepartment="{{$user->department->name}}"data-toggle="modal" data-target="#editModal" >Edit</button>
+                                    <button class="btn btn-danger" data-myid="{{$user->id}}" data-toggle="modal" data-target="#deleteModal" >Delete</button>                                   
                                 </td>
                             </tr>
                         @endforeach
@@ -45,9 +44,9 @@
 </div>
 <div class="row">
     <div class="col-md">
-        @isset($employees)
+        @isset($users)
             {{-- {{ $employees->appends(request()->query())->links() }} --}}
-            {!! $employees->appends(\Request::except('page'))->render() !!}
+            {!! $users->appends(\Request::except('page'))->render() !!}
             {{-- Input::except(array('page')) --}}
         @endisset                        
     </div>    

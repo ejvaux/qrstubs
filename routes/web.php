@@ -34,8 +34,8 @@ Route::get('/usrtransact', 'HomeController@usrtransact');
 Route::get('/ctntransact', 'HomeController@ctntransact');
 
 Route::resources([
-    'users' => 'UserController',
-    'credits' => 'CreditController',
+    'hrc' => 'HrController',
+    'ctn' => 'CanteenController',
     'usrtrct' => 'TransactionController',
     
 ]);

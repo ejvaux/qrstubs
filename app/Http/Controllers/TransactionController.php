@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\User;
+use Carbon\Carbon;
 use App\transaction;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,26 @@ class TransactionController extends Controller
                     ->orderBy('id', 'DESC')->paginate(10);
 
         return view('includes.table.userTbl', compact('transactions'));
+    }
+    public function home()
+    {
+        $user_id = Auth::user()->id;
+        $qrcode = Auth::user()->qrcode;
+        $control_no = 'SP202110B';
+        //Get Date today
+        $todayDate = Carbon::now()->format('Y-m');
+        dd($todayDate);
+
+        //Credit amount of User
+        $credit = credit::select('credit_amount')->where('user_id', 'like', $user_id)
+                    ->where('control_no', 'like', $control_no);
+        //Transactions of User
+        $price = transaction::select('price')->where('user_id', 'like', $user_id)
+                    ->where('control_no', 'like', $control_no);
+        //Computation of User
+        $balance = 'hello';
+
+        return view('pages.user.user-home', compact('qrcode'));
     }
 
     /**

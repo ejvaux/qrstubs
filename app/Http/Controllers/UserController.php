@@ -19,18 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        $credits = credit::all();
-        $departments = Department::all();
-        $name = $request->input('searchtxt');
-        if($name == ""){
-            $employees = User::paginate(10);
-        }
-        else{
-            $employees = User::where('name', 'like', '%'.$name.'%')->paginate(10);
-        }
-
-        return view('includes.table.userTbl',compact('employees','roles', 'credits', 'departments', ));
+        //
     }
 
     /**
@@ -51,33 +40,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'uname' => ['required', 'string', 'max:20'],
-            'name' => ['required', 'string', 'max:20'],
-            'qrcode' => ['required', 'string', 'max:20'],
-            'role_id' => ['required', 'integer', 'max:20'],
-            'department_id' => ['nullable', 'integer', 'max:20'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-            
-        ]);
-
-        $qrcode = 'SPO'.$request->uname;
-        $hashed = Hash::make($qrcode);
-        $password = $request->password;
-        $hashed2 = Hash::make($password);
-
-        $register = new User;
-        
-        $register->uname = $request->uname;
-        $register->name = $request->name;
-        $register->qrcode = $hashed;
-        $register->role_id = $request->role_id;
-        $register->department_id = $request->department_id;
-        $register->password = $hashed2;
-        
-        $register->save();
-
-        return 'success';
+        //
     }
 
     /**
@@ -111,13 +74,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employee = User::findOrFail($request->employee_id);
-        $employee->name = $request->name;
-        $employee->uname = $request->uname;
-        $employee->department_id = $request->department_id;
-        $employee->save();
-       
-        return 'success';
+        //
     }
 
     /**

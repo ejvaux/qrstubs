@@ -18,14 +18,13 @@ class CanteenController extends Controller
     public function index()
     {
         $user = User::all();
-        $ctnname = canteen::all();
         $canteen = Auth::user()->canteen_id;
 
         //Don't forget pagination when displaying table
         $transactions = transaction::where('canteen_id', 'like', $canteen)
                     ->orderBy('id', 'DESC')->paginate(10);
 
-        return view('includes.table.ctnTbl', compact('transactions','ctnname', 'user'));
+        return view('includes.table.ctnTbl', compact('transactions', 'user'));
     }
 
     /**

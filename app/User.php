@@ -55,6 +55,7 @@ class User extends Authenticatable
     }
     public function credit()
     {
-        return $this->belongsto('App\credit','credit_id');
+        return $this->belongsto('App\credit','id');
     }
+    
 }

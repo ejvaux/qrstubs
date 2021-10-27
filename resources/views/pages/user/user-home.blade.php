@@ -3,7 +3,7 @@
 @section('content')
 
 @php
-    $name = Auth::user()->qrcode;
+    $qrcode = Auth::user()->qrcode;
 @endphp
 
 <body class="body">
@@ -12,7 +12,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <center>
-                {!! QrCode::size(250)->generate($name); !!}
+                {!! QrCode::size(250)->generate($qrcode); !!}
                 </center>
             </div>
             <div class="col-md-3"></div>
@@ -21,7 +21,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <h1 style="text-align: center;"> 
-                  
+                    
                 </h1>
             </div>
             <div class="col-md-3"></div>   

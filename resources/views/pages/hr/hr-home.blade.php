@@ -125,7 +125,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> 
             {{--End of deleting--}}
     </div>
 </div>
