@@ -22,7 +22,7 @@ class TransactionController extends Controller
         $transactions = transaction::where('user_id', 'like', $users)
                     ->orderBy('id', 'DESC')->paginate(10);
 
-        return view('includes.table.userTbl', compact('transactions','users'));
+        return view('includes.table.userTbl', compact('transactions'));
     }
 
     /**
