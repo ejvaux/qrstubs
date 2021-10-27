@@ -61,7 +61,7 @@ class UserController extends Controller
             'department_id' => ['nullable', 'integer', 'max:20'],
             'canteen_id' => ['nullable', 'integer', 'max:20'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-            
+
         ]);
 
         $credit = 'SPI'.$request->uname;
@@ -71,7 +71,7 @@ class UserController extends Controller
         $hashed2 = Hash::make($password);
 
         $register = new User;
-        
+
         $register->uname = $request->uname;
         $register->name = $request->name;
         $register->qrcode = $hashed;
@@ -79,7 +79,7 @@ class UserController extends Controller
         $register->role_id = $request->role_id;
         $register->department_id = $request->department_id;
         $register->password = $hashed2;
-        
+
         $register->save();
 
         return 'success';
@@ -123,7 +123,7 @@ class UserController extends Controller
         $employee->canteen_id = $request->canteen_id;
         $employee->department_id = $request->department_id;
         $employee->save();
-       
+
         return 'success';
     }
 
@@ -136,5 +136,17 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getUser($qr)
+    {
+        $user = User::with('department')->where('qrcode',$qr)->first();
+        return $user;
+    }
+
+    public function getUserCredit(Request $request)
+    {
+        $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
+        return $credit;
     }
 }

@@ -34,7 +34,7 @@ Route::get('/usrtransact', 'HomeController@usrtransact');
 Route::get('/ctntransact', 'HomeController@ctntransact');
 
 Route::resources([
-    'employees' => 'UserController',
+    'user' => 'UserController',
 ]);
 
 // User Registration
@@ -47,6 +47,10 @@ Route::get ('/layout', 'PrintController@layout');
 
 Route::get ('/emp', 'EmployeeController@index');
 Route::get ('/ctform', 'EmployeeController@cntn');
+
+Route::get ('/getuser/{qr}', 'UserController@getUser');
+Route::post ('/getUserCredit', 'UserController@getUserCredit');
+Route::post ('/transact', 'TransactionController@transact');
 
 /*
     EJ - End
