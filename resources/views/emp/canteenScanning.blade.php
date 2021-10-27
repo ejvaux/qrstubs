@@ -15,8 +15,8 @@
                             <span class="font-weight-bold">Canteen Scanning</span>
                         </div>
                         <div class="col">
-                            <select id="cameraSelect" name="camera" class="form-control form-control-sm">
-                                {{--<option value="">- Select Camera -</option>--}}
+                            <select id="cameraSelect" name="camera" class="form-control form-control-sm" disabled>
+                                <option value="check">Loading Cameras . . .</option>
                             </select>
                         </div>
                     </div>

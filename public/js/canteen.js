@@ -1,23 +1,75 @@
 $(document).ready(function () {
-    Instascan.Camera.getCameras().then(function (cameras) {
-    if (cameras.length > 0) {
-        $.each(cameras, function( i,val ) {
-            var opt = document.createElement('option');
-            opt.value = i;
-            opt.text = val.name;
-            $("#cameraSelect").prepend(opt);
+    /*navigator.getUserMedia({
+        video: true,
+        audio: true
+     });*/
+    navigator.mediaDevices.getUserMedia(
+        {
+            video: true
+         }
+    )
+     .then( function(stream){
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                $("#cameraSelect option[value='check']").remove();
+                $("#cameraSelect").prop('disabled',false);
+                $.each(cameras, function( i,val ) {
+                    var opt = document.createElement('option');
+                    opt.value = i;
+                    opt.text = val.name;
+                    $("#cameraSelect").prepend(opt);
+                });
+                $("#cameraSelect").val(cameras.length-1);
+            } else {
+                var opt = document.createElement('option');
+                    opt.text = "No cameras found.";
+                    $("#cameraSelect").append(opt);
+                $("#cameraSelect").prop("disabled",true);
+                console.error('No cameras found.');
+            }
+            }).catch(function (e) {
+                console.error(e);
         });
-        $("#cameraSelect").val(cameras.length-1);
-    } else {
-        var opt = document.createElement('option');
-            opt.text = "No cameras found.";
-            $("#cameraSelect").append(opt);
-        $("#cameraSelect").prop("disabled",true);
-        console.error('No cameras found.');
-    }
-    }).catch(function (e) {
-        console.error(e);
-    });
+     }
+     );
+    /*navigator.getUserMedia (
+        // constraints
+        {
+           video: true,
+           audio: true
+        },
+
+        // successCallback
+        function(localMediaStream) {
+            Instascan.Camera.getCameras().then(function (cameras) {
+                if (cameras.length > 0) {
+                    $.each(cameras, function( i,val ) {
+                        var opt = document.createElement('option');
+                        opt.value = i;
+                        opt.text = val.name;
+                        $("#cameraSelect").prepend(opt);
+                    });
+                    $("#cameraSelect").val(cameras.length-1);
+                } else {
+                    var opt = document.createElement('option');
+                        opt.text = "No cameras found.";
+                        $("#cameraSelect").append(opt);
+                    $("#cameraSelect").prop("disabled",true);
+                    console.error('No cameras found.');
+                }
+                }).catch(function (e) {
+                    console.error(e);
+            });
+        },
+
+        // errorCallback
+        function(err) {
+         if(err === PERMISSION_DENIED) {
+           // Explain why you need permission and how to update the permission setting
+         }
+        }
+     );*/
+
     //$('#msg').text(generateControlNum(new Date()));
 });
 
