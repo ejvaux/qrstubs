@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\User;
 use App\transaction;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,13 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $users = Auth::user()->id;
+
+        //Don't forget pagination when displaying table
+        $transactions = transaction::where('user_id', 'like', $users)
+                    ->orderBy('id', 'DESC')->paginate(10);
+
+        return view('includes.table.userTbl', compact('transactions','users'));
     }
 
     /**

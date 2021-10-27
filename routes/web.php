@@ -34,10 +34,13 @@ Route::get('/usrtransact', 'HomeController@usrtransact');
 Route::get('/ctntransact', 'HomeController@ctntransact');
 
 Route::resources([
-    'employees' => 'UserController',
+    'users' => 'UserController',
+    'credits' => 'CreditController',
+    'usrtrct' => 'TransactionController',
+    
 ]);
 
-// User Registration
+// HR Registration
 Route::post('registerUser', 'UserController@store');
 /*
     EJ - Start
