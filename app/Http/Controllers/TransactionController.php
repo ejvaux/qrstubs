@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Transaction;
+use App\Credit;
 use App\User;
 use Carbon\Carbon;
-use App\transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -110,5 +111,49 @@ class TransactionController extends Controller
     public function destroy(transaction $transaction)
     {
         //
+    }
+
+    public function transact(Request $request)
+    {
+        /*$request->userId."-".$request->ctrl."-".$request->amount;*/
+        $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
+        if ($credit) {
+            $tAmount = Transaction::where('user_id',$request->userId)->where('credit_id',$credit->id)->sum('price');
+            $bal = $credit->credit_amount - $tAmount;
+
+            if ($bal > $request->amount) {
+                $tr = new Transaction;
+                $tr->user_id = $request->userId;
+                $tr->credit_id = $credit->id;
+                $tr->control_no = $request->ctrl;
+                $tr->canteen_id = Auth::id();
+                $tr->price = $request->amount;
+
+                if ($tr->save()) {
+                    return [
+                        'status' => 1,
+                        'result' => 'Transaction Complete.'
+                    ];
+                }
+                else {
+                    return [
+                        'status' => 2,
+                        'result' => 'Transaction Failed'
+                    ];
+                }
+
+            } else {
+                return [
+                    'status' => 2,
+                    'result' => "Not enough credit balance."
+                ];
+            }
+        }
+        else{
+            return [
+                'status' => 2,
+                'result' => "No credit found."
+            ];
+        }
     }
 }

@@ -12,25 +12,33 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    {{--<script src="{{ asset('js/iziToast.js')}}" defer></script>--}}
+    <script src="{{ asset('js/instascan.min.js')}}" defer></script>
+    <script src="{{ asset('js/custom.js')}}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    {{--<link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">--}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
-   
+    <link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet">
+
     <!-- Scanner -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
+	{{--<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>--}}
 
     @yield('js')
 
 </head>
 <body>
     <div id="app">
+        <div id="wait">
+            <div class="wait_cont">
+            <img src="{{ asset('img/loading3.gif')}}" class="loading_badge"><br>LOADING...<br>Please wait.
+            </div>
+        </div>
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -65,17 +73,17 @@
                             @if(Auth::user()->role_id==2 || Auth::user()->role_id==3)
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-                            </li> 
+                            </li>
                             @endif
                             @if(Auth::user()->role_id==2)
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('ctntransact') }}">{{ __('Transactions') }}</a>
-                                </li>   
+                                </li>
                             @endif
                             @if(Auth::user()->role_id==3)
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('usrtransact') }}">{{ __('Transactions') }}</a>
-                                </li>   
+                                </li>
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -37,7 +37,7 @@ Route::resources([
     'hrc' => 'HrController',
     'ctn' => 'CanteenController',
     'usrtrct' => 'TransactionController',
-    
+
 ]);
 
 // HR Registration
@@ -50,6 +50,10 @@ Route::get ('/layout', 'PrintController@layout');
 
 Route::get ('/emp', 'EmployeeController@index');
 Route::get ('/ctform', 'EmployeeController@cntn');
+
+Route::get ('/getuser/{qr}', 'UserController@getUser');
+Route::post ('/getUserCredit', 'UserController@getUserCredit');
+Route::post ('/transact', 'TransactionController@transact');
 
 /*
     EJ - End

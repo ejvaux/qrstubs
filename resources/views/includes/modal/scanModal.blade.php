@@ -5,7 +5,7 @@
                 <h5 class="modal-title">QR Scanning</h5>
             </div>
             <div class="modal-body">
-                <video id ="preview" width="100%">
+                <video id ="preview" width="100%" style="background-color: black;">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
