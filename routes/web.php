@@ -51,7 +51,7 @@ Route::get ('/layout', 'PrintController@layout');
 Route::get ('/emp', 'EmployeeController@index');
 Route::get ('/ctform', 'EmployeeController@cntn');
 
-Route::get ('/getuser/{qr}', 'UserController@getUser');
+Route::post ('/getuser', 'UserController@getUser');
 Route::post ('/getUserCredit', 'UserController@getUserCredit');
 Route::post ('/transact', 'TransactionController@transact');
 

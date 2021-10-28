@@ -161,8 +161,11 @@ function loadUser(qr){
         }
     });*/
     $.ajax({
-        url: 'getuser/'+qr,
-        type:'GET',
+        url: 'getuser',
+        type:'POST',
+        data:{
+            'qr': qr
+        },
         success: function (data) {
             $("#scanModal").modal('hide');
             if(data){
