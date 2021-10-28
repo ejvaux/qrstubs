@@ -3,7 +3,7 @@ $(document).ready(function () {
         video: true,
         audio: true
      });*/
-    /*navigator.mediaDevices.getUserMedia(
+    navigator.mediaDevices.getUserMedia(
         {
             video: true
          }
@@ -43,7 +43,7 @@ $(document).ready(function () {
             $('#msg').text('*** PLEASE ALLOW PERMISSION TO USE CAMERA ***');
         }
         console.error(err.name);
-    });*/
+    });
     /*navigator.getUserMedia (
         // constraints
         {
@@ -82,7 +82,7 @@ $(document).ready(function () {
         }
      );*/
 
-     Instascan.Camera.getCameras().then(function (cameras) {
+     /*Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
             $("#cameraSelect option[value='check']").remove();
             $("#cameraSelect").prop('disabled',false);
@@ -103,7 +103,7 @@ $(document).ready(function () {
         }
         }).catch(function (e) {
             console.error(e);
-    });
+    });*/
 
     //$('#msg').text(generateControlNum(new Date()));
 });
