@@ -41,7 +41,7 @@ Route::resources([
 ]);
 
 // HR Registration
-Route::post('registerUser', 'UserController@store');
+Route::post('registerUser', 'HrController@store');
 /*
     EJ - Start
 */

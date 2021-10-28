@@ -30,7 +30,7 @@ class TransactionController extends Controller
     {
         $user_id = Auth::user()->id;
         $qrcode = Auth::user()->qrcode;
-        $control_no = 'SP202110B';
+        $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
         //Get Date today
         $todayDate = Carbon::now()->format('Y-m');
         dd($todayDate);

@@ -81,7 +81,7 @@
                             </button>
                         </div>
 
-                        <form id="editUserForm" action="{{route('employees.update','test')}}" method="post">
+                        <form id="editUserForm" action="{{route('hrc.update','test')}}" method="post">
                                 {{csrf_field()}}
                                 {{method_field('patch')}}
                             <div class="modal-body">
@@ -111,7 +111,7 @@
                             </button>
                         </div>
 
-                        <form id="deleteUserForm" action="{{route('employees.destroy','test')}}" method="post">
+                        <form id="deleteUserForm" action="{{route('hrc.destroy','test')}}" method="post">
                                 {{csrf_field()}}
                                 {{method_field('delete')}}
                         <div class="modal-body">
