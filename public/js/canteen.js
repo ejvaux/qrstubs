@@ -182,7 +182,7 @@ function loadUser(qr){
                             $('#empId').val(data.id);
                             $('#empNum').val(data.uname);
                             $('#empName').val(data.name);
-                            $('#empDept').val(data.department.name);
+                            $('#empDept').val((data.department_id)?data.department.name:"N/A");
 
                             $('#msg').addClass('d-none');
                             $('.scan').removeClass('d-none');
