@@ -8,7 +8,7 @@ $(document).ready(function () {
             video: true
          }
     )
-     .then( function(stream){
+    .then( function(stream){
         Instascan.Camera.getCameras().then(function (cameras) {
             if (cameras.length > 0) {
                 $("#cameraSelect option[value='check']").remove();
@@ -21,6 +21,7 @@ $(document).ready(function () {
                 });
                 $("#cameraSelect").val(cameras.length-1);
             } else {
+                $("#cameraSelect option[value='check']").remove();
                 var opt = document.createElement('option');
                     opt.text = "No cameras found.";
                     $("#cameraSelect").append(opt);
@@ -30,8 +31,17 @@ $(document).ready(function () {
             }).catch(function (e) {
                 console.error(e);
         });
-     }
-     );
+    })
+    .catch(function(err) {
+        if(err.name === 'NotAllowedError'){
+            $("#cameraSelect option[value='check']").remove();
+            var opt = document.createElement('option');
+            opt.text = "Camera "+err.message;
+            $("#cameraSelect").append(opt);
+            $("#cameraSelect").prop("disabled",true);
+        }
+        console.error(err.name);
+    });
     /*navigator.getUserMedia (
         // constraints
         {
