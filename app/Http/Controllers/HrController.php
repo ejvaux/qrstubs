@@ -20,7 +20,7 @@ class HrController extends Controller
     public function index(Request $request)
     {
         $credits = credit::all();
-        $departments = Department::all();
+        $departments= Department::all();
         $name = $request->input('searchtxt');
 
         $users = User::where('role_id', 'like', '3');

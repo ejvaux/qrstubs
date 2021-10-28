@@ -17,10 +17,10 @@
                             <tr>
                                 <td>{{$user->uname}}</td>
                                 <td>{{$user->name}}</td>
-                                <td>{{$user->credit->amount}}</td>
-                                <td>{{$user->credit->control_no}}</td>
+                                <td></td>
+                                <td></td>
                                 <td width="150" style="text-align:center">
-                                    <button class="btn btn-success" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-amount="{{$user->credit->amount}}" data-mydepartment="{{$user->credit->amount}}"data-toggle="modal" data-target="#editModal" >Edit</button>
+                                    <button class="btn btn-success" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-amount=" " data-mydepartment=" "data-toggle="modal" data-target="#editModal" >Edit</button>
                                     <button class="btn btn-danger" data-myid="{{$user->id}}" data-toggle="modal" data-target="#deleteModal" >Delete</button>                                   
                                 </td>
                             </tr>
