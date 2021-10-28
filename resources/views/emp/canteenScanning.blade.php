@@ -7,6 +7,7 @@
 @section('content')--}}
 <div class="container">
     <div class="row justify-content-center">
+        @if(Auth::check() && Auth::user()->role_id == 2)
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{--<span class="font-weight-bold">Canteen Scanning</span>--}}
@@ -96,6 +97,11 @@
                 </form>
             </div>
         </div>
+        @else
+            <div class="row">
+                <p style="font-size:40px">* YOU DON'T HAVE ACCESS</p>
+            </div>
+        @endif
     </div>
 </div>
 @include('includes.modal.scanModal')
