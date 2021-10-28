@@ -7,6 +7,7 @@
 @section('content')
 <body class="body">
     <div class="container1">
+        @if(Auth::check() && Auth::user()->role_id == 3)
         <div class="card text-middle">
             <div class="card-header">
                 <div class="row" style="margin: 20px 0px;">
@@ -23,6 +24,11 @@
             </div>
             
         </div>
+        @else
+            <div class="row justify-content-center" style="margin-bottom: 15%;">
+                <p style="font-size:40px">* YOU DON'T HAVE ACCESS</p>
+            </div>
+        @endif
 
     </div> 
 </body>

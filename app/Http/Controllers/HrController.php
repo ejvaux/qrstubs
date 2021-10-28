@@ -29,7 +29,7 @@ class HrController extends Controller
             $users = User::paginate(10);
         }
         else{
-            $users = User::where('name', 'like', '%'.$name.'%')->paginate(1);
+            $users = User::where('name', 'like', '%'.$name.'%')->paginate(10);
         }
         
 

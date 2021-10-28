@@ -36,8 +36,8 @@
                     </tr>
                 @endisset
                     
-                @else
-                    <td colspan="8">-- ACCOUNT NOT PERMITTED --</td>
+            @else
+                <td colspan="8">-- ACCOUNT NOT PERMITTED --</td>
             @endif
         </tbody>
     </table>
