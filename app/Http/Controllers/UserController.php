@@ -88,9 +88,9 @@ class UserController extends Controller
         //
     }
 
-    public function getUser($qr)
+    public function getUser(Request $request)
     {
-        $user = User::with('department')->where('qrcode',$qr)->first();
+        $user = User::with('department')->where('qrcode',$request->qr)->first();
         return $user;
     }
 
