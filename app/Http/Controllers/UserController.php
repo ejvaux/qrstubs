@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\credit;
+use App\Role;
+use App\Department;
+use App\canteen;
+use Auth;
 
 class UserController extends Controller
 {
