@@ -3,7 +3,7 @@ $(document).ready(function () {
         video: true,
         audio: true
      });*/
-    navigator.mediaDevices.getUserMedia(
+    /*navigator.mediaDevices.getUserMedia(
         {
             video: true
          }
@@ -43,7 +43,7 @@ $(document).ready(function () {
             $('#msg').text('*** PLEASE ALLOW PERMISSION TO USE CAMERA ***');
         }
         console.error(err.name);
-    });
+    });*/
     /*navigator.getUserMedia (
         // constraints
         {
@@ -81,6 +81,29 @@ $(document).ready(function () {
          }
         }
      );*/
+
+     Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+            $("#cameraSelect option[value='check']").remove();
+            $("#cameraSelect").prop('disabled',false);
+            $.each(cameras, function( i,val ) {
+                var opt = document.createElement('option');
+                opt.value = i;
+                opt.text = val.name;
+                $("#cameraSelect").prepend(opt);
+            });
+            $("#cameraSelect").val(cameras.length-1);
+        } else {
+            $("#cameraSelect option[value='check']").remove();
+            var opt = document.createElement('option');
+                opt.text = "No cameras found.";
+                $("#cameraSelect").append(opt);
+            $("#cameraSelect").prop("disabled",true);
+            console.error('No cameras found.');
+        }
+        }).catch(function (e) {
+            console.error(e);
+    });
 
     //$('#msg').text(generateControlNum(new Date()));
 });
