@@ -39,6 +39,8 @@ $(document).ready(function () {
             opt.text = "Camera "+err.message;
             $("#cameraSelect").append(opt);
             $("#cameraSelect").prop("disabled",true);
+            $('#msg').css('color','red');
+            $('#msg').text('*** PLEASE ALLOW PERMISSION TO USE CAMERA ***');
         }
         console.error(err.name);
     });
