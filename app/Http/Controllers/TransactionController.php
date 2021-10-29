@@ -23,8 +23,13 @@ class TransactionController extends Controller
         //Don't forget pagination when displaying table
         $transactions = transaction::where('user_id', 'like', $users)
                     ->orderBy('id', 'DESC')->paginate(10);
-
-        return view('includes.table.userTbl', compact('transactions'));
+        if (Auth::check() && Auth::user()->role_id == 3) {
+            return view('includes.table.userTbl', compact('transactions'));
+        } else {
+            return redirect('error');
+        }
+        
+        
     }
     public function home()
     {
