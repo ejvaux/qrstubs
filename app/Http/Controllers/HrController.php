@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\credit;
 use App\Role;
 use App\Department;
+use App\transaction;
 use App\canteen;
 use Auth;
+use Carbon\Carbon;
 
 class HrController extends Controller
 {
@@ -19,21 +23,14 @@ class HrController extends Controller
      */
     public function index(Request $request)
     {
-        $credits = credit::all();
-        $departments= Department::all();
-        $name = $request->input('searchtxt');
+        $departments = Department::all();
+        $ctrl = $this->generateControlNum();
+        $users = User::with('latest_credit')->get();
+        $credits = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
 
-        $users = User::where('role_id', 'like', '3');
-
-        if($name == ""){
-            $users = User::paginate(10);
-        }
-        else{
-            $users = User::where('name', 'like', '%'.$name.'%')->paginate(10);
-        }
-        
-
-        return view('includes.table.hrTbl',compact('users', 'credits', 'departments' ));
+        $users = User::where('role_id', 'like', '3')->paginate(10);
+       
+        return view('includes.table.hrTbl',compact('users', 'departments', 'ctrl' ));
     }
 
     /**
@@ -54,12 +51,11 @@ class HrController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
         $request->validate([
             'uname' => ['required', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
-            'qrcode' => ['required', 'string', 'max:20'],
-            'role_id' => ['required', 'integer', 'max:20'],
+            'qrcode' => ['nullable', 'string', 'max:20'],
+            'role_id' => ['required', 'integer', 'max:4'],
             'department_id' => ['nullable', 'integer', 'max:20'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             
@@ -78,6 +74,7 @@ class HrController extends Controller
         $register->role_id = $request->role_id;
         $register->department_id = $request->department_id;
         $register->password = $hashed2;
+        
         
         $register->save();
 
@@ -116,11 +113,19 @@ class HrController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($request->employee_id);
-        $user->name = $request->uname;
-        $user->uname = $request->name;
-        $user->department_id = $request->department_id;
+        $user->uname = $request->uname;
+        $user->name = $request->name;
+        $user->department_id = $request->department;
         $user->save();
-       
+
+        return 'success';
+    }
+    public function updateAmount(Request $request, $id)
+    {
+        $credit_amount = credit::findOrFail($request->employee_id);
+        $credit_amount = $request->amount;
+        $user->save();
+
         return 'success';
     }
 
@@ -130,11 +135,23 @@ class HrController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $user = User::findOrFail($request->employee_id);
         $user->delete();
        
         return 'success';
+    }
+    function generateControlNum(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $day = Carbon::now()->format('d');
+        $con = 'SP'.$year.$month;
+        if ($day <= 15) {
+            $con = $con.'A';
+        } else {
+            $con = $con.'B';
+        }
+        return $con;
     }
 }

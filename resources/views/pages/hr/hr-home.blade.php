@@ -13,14 +13,14 @@
             <div class="row" style="margin: 20px 0px;">
                 <div class="col-md-4">
                     <h1 class="wiggle">
-                        <button style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
+                        <button disabled style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
                     </h1>
                 </div>
                 <div class="col-md-3">
                     <h1 style="text-align:center;"> HR </h1>    
                 </div> <div class="col-md-2"></div>
                 <div class="col-md-3">
-                    <form id="searchNForm" method="POST">
+                    {{-- <form id="searchNForm" method="POST">
                     {{ csrf_field() }}                        
                         <div class="input-group">
                             <input type="search" class="form-control" name="searchtxt"
@@ -28,7 +28,7 @@
                             <button type="submit" id="sn-search-button" style="
                             height: calc(1.6em + 0.75rem + 2px);">Go</button>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
                 
             </div>
@@ -55,7 +55,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form id="addUserForm"  method="POST" action="{{ url('registerUser') }}">
+                        <form id="addUserForm" method="POST" action="{{ url('registerUser') }}">
                             @csrf
                         <div class="modal-body">
                             @include('includes.regform') 
@@ -90,7 +90,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" id="editUserBtn" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
                         
@@ -98,6 +98,55 @@
                 </div>
             </div>    
                 
+            {{--End of editing --}}
+
+            {{-- Editing Amount Content--}}
+
+            <div class="modal modal-primary fade" id="amountModal" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 style="margin-left:0.83em; margin-top:0.3em; font-size: 1.5em; font-weight: bold;">Edit Credit Amount</h5>
+                            <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form id="editAmountForm" action="{{ url('updateAmount') }}" method="post">
+                                {{csrf_field()}}
+                                {{method_field('patch')}}
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                         
+                                    <div class="col-md-7">
+                                            <input id="name" name="name" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="amount" class="col-md-4 col-form-label text-md-right">Credit Amount</label>
+                                    <div class="col-md-7">
+                                            <input id="amount" name="amount" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>    
+
+
+
+
+
+
+            
+
             {{--End of editing --}}
             
             {{--Start of deleting--}}
@@ -128,6 +177,7 @@
                 </div>
             </div> 
             {{--End of deleting--}}
+
     </div>
     @else
         <div class="row justify-content-center" style="margin-bottom: 15%;">

@@ -4,23 +4,28 @@
         <tr> &nbsp; &nbsp; 
             <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;USERNAME</th>
             <th>NAME</th>
-            <th>CREDIT AMOUNT</th>
             <th>DEPARTMENT</th>
-            <th colspan="2" style="text-align:center">ACTION</th>
+            <th>CREDIT AMOUNT</th>
+            {{-- <th>BALANCE</th> --}}
+            <th colspan="3" style="text-align:center">ACTION</th>
         </tr>
         </thead>
         <tbody>
-            @if(Auth::check() && Auth::user()->role_id == 1)
                 @isset($users)
                     @if ($users->count() > 0)
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{$user->uname}}</td>
                                 <td>{{$user->name}}</td>
-                                <td></td>
-                                <td></td>
-                                <td width="150" style="text-align:center">
-                                    <button class="btn btn-success" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-amount=" " data-mydepartment=" "data-toggle="modal" data-target="#editModal" >Edit</button>
+                                <td>{{$user->department->name}}</td>
+                                @if ($user->latest_credit->control_no == $ctrl)
+                                    <td>{{$user->latest_credit->amount}}</td>
+                                @elseif($user->latest_credit->control_no == NULL)
+                                    <td>0</td>
+                                @endif
+                                <td colspan="3" style="text-align:center">
+                                    <button class="btn btn-primary" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-mydepartment="{{$user->department_id}}"data-toggle="modal" data-target="#editModal" >Info</button>
+                                    <button disabled class="btn btn-success" data-myid="{{$user->id}}" data-myname="{{$user->name}}" data-toggle="modal" data-target="#amountModal" >Amount</button>
                                     <button class="btn btn-danger" data-myid="{{$user->id}}" data-toggle="modal" data-target="#deleteModal" >Delete</button>                                   
                                 </td>
                             </tr>
@@ -35,10 +40,6 @@
                         <td colspan="7">NO DATA</td>
                     </tr>
                 @endisset
-                    
-            @else
-                <td colspan="8">-- ACCOUNT NOT PERMITTED --</td>
-            @endif
         </tbody>
     </table>
 </div>

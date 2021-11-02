@@ -13,16 +13,18 @@ function LoadhrTbl(search, url = 'hrc'){
 LoadhrTbl();
 $(document).ready(function(){
 
+
     // Search user Form
-    $('#searchNForm').on('submit', function(e){
+    // $('#searchNForm').on('submit', function(e){
 
-        e.preventDefault();
+    //     e.preventDefault();
 
-        var form = $('#searchNForm').serialize();
+    //     var form = $('#searchNForm').serialize();
 
-        LoadhrTbl(form);
-    });
+    //     LoadhrTbl(form);
+    // });
 
+    
 
     //  EDIT USER FORM
     $('#editModal').on('show.bs.modal', function(event){
@@ -30,21 +32,36 @@ $(document).ready(function(){
     var button = $(event.relatedTarget)
 
     var emp_id = button.data('myid') 
+    var uname = button.data('myuname')
     var name = button.data('myname')
-    var email = button.data('myemail')
-    var phone = button.data('myphone')
-    var position = button.data('myposition')
+    var amount = button.data('myamount')
     var department = button.data('mydepartment');
     var modal = $(this)
 
     modal.find('.modal-body #emp_id').val(emp_id);
+    modal.find('.modal-body #uname').val(uname);
     modal.find('.modal-body #name').val(name);
-    modal.find('.modal-body #email').val(email);
-    modal.find('.modal-body #phone').val(phone);
-    modal.find('.modal-body #position').val(position);
+    modal.find('.modal-body #amount').val(amount);
     modal.find('.modal-body #department').val(department);
     
     });
+
+    //  EDIT AMOUNT FORM
+    $('#amountModal').on('show.bs.modal', function(event){
+        console.log('Model_opened');
+        var button = $(event.relatedTarget)
+    
+        var emp_id = button.data('myid') 
+        var name = button.data('myname')
+        var amount = button.data('myamount')
+        var modal = $(this)
+    
+        modal.find('.modal-body #emp_id').val(emp_id);
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #amount').val(amount);
+        
+        });
+
 
     //  DELETE USER FORM
     $('#deleteModal').on('show.bs.modal', function (event) {
@@ -57,120 +74,162 @@ $(document).ready(function(){
     });
 
 
-    editUserBtn
-    //  REGISTRATION FORM
-    $('#addUserForm').on('submit', function(e){
-
-        e.preventDefault();
     
-        var form = $('#addUserForm').serialize();
-        var url = $(this).attr('action');
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: form,
-            success: function(data) {
-                $("#addUserForm")[0].reset();
-                $('#regModal').modal("hide");
-                // Load The tables
-                LoadhrTbl();
-
-                if (data == 'success') {
-                    iziToast.success({
-                        title: 'Success',
-                        position: 'topCenter',
-                        message: 'User Registered!'
-                    });
-                }
-            },
-            error:function(error){
-                $('#regModal').modal("hide")
-
-                iziToast.error({
-                    title: 'Failed',
-                    position: 'topCenter',
-                    message: 'User Registration! <br>Please check your input'
-                });
-            }
-
-        });
-    });
 
 });
 
-        //  EDIT FORM BUTTON OVERRIDE
-        $('#editUserForm').on('submit', function(e){
-            e.preventDefault();
-    
-            var form = $('#editUserForm').serialize();
-            var url = $(this).attr('action');
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: form,
-                success: function(data) {
-                    $('#editModal').modal("hide");
-                    // Load The tables
-                    LoadhrTbl();
-    
-                    if (data == 'success') {
-                        iziToast.success({
-                            title: 'Success',
-                            position: 'topCenter',
-                            message: 'Editting User Success!'
-                        });
-                    }
-                },
-                error:function(error){
-                    $('#editModal').modal("hide")
-    
-                    iziToast.success({
-                        title: 'Failed',
-                        position: 'topCenter',
-                        message: 'Editting User Failed !',
-                        color:red
-                    });
-                }
-    
-            });
-        });
+//  REGISTRATION FORM
+$('#addUserForm').on('submit', function(e){
 
-        //  DELETE FORM BUTTON OVERRIDE
-        $('#deleteUserForm').on('submit', function(e){
-            e.preventDefault();
-    
-            var form = $('#deleteUserForm').serialize();
-            var url = $(this).attr('action');
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: form,
-                success: function(data) {
-                    $('#deleteModal').modal("hide");
-                    LoadhrTbl();
-    
-                    if (data == 'success') {
-                        iziToast.warning({
-                            title: 'Deleted User',
-                            position: 'topCenter',
-                            message: 'Successfully!',
-                            iconColor: 'Red',
-                        });
-                    }
-                },
-                error:function(error){
-                    $('#deleteModal').modal("hide")
-    
-                    iziToast.warning({
-                        title: 'Failed',
-                        position: 'topCenter',
-                        message: 'Deleting User Failed !',
-                        color:red
-                    });
-                }
-    
+    e.preventDefault();
+
+    var form = $('#addUserForm').serialize();
+    var url = $(this).attr('action');
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: form,
+        success: function(data) {
+            $("#addUserForm")[0].reset();
+            $('#regModal').modal("hide");
+            // Load The tables
+            LoadhrTbl();
+
+            if (data == 'success') {
+                iziToast.success({
+                    title: 'Success',
+                    position: 'topCenter',
+                    message: 'User Registered!'
+                });
+            }
+        },
+        error:function(error){
+            $('#regModal').modal("hide")
+
+            iziToast.warning({
+                title: 'Failed',
+                position: 'topCenter',
+                message: 'User Registration! <br>Please check your input'
             });
-        });
+        }
+
+    });
+});
+
+
+        //  EDIT FORM BUTTON OVERRIDE
+$('#editUserForm').on('submit', function(e){
+    e.preventDefault();
+
+    var form = $('#editUserForm').serialize();
+    var url = $(this).attr('action');
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: form,
+        success: function(data) {
+            $('#editModal').modal("hide");
+            // Load The tables
+            LoadhrTbl();
+
+            if (data == 'success') {
+                iziToast.success({
+                    title: 'Success',
+                    position: 'topCenter',
+                    message: 'Editting User Success!'
+                });
+            }
+        },
+        error:function(error){
+            $('#editModal').modal("hide")
+            LoadhrTbl();
+
+            iziToast.warning({
+                title: 'Failed',
+                position: 'topCenter',
+                message: 'Editting User Failed !',
+            });
+        }
+
+    });
+});
+
+        //  EDIT AMOUNT BUTTON OVERRIDE
+$('#editAmountForm').on('submit', function(e){
+    e.preventDefault();
+
+    var form = $('#editAmountForm').serialize();
+    var url = $(this).attr('action');
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: form,
+        success: function(data) {
+            $('#amountModal').modal("hide");
+            // Load The tables
+            LoadhrTbl();
+
+            if (data == 'success') {
+                iziToast.success({
+                    title: 'Success',
+                    position: 'topCenter',
+                    message: 'Editting User Success!'
+                });
+            }
+        },
+        error:function(error){
+            $('#amountModal').modal("hide")
+
+            iziToast.warning({
+                title: 'Failed',
+                position: 'topCenter',
+                message: 'Editting User Failed !',
+                color:red
+            });
+        }
+
+    });
+});
+
+
+
+
+//  DELETE FORM BUTTON OVERRIDE
+$('#deleteUserForm').on('submit', function(e){
+    e.preventDefault();
+
+    var form = $('#deleteUserForm').serialize();
+    var url = $(this).attr('action');
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: form,
+        success: function(data) {
+            $('#deleteModal').modal("hide");
+            LoadhrTbl();
+
+            if (data == 'success') {
+                iziToast.warning({
+                    title: 'Deleted User',
+                    position: 'topCenter',
+                    message: 'Successfully!',
+                    iconColor: 'Red',
+                });
+            }
+        },
+        error:function(error){
+            $('#deleteModal').modal("hide")
+
+            iziToast.warning({
+                title: 'Failed',
+                position: 'topCenter',
+                message: 'Deleting User Failed !',
+                color:red,
+            });
+        }
+
+    });
+});
 
         
 

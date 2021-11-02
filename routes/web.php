@@ -40,7 +40,7 @@ Route::resources([
     'usrtrct' => 'TransactionController',
 
 ]);
-
+Route::post('updateAmount', 'HrController@updateAmount');
 // HR Registration
 Route::post('registerUser', 'HrController@store');
 /*
@@ -60,7 +60,12 @@ Route::get ('/export/user/page', 'ExportController@userExportPage');
 Route::get ('/export/user/download', 'ExportController@userDownload');
 
 Route::get ('/test', function(){
-    $users =  App\User::where('role_id',3)->with(['department','credit'])->get();
+    $ctrl = 'SP202111A';
+    // $users = User::with('latest_credit')->get();
+    $users = App\User::with(['latest_credit' => 
+        function($query) use($ctrl) {
+            $query->where('control_no', $ctrl);
+        }])->get();
     return $users;
 });
 

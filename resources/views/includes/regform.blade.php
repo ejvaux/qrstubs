@@ -3,7 +3,7 @@
         <input type="text" placeholder="Company ID *" class="form-control" name="uname" required>
     </div>
     <div class="form-group">
-        <input type="text" minlength="8" placeholder="Name *" maxlength="11" name="name" class="form-control"  value="" required />  
+        <input type="text" minlength="8" placeholder="Name *" maxlength="20" name="name" class="form-control" required />  
         <input type="hidden" id="qrcode" name="qrcode" value=" ">
         <input type="hidden" id="role_id" name="role_id" value="3">
     </div>
