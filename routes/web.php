@@ -60,7 +60,7 @@ Route::get ('/export/user/page', 'ExportController@userExportPage');
 Route::get ('/export/user/download', 'ExportController@userDownload');
 
 Route::get ('/test', function(){
-    $users =  App\User::where('role_id',3)->with(['department','credit'])->get();
+    $users =  App\User::where('role_id',3)->with(['department','latest_credit'])->get();
     return $users;
 });
 
