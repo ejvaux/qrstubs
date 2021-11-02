@@ -55,6 +55,15 @@ Route::post ('/getuser', 'UserController@getUser');
 Route::post ('/getUserCredit', 'UserController@getUserCredit');
 Route::post ('/transact', 'TransactionController@transact');
 
+Route::get ('/export/user/page', 'ExportController@userExportPage');
+Route::get ('/export/user/download', 'ExportController@userDownload');
+
+Route::get ('/test', function(){
+    $users =  App\User::where('role_id',3)->with(['department','credit'])->get();
+    return $users;
+});
+
+
 /*
     EJ - End
 */
