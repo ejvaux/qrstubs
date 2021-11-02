@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Exports\UsersExport;
+use App\Exports\TransactionsExport;
+use Carbon\Carbon;
 //use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends Controller
@@ -36,5 +38,9 @@ class ExportController extends Controller
     {
         //return Excel::download(new UsersExport, 'Employee Credits.xlsx');
         return (new UsersExport)->download('Employee Credits.xlsx');
+    }
+    public function transactionDownload(Request $req)
+    {
+        return (new TransactionsExport($req->date,$req->canteenId))->download('Transcations_'.Date('Ymd').'.xlsx');
     }
 }

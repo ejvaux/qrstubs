@@ -28,8 +28,8 @@ class TransactionController extends Controller
         } else {
             return redirect('error');
         }
-        
-        
+
+
     }
     public function home()
     {
@@ -124,14 +124,15 @@ class TransactionController extends Controller
         $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
         if ($credit) {
             $tAmount = Transaction::where('user_id',$request->userId)->where('credit_id',$credit->id)->sum('price');
-            $bal = $credit->credit_amount - $tAmount;
+            $bal = $credit->amount - $tAmount;
 
             if ($bal > $request->amount) {
                 $tr = new Transaction;
                 $tr->user_id = $request->userId;
+                $tr->scanner_id = Auth::id();
                 $tr->credit_id = $credit->id;
                 $tr->control_no = $request->ctrl;
-                $tr->canteen_id = Auth::id();
+                $tr->canteen_id = Auth::user()->canteen_id;
                 $tr->price = $request->amount;
 
                 if ($tr->save()) {
