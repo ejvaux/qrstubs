@@ -16,4 +16,8 @@ class transaction extends Model
     {
         return $this->belongsto('App\User','user_id');
     }
+    public function scanner()
+    {
+        return $this->belongsto('App\User','scanner_id');
+    }
 }

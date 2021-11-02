@@ -27,7 +27,29 @@ class TransactionController extends Controller
             return view('includes.table.userTbl', compact('transactions'));
         } else {
             return redirect('error');
-        } 
+        }
+
+
+    }
+    public function home()
+    {
+        $user_id = Auth::user()->id;
+        $qrcode = Auth::user()->qrcode;
+        $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
+        //Get Date today
+        $todayDate = Carbon::now()->format('Y-m');
+        dd($todayDate);
+
+        //Credit amount of User
+        $credit = credit::select('credit_amount')->where('user_id', 'like', $user_id)
+                    ->where('control_no', 'like', $control_no);
+        //Transactions of User
+        $price = transaction::select('price')->where('user_id', 'like', $user_id)
+                    ->where('control_no', 'like', $control_no);
+        //Computation of User
+        $balance = 'hello';
+
+        return view('pages.user.user-home', compact('qrcode'));
     }
 
     /**
@@ -102,14 +124,15 @@ class TransactionController extends Controller
         $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
         if ($credit) {
             $tAmount = Transaction::where('user_id',$request->userId)->where('credit_id',$credit->id)->sum('price');
-            $bal = $credit->credit_amount - $tAmount;
+            $bal = $credit->amount - $tAmount;
 
             if ($bal > $request->amount) {
                 $tr = new Transaction;
                 $tr->user_id = $request->userId;
+                $tr->scanner_id = Auth::id();
                 $tr->credit_id = $credit->id;
                 $tr->control_no = $request->ctrl;
-                $tr->canteen_id = Auth::id();
+                $tr->canteen_id = Auth::user()->canteen_id;
                 $tr->price = $request->amount;
 
                 if ($tr->save()) {

@@ -44,7 +44,7 @@ class UsersExport implements FromQuery, WithMapping, WithHeadings
             $users->uname,
             $users->name,
             $users->department->name,
-            $users->credit->amount,
+            $users->latest_credit->amount,
         ];
     }
 
