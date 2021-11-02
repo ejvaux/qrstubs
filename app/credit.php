@@ -10,6 +10,10 @@ class credit extends Model
 {
     public function user()
     {
-        return $this->belongsto('App\User','user_id');
+        return $this->belongsto('App\User');
+    }
+    public function transactions()
+    {
+        return $this->hasMany('App\Transaction');
     }
 }

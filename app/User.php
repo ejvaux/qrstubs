@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Department;
 use App\role;
 use App\canteen;
-use App\credit;
+use App\Credit;
 
 class User extends Authenticatable
 {
@@ -53,9 +53,17 @@ class User extends Authenticatable
     {
         return $this->belongsto('App\canteen','canteen_id');
     }
-    public function credit()
+    public function latest_credit()
     {
-        return $this->belongsto('App\credit','id');
+        return $this->hasone('App\Credit')->latest();
     }
-    
+    public function credits()
+    {
+        return $this->hasmany('App\Credit');
+    }
+    public function transactions()
+    {
+        return $this->hasManyThrough('App\Transaction','App\Credit');
+    }
+
 }
