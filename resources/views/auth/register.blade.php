@@ -49,7 +49,7 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
                             <div class="col-md-6">
                             <select id="role_id" name="role_id" class="form-control{{ $errors->has('role_id') ? ' is-invalid' : '' }}" value="{{ old('role_id') }}" required autofocus>
-                                    <option value=" "class="hidden" selected disabled>-- Select Role --</option>
+                                    <option value=" "class="" selected disabled>-- Select Role --</option>
                                     @foreach ($roles as $role)
                                         <option value="{{$role->id}}">{{$role->name}} </option>
                                     @endforeach

@@ -7,8 +7,10 @@ use App\User;
 use App\credit;
 use App\Role;
 use App\Department;
+use App\transaction;
 use App\canteen;
 use Auth;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -47,23 +49,74 @@ class HomeController extends Controller
     }
     public function hr(Request $req)
     {
-        return view('pages.hr.hr-home');
+        $departments = Department::all();
+        
+        if (Auth::check() && Auth::user()->role_id == 1) {
+            return view('pages.hr.hr-home',compact('departments'));
+        } else {
+            return redirect('error');
+        }
     }
     public function canteen(Request $req)
     {
-        return view('pages.canteen.ctn-home');
+        if (Auth::check() && Auth::user()->role_id == 2) {
+            return view('pages.canteen.ctn-home');
+        } else {
+            return redirect('error');
+        }
     }
     public function user(Request $req)
     {
-        return view('pages.user.user-home');
+        $users = Auth::user()->id;
+        $qrcode = Auth::user()->qrcode;
+        $ctrl = $this->generateControlNum();
+        $credit = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
+        if($credit == NULL){
+            $balance = '"Please apply for your Credit Amount"';
+            $qrcode = '"Please apply for your Credit Amount"';
+        } else {
+            $price_total = Transaction::where('user_id',$users)->where('credit_id',$credit->id)->sum('price');
+            $balance = $credit->amount - $price_total;
+        }
+        
+
+        if (Auth::check() && Auth::user()->role_id == 3) {
+            return view('pages.user.user-home', compact('qrcode','balance'));
+        } else {
+            return redirect('error');
+        }
     }
     public function usrtransact(Request $req)
     {
-        return view('pages.user.user-transaction');
+        if (Auth::check() && Auth::user()->role_id == 3) {
+            return view('pages.user.user-transaction');
+        } else {
+            return redirect('error');
+        }
     }
     public function ctntransact(Request $req)
     {
-        return view('pages.canteen.ctn-transaction');
+        if (Auth::check() && Auth::user()->role_id == 2) {
+            return view('pages.canteen.ctn-transaction');
+        } else {
+            return redirect('error');
+        }
     }
-    
+    public function error(Request $req)
+    {
+        return view('pages.error');
+    }
+
+    function generateControlNum(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $day = Carbon::now()->format('d');
+        $con = 'SP'.$year.$month;
+        if ($day <= 15) {
+            $con = $con.'A';
+        } else {
+            $con = $con.'B';
+        }
+        return $con;
+    }
 }

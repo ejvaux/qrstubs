@@ -1,16 +1,34 @@
+$(document).ready(function () {
+    $.ajax({
+        url: 'user',
+        type:'GET',
+        data:{
+            'ctrl': generateControlNum(new Date())
+        }
+    });
+});
+
+
 function LoadUsrTbl(search, url = 'usrtrct'){
     $.ajax({
-      url: url,
-      type:'get',
-      data: {
-          
-      },
-      success: function (data) {
-          $('#usertransactTable').html(data); 
-      }
+        url: url,
+        type:'get',
+        data: {
+            
+        },
+        success: function (data) {
+            $('#usertransactTable').html(data); 
+        }
   });
 }
 LoadUsrTbl();
+
+    
+
+
+
+
+
 
 
 // TABLE RELOAD PAGINATE 

@@ -32,6 +32,7 @@ Route::get('/canteen', 'HomeController@canteen');
 Route::get('/user', 'HomeController@user');
 Route::get('/usrtransact', 'HomeController@usrtransact');
 Route::get('/ctntransact', 'HomeController@ctntransact');
+Route::get('/error', 'HomeController@error');
 
 Route::resources([
     'hrc' => 'HrController',
