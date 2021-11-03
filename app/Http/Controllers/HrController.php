@@ -23,13 +23,23 @@ class HrController extends Controller
      */
     public function index(Request $request)
     {
+        // $departments = Department::all();
+        // $ctrl = $this->generateControlNum();
+        // $users = User::with('latest_credit')->get();
+        // $credits = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
+
+        // 
+       
+        // return view('includes.table.hrTbl',compact('users', 'departments', 'ctrl' ));
+
+        $users = User::with('latest_credit')->get();
         $departments = Department::all();
         $ctrl = $this->generateControlNum();
-        $users = User::with('latest_credit')->get();
         $credits = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
 
+
+
         $users = User::where('role_id', 'like', '3')->paginate(10);
-       
         return view('includes.table.hrTbl',compact('users', 'departments', 'ctrl' ));
     }
 
