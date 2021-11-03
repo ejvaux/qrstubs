@@ -111,7 +111,7 @@ class HomeController extends Controller
         $year = Carbon::now()->format('Y');
         $month = Carbon::now()->format('m');
         $day = Carbon::now()->format('d');
-        $con = 'SP'.$year.$month;
+        $con = 'SPI'.$year.$month;
         if ($day <= 15) {
             $con = $con.'A';
         } else {
