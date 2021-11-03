@@ -58,7 +58,7 @@ Route::post ('/transact', 'TransactionController@transact');
 
 Route::get ('/export/user/page', 'ExportController@userExportPage');
 Route::get ('/export/user/download', 'ExportController@userDownload');
-Route::post ('/export/transaction/download', 'ExportController@transactionDownload');
+Route::get ('/export/transaction/download', 'ExportController@transactionDownload');
 
 Route::get ('/test', function(){
     $users =  App\User::where('role_id',3)->with(['department','latest_credit','transactions'])->get();

@@ -41,6 +41,6 @@ class ExportController extends Controller
     }
     public function transactionDownload(Request $req)
     {
-        return (new TransactionsExport($req->date,$req->canteenId))->download('Transcations_'.Date('Ymd').'.xlsx');
+        return (new TransactionsExport($req->input('fromDate'),$req->input('toDate'),$req->input('canteenId')))->download('Transactions_'.Date('Ymd').'.xlsx');
     }
 }

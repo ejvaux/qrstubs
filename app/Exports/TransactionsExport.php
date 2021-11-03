@@ -13,10 +13,11 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings
 {
     use Exportable;
 
-    public function __construct(string $date,int $canteen_id)
+    public function __construct(string $fromDate,string $toDate,int $canteenId)
     {
-        $this->date = $date;
-        $this->canteen_id = $canteen_id;
+        $this->fromDate = $fromDate;
+        $this->toDate = $toDate;
+        $this->canteenId = $canteenId;
     }
 
     /*
@@ -38,7 +39,7 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings
     */
     public function query()
     {
-        $transactions =  Transaction::query()->whereDate('created_at', $this->date)->where('canteen_id',$this->canteen_id);
+        $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate])->where('canteen_id',$this->canteenId);
         return $transactions;
     }
 
