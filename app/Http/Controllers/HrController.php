@@ -23,20 +23,15 @@ class HrController extends Controller
      */
     public function index(Request $request)
     {
-        // $departments = Department::all();
-        // $ctrl = $this->generateControlNum();
-        // $users = User::with('latest_credit')->get();
-        // $credits = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
-
-        // 
-       
-        // return view('includes.table.hrTbl',compact('users', 'departments', 'ctrl' ));
-
+        // $users = User::with('latest_credit', function($query) use ($category_id){
+            
+        // })->get();
         $users = User::with('latest_credit')->get();
         $departments = Department::all();
         $ctrl = $this->generateControlNum();
-        $credits = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
-
+        $credit = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
+        // $price_total = Transaction::where('user_id',$users)->where('credit_id',$credit->id)->sum('price');
+        // $balance = $credit->amount - $price_total;
 
 
         $users = User::where('role_id', 'like', '3')->paginate(10);

@@ -6,6 +6,7 @@
             <th>NAME</th>
             <th>DEPARTMENT</th>
             <th>CREDIT AMOUNT</th>
+            <th>BALANCE</th>
             {{-- <th>BALANCE</th> --}}
             <th colspan="3" style="text-align:center">ACTION</th>
         </tr>
@@ -18,15 +19,25 @@
                                 <td>{{$user->uname}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->department->name}}</td>
-                                @if ($user->latest_credit->control_no == $ctrl)
-                                    <td>{{$user->latest_credit->amount}}</td>
-                                @elseif($user->latest_credit->control_no == NULL)
+                                @if ($user->latest_credit != NULL)
+                                    @if ($user->latest_credit->control_no == $ctrl)
+                                        <td>{{$user->latest_credit->amount}}</td>
+                                        <td></td>
+                                    @else
+                                        <td>0</td>
+                                        <td></td>
+                                    @endif
+                                @else
                                     <td>0</td>
                                 @endif
+                                    {{-- 
+                                    @elseif($user->latest_credit-> NULL)
+                                        <td>0</td>
+                                    @endif --}}
                                 <td colspan="3" style="text-align:center">
                                     <button class="btn btn-primary" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-mydepartment="{{$user->department_id}}"data-toggle="modal" data-target="#editModal" >Info</button>
                                     <button disabled class="btn btn-success" data-myid="{{$user->id}}" data-myname="{{$user->name}}" data-toggle="modal" data-target="#amountModal" >Amount</button>
-                                    <button class="btn btn-danger" data-myid="{{$user->id}}" data-toggle="modal" data-target="#deleteModal" >Delete</button>                                   
+                                    <button disabled class="btn btn-danger" data-myid="{{$user->id}}" data-toggle="modal" data-target="#deleteModal" >Disable</button>                                   
                                 </td>
                             </tr>
                         @endforeach
