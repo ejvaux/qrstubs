@@ -4,7 +4,7 @@
         <tr> &nbsp; &nbsp; 
             <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;ID NO</th>
             <th>Name</th>
-            <th>CONTROL NO</th>
+            <th>Scanned By</th>
             <th>PRICE</th>
             <th>DATE</th>
         </tr>
@@ -17,7 +17,7 @@
                             <tr>
                                 <td>{{$transaction->id}}</td>
                                 <td>{{$transaction->user->name}}</td>
-                                <td>{{$transaction->control_no}}</td>
+                                <td>{{$transaction->scanner->name}}</td>
                                 <td>{{$transaction->price}}</td>
                                 <td>{{$transaction->created_at}}</td>
                             </tr>

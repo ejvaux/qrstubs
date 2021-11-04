@@ -4,7 +4,7 @@
            <label for="name" class="col-md-4 col-form-label text-md-right">Username</label>
 
            <div class="col-md-7">
-               <input id="uname" name="uname" type="text" class="form-control" required>
+               <input disabled id="uname" name="uname" type="text" class="form-control" required>
            </div>
        </div>
        <div class="form-group row">

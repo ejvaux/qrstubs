@@ -3,7 +3,7 @@
         <thead>
         <tr> &nbsp; &nbsp; 
             <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;ID NO</th>
-            <th>CONTROL NO</th>
+            <th>SCANNED BY</th>
             <th>CANTEEN</th>
             <th>PRICE</th>
             <th>DATE</th>
@@ -16,8 +16,8 @@
                         @foreach ($transactions as $transaction)
                             <tr>
                                 <td>{{$transaction->id}}</td>
-                                <td>{{$transaction->control_no}}</td>
-                                <td>{{$transaction->canteen_id}}</td>
+                                <td>{{$transaction->scanner->name}}</td>
+                                <td>{{$transaction->canteen->name}}</td>
                                 <td>{{$transaction->price}}</td>
                                 <td>{{$transaction->created_at}}</td>
                             </tr>

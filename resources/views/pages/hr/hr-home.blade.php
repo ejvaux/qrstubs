@@ -12,14 +12,12 @@
         <div class="card-header">
             <div class="row" style="margin: 20px 0px;">
                 <div class="col-md-4">
-                    <h1 class="wiggle">
-                        <button disabled style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
-                    </h1>
+                    <button disabled style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
                 </div>
-                <div class="col-md-3">
-                    <h1 style="text-align:center;"> HR </h1>    
-                </div> <div class="col-md-2"></div>
-                <div class="col-md-3">
+                <div class="col-md-4">
+                    <h1 style="text-align:center;"> HR </h1>   
+                </div> 
+                <div class="col-md-4 ">
                     {{-- <form id="searchNForm" method="POST">
                     {{ csrf_field() }}                        
                         <div class="input-group">
@@ -29,8 +27,12 @@
                             height: calc(1.6em + 0.75rem + 2px);">Go</button>
                         </div>
                     </form> --}}
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"><a href="{{ url('/download/template.xlsx')}}" class="btn btn-success"><i class="fa fa-download"></i> Template</a></div>
+                    </div>
                 </div>
-                
             </div>
         </div>
         <div class="card-body">
@@ -38,12 +40,20 @@
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#allemp-tab" role="tab">Employees</a>
                 </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
+                </li> --}}
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="allemp-tab" role="tabpanel">
                     @include('pages.hr.empTab')
                 </div>
             </div>
+            {{-- <div class="tab-content">
+                <div class="tab-pane" id="allcredit-tab" role="tabpanel">
+                    @include('pages.hr.creditTab')
+                </div>
+            </div> --}}
         </div>
         {{-- Register Modal--}}
         <div class="modal modal-primary fade" id="regModal" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
@@ -139,12 +149,6 @@
                     </div>
                 </div>
             </div>    
-
-
-
-
-
-
             
 
             {{--End of editing --}}

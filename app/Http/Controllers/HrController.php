@@ -123,7 +123,6 @@ class HrController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($request->employee_id);
-        $user->uname = $request->uname;
         $user->name = $request->name;
         $user->department_id = $request->department;
         $user->save();

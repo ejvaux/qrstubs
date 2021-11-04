@@ -20,7 +20,7 @@
 // Auth::routes(['register' => false]);
 
 //Show the Auth
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/', 'HomeController@pages');
 Route::get('/home', 'HomeController@index')->name('home');

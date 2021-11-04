@@ -16,4 +16,5 @@ class credit extends Model
     {
         return $this->hasMany('App\Transaction');
     }
+    
 }
