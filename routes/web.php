@@ -65,6 +65,9 @@ Route::get ('/test', function(){
     return $users;
 });
 
+Route::get ('/importuser', function(){
+    (new App\Imports\UsersImport)->import('Idno.xlsx', 'local', \Maatwebsite\Excel\Excel::XLSX);
+});
 
 /*
     EJ - End
