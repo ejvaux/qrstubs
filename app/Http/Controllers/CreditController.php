@@ -19,9 +19,10 @@ class CreditController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::with('latest_credit')->where('role_id', '3');
+        $users = User::with('latest_credit')->where('role_id', '3')->where('status', '0');
         $ctrl = $this->generateControlNum();
         $expr = $this->generateExpirationNum();
+        $transactions = transaction::where('control_no', $ctrl)->sum('price');
         $users = $users->paginate(10);
         return view('includes.table.creditTbl', compact('users','ctrl','expr'));
     }
