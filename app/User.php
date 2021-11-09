@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Department;
+use App\Status;
 use App\role;
 use App\canteen;
 use App\Credit;
@@ -20,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'uname', 'name', 'qrcode', 'role_id', 'password', 'department_id', 'canteen_id',
+        'uname', 'name', 'qrcode', 'role_id', 'password', 'department_id', 'canteen_id', 'status'
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable
     {
         return $this->belongsto('App\Role','role_id');
     }
+    
     public function canteen()
     {
         return $this->belongsto('App\canteen','canteen_id');

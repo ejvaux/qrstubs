@@ -2,13 +2,11 @@
     <table id="mytable" class="table table-bordred table-striped" style="width:100%;">  
         <thead>
         <tr> &nbsp; &nbsp; 
+            <th>STATUS</th>
             <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;USERNAME</th>
             <th>NAME</th>
             <th>DEPARTMENT</th>
-            <th>CREDIT AMOUNT</th>
-            <th>BALANCE</th>
-            {{-- <th>BALANCE</th> --}}
-            <th colspan="3" style="text-align:center">ACTION</th>
+            <th style="text-align:center">ACTION</th>
         </tr>
         </thead>
         <tbody>
@@ -16,28 +14,16 @@
                     @if ($users->count() > 0)
                         @foreach ($users as $user)
                             <tr>
+                                @if ($user->status ==0)
+                                    <td><button class="btn btn-success" style="padding:0px 5px;">Active</button></td>
+                                @else
+                                    <td><button class="btn btn-danger" style="padding:0px 5px;">Inactive</button></td>
+                                @endif
                                 <td>{{$user->uname}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->department->name}}</td>
-                                @if ($user->latest_credit != NULL)
-                                    @if ($user->latest_credit->control_no == $ctrl)
-                                        <td>{{$user->latest_credit->amount}}</td>
-                                        <td></td>
-                                    @else
-                                        <td>0</td>
-                                        <td></td>
-                                    @endif
-                                @else
-                                    <td>0</td>
-                                @endif
-                                    {{-- 
-                                    @elseif($user->latest_credit-> NULL)
-                                        <td>0</td>
-                                    @endif --}}
-                                <td colspan="3" style="text-align:center">
-                                    <button class="btn btn-primary" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-mydepartment="{{$user->department_id}}"data-toggle="modal" data-target="#editModal" >Info</button>
-                                    <button disabled class="btn btn-success" data-myid="{{$user->id}}" data-myname="{{$user->name}}" data-toggle="modal" data-target="#amountModal" >Amount</button>
-                                    <button disabled class="btn btn-danger" data-myid="{{$user->id}}" data-toggle="modal" data-target="#deleteModal" >Disable</button>                                   
+                                <td style="text-align:center">
+                                    <button class="btn btn-primary" style="padding:0px 2px;" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-mydepartment="{{$user->department_id}}" data-mystatus="{{$user->status}}" data-toggle="modal" data-target="#editModal" >Edit Info</button>    
                                 </td>
                             </tr>
                         @endforeach

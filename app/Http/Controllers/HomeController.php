@@ -68,6 +68,7 @@ class HomeController extends Controller
     public function user(Request $req)
     {
         $users = Auth::user()->id;
+        $uname = Auth::user()->uname;
         $qrcode = Auth::user()->qrcode;
         $ctrl = $this->generateControlNum();
         $credit = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
@@ -81,7 +82,7 @@ class HomeController extends Controller
         
 
         if (Auth::check() && Auth::user()->role_id == 3) {
-            return view('pages.user.user-home', compact('qrcode','balance'));
+            return view('pages.user.user-home', compact('qrcode','balance', 'uname'));
         } else {
             return redirect('error');
         }
