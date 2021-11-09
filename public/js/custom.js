@@ -13,12 +13,17 @@ $.ajaxSetup({
         }
         if (XMLHttpRequest.readyState == 4) {
             // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
-            iziToast.warning({
-                title: 'ERROR '+ XMLHttpRequest.status,
-                message: XMLHttpRequest.statusText + '<br>' + msg + '<br>' + file + '<br>Line: ' + line,
-                position: 'topCenter',
-                close: false,
-            });
+            if(XMLHttpRequest.status == '419'){
+                window.location.reload();
+            }
+            else{
+                iziToast.warning({
+                    title: 'ERROR '+ XMLHttpRequest.status,
+                    message: XMLHttpRequest.statusText + '<br>' + msg + '<br>' + file + '<br>Line: ' + line,
+                    position: 'topCenter',
+                    close: false,
+                });
+            }
         }
         else if (XMLHttpRequest.readyState == 0) {
             // Network error (i.e. connection refused, access denied due to CORS, etc.)

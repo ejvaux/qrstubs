@@ -9,26 +9,34 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{--<span class="font-weight-bold">Canteen Scanning</span>--}}
-                    <div class="row">
+                <div class="card-header">
+                    <span class="font-weight-bold" style="font-size:1rem">CANTEEN SCANNING</span>
+                    {{--<div class="row">
                         <div class="col">
-                            <span class="font-weight-bold">Canteen Scanning</span>
+                            <span class="font-weight-bold" style="font-size: 10 rem">Canteen Scanning</span>
                         </div>
                         <div class="col">
-                            <select id="cameraSelect" name="camera" class="form-control form-control-sm" disabled>
+                            <select id="cameraSelect" name="camera" class="form-control" disabled>
                                 <option value="check">Loading Cameras . . .</option>
                             </select>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
 
                 <div class="card-body">
                     <!-- ____________ FORM __________________ -->
+                <div class="form-group row">
+                    <div class="col">
+                        <select id="cameraSelect" name="camera" class="form-control" disabled>
+                            <option value="check">Loading Cameras . . .</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div id="noscan">
                     <div class="row">
                         <div class="col text-center">
-                            <span id="msg">* * * Please Scan QR Code * * *</span>
+                            <span id="msg">* * * PLEASE SCAN QR CODE * * *</span>
                         </div>
                     </div>
                 </div>
@@ -41,7 +49,7 @@
                                     <label for="empNum" class="col-form-label">Employee #:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class='form-control' type="text" name="empNum" id="empNum" readonly>
+                                    <input class='form-control form-control-lg' type="text" name="empNum" id="empNum" readonly>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +61,7 @@
                                     <label for="empName" class="col-form-label">Name:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class='form-control' type="text" name="empName" id="empName" readonly>
+                                    <input class='form-control form-control-lg' type="text" name="empName" id="empName" readonly>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +73,7 @@
                                     <label for="empDept" class="col-form-label">Department:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class='form-control' type="text" name="empDept" id="empDept" readonly>
+                                    <input class='form-control form-control-lg' type="text" name="empDept" id="empDept" readonly>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +85,7 @@
                                     <label for="amount" class="col-form-label">Enter amount:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class='form-control' type="number" min="0" name="amount" id="amount" value="0">
+                                    <input class='form-control form-control-lg' type="number" name="amount" id="amount">
                                     <span class="invalid-feedback" role="alert">
                                         <strong>Please type the amount.</strong>
                                     </span>
@@ -90,7 +98,7 @@
                 <!-- ____________ FORM END __________________ -->
                 </div>
                 <div class="modal-footer text-center">
-                    <button id="transactBtn" type="button" class="btn btn-primary scan d-none">TRANSACT</button>
+                    <button id="transactBtn" type="button" class="btn btn-success scan d-none">TRANSACT</button>
                     <button id="scanqrBtn" type="button" class="btn btn-primary">SCAN</button>
                 </div>
                 </form>

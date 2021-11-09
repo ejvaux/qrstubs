@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    /*navigator.getUserMedia({
-        video: true,
-        audio: true
-     });*/
     navigator.mediaDevices.getUserMedia(
         {
             video: true
@@ -44,66 +40,6 @@ $(document).ready(function () {
         }
         console.error(err.name);
     });
-    /*navigator.getUserMedia (
-        // constraints
-        {
-           video: true,
-           audio: true
-        },
-
-        // successCallback
-        function(localMediaStream) {
-            Instascan.Camera.getCameras().then(function (cameras) {
-                if (cameras.length > 0) {
-                    $.each(cameras, function( i,val ) {
-                        var opt = document.createElement('option');
-                        opt.value = i;
-                        opt.text = val.name;
-                        $("#cameraSelect").prepend(opt);
-                    });
-                    $("#cameraSelect").val(cameras.length-1);
-                } else {
-                    var opt = document.createElement('option');
-                        opt.text = "No cameras found.";
-                        $("#cameraSelect").append(opt);
-                    $("#cameraSelect").prop("disabled",true);
-                    console.error('No cameras found.');
-                }
-                }).catch(function (e) {
-                    console.error(e);
-            });
-        },
-
-        // errorCallback
-        function(err) {
-         if(err === PERMISSION_DENIED) {
-           // Explain why you need permission and how to update the permission setting
-         }
-        }
-     );*/
-
-     /*Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-            $("#cameraSelect option[value='check']").remove();
-            $("#cameraSelect").prop('disabled',false);
-            $.each(cameras, function( i,val ) {
-                var opt = document.createElement('option');
-                opt.value = i;
-                opt.text = val.name;
-                $("#cameraSelect").prepend(opt);
-            });
-            $("#cameraSelect").val(cameras.length-1);
-        } else {
-            $("#cameraSelect option[value='check']").remove();
-            var opt = document.createElement('option');
-                opt.text = "No cameras found.";
-                $("#cameraSelect").append(opt);
-            $("#cameraSelect").prop("disabled",true);
-            console.error('No cameras found.');
-        }
-        }).catch(function (e) {
-            console.error(e);
-    });*/
 
     //$('#msg').text(generateControlNum(new Date()));
 });
@@ -296,7 +232,8 @@ $('#transactBtn').on('click', function (event) {
     if ($('#amount').val() != 0) {
         Swal.fire({
             title: 'Are you sure?',
-            text: "Php "+amnt+" will be deducted to "+empName,
+            /*html: "<span style='font-size:2rem'><span class='text-info'>Php "+amnt+"</span> will be deducted to <span class='text-info'>"+empName+"</span></span>",*/
+            html: "<span style='font-size:2rem'><span class='text-info'>Php "+amnt+"</span> will be deducted.</span>",
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
