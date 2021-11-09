@@ -10,7 +10,21 @@ function LoadhrTbl(search, url = 'hrc'){
       }
   });
 }
+function LoadcreditTbl(search, url = 'crdc'){
+    $.ajax({
+      url: url,
+      type:'get',
+      data: {
+          
+      },
+      success: function (data) {
+          $('#creditTable').html(data); 
+      }
+  });
+}
 LoadhrTbl();
+LoadcreditTbl();
+
 $(document).ready(function(){
 
 
@@ -34,14 +48,14 @@ $(document).ready(function(){
     var emp_id = button.data('myid') 
     var uname = button.data('myuname')
     var name = button.data('myname')
-    var amount = button.data('myamount')
+    var status = button.data('mystatus')
     var department = button.data('mydepartment');
     var modal = $(this)
 
     modal.find('.modal-body #emp_id').val(emp_id);
     modal.find('.modal-body #uname').val(uname);
-    modal.find('.modal-body #name').val(name);
-    modal.find('.modal-body #amount').val(amount);
+    modal.find('.modal-body #name2').val(name);
+    modal.find('.modal-body #status').val(status);
     modal.find('.modal-body #department').val(department);
     
     });
@@ -59,22 +73,8 @@ $(document).ready(function(){
         modal.find('.modal-body #emp_id').val(emp_id);
         modal.find('.modal-body #name').val(name);
         modal.find('.modal-body #amount').val(amount);
-        
         });
 
-
-    //  DELETE USER FORM
-    $('#deleteModal').on('show.bs.modal', function (event) {
-        console.log('Model_opened');
-        var button = $(event.relatedTarget) 
-        var emp_id = button.data('myid') 
-        var modal = $(this)
-
-        modal.find('.modal-body #emp_id').val(emp_id);
-    });
-
-
-    
 
 });
 
@@ -184,52 +184,54 @@ $('#editAmountForm').on('submit', function(e){
                 title: 'Failed',
                 position: 'topCenter',
                 message: 'Editting User Failed !',
-                color:red
             });
         }
 
     });
 });
+
 
 
 
 
 //  DELETE FORM BUTTON OVERRIDE
-$('#deleteUserForm').on('submit', function(e){
-    e.preventDefault();
+// $('#deleteUserForm').on('submit', function(e){
+//     e.preventDefault();
 
-    var form = $('#deleteUserForm').serialize();
-    var url = $(this).attr('action');
-    $.ajax({
-        url: url,
-        type: "POST",
-        data: form,
-        success: function(data) {
-            $('#deleteModal').modal("hide");
-            LoadhrTbl();
+//     var form = $('#deleteUserForm').serialize();
+//     var url = $(this).attr('action');
+//     $.ajax({
+//         url: url,
+//         type: "POST",
+//         data: form,
+//         success: function(data) {
+//             $('#deleteModal').modal("hide");
+//             LoadhrTbl();
 
-            if (data == 'success') {
-                iziToast.warning({
-                    title: 'Deleted User',
-                    position: 'topCenter',
-                    message: 'Successfully!',
-                    iconColor: 'Red',
-                });
-            }
-        },
-        error:function(error){
-            $('#deleteModal').modal("hide")
+//             if (data == 'success') {
+//                 iziToast.warning({
+//                     title: 'Deleted User',
+//                     position: 'topCenter',
+//                     message: 'Successfully!',
+//                     iconColor: 'Red',
+//                 });
+//             }
+//         },
+//         error:function(error){
+//             $('#deleteModal').modal("hide")
 
-            iziToast.warning({
-                title: 'Failed',
-                position: 'topCenter',
-                message: 'Deleting User Failed !',
-                color:red,
-            });
-        }
+//             iziToast.warning({
+//                 title: 'Failed',
+//                 position: 'topCenter',
+//                 message: 'Deleting User Failed !',
+//                 color:red,
+//             });
+//         }
 
-    });
-});
+//     });
+// });
+
+
 
         
 
@@ -238,4 +240,8 @@ $('#deleteUserForm').on('submit', function(e){
 $('#hrTable').on('click', '.page-link', function(e){
     e.preventDefault();
     LoadhrTbl('',$(this).attr('href'));
+});
+$('#creditTable').on('click', '.page-link', function(e){
+    e.preventDefault();
+    LoadcreditTbl('',$(this).attr('href'));
 });

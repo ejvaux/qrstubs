@@ -11,7 +11,7 @@
            <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
            <div class="col-md-7">
-                   <input id="name" name="name" type="text" class="form-control" required>
+                   <input id="name2" name="name2" type="text" class="form-control" required>
            </div>
        </div>
        
@@ -26,3 +26,13 @@
                </select>
            </div>
        </div>
+       <div class="form-group row">
+        <label for="name" class="col-md-4 col-form-label text-md-right">Status</label>
+
+        <div class="col-md-7">
+            <select id="status" class="form-control" name="status" style=" height: calc(1.6em + 0.75rem + 2px); " required>
+                <option value="0">Active</option>
+                <option value="1">Inactive</option>
+            </select>
+        </div>
+    </div>

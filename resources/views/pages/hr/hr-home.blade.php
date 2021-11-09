@@ -12,7 +12,7 @@
         <div class="card-header">
             <div class="row" style="margin: 20px 0px;">
                 <div class="col-md-4">
-                    <button disabled style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
+                    <button style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
                 </div>
                 <div class="col-md-4">
                     <h1 style="text-align:center;"> HR </h1>   
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-4"></div>
-                        <div class="col-md-4"><a href="{{ url('/download/template.xlsx')}}" class="btn btn-success"><i class="fa fa-download"></i> Template</a></div>
+                        <div class="col-md-4"><a href="{{ url('/download/Template.xlsx')}}" class="btn btn-success"><i class="fa fa-download"></i> Template</a></div>
                     </div>
                 </div>
             </div>
@@ -38,29 +38,27 @@
         <div class="card-body">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#allemp-tab" role="tab">Employees</a>
+                    <a class="nav-link" data-toggle="tab" href="#allemp-tab" role="tab">Users</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
-                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
+                </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="allemp-tab" role="tabpanel">
+                <div class="tab-pane" id="allemp-tab" role="tabpanel">
                     @include('pages.hr.empTab')
                 </div>
-            </div>
-            {{-- <div class="tab-content">
-                <div class="tab-pane" id="allcredit-tab" role="tabpanel">
+                <div class="tab-pane active" id="allcredit-tab" role="tabpanel">
                     @include('pages.hr.creditTab')
                 </div>
-            </div> --}}
+            </div>
         </div>
         {{-- Register Modal--}}
         <div class="modal modal-primary fade" id="regModal" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 style="margin-left:0.83em; margin-top:0.3em; font-size: 1.5em; font-weight: bold;">Register Account</h5>
+                            <h5 style="margin-left:0.83em; margin-top:0.3em; font-size: 1.5em; font-weight: bold;">Register User's Account</h5>
                             <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -123,8 +121,9 @@
                         </div>
 
                         <form id="editAmountForm" action="{{ url('updateAmount') }}" method="post">
-                                {{csrf_field()}}
-                                {{method_field('patch')}}
+                            @csrf
+                                {{-- {{csrf_field()}}
+                                {{method_field('patch')}} --}}
                             <div class="modal-body">
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
@@ -149,38 +148,9 @@
                     </div>
                 </div>
             </div>    
-            
 
             {{--End of editing --}}
             
-            {{--Start of deleting--}}
-
-            <div class="modal modal-danger fade" id="deleteModal" data-backdrop="false" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 style="margin-left:0.83em; margin-top:0.3em; font-size: 1.5em; font-weight: bold;">Delete Confirmation</h5>
-                            <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <form id="deleteUserForm" action="{{route('hrc.destroy','test')}}" method="post">
-                                {{csrf_field()}}
-                                {{method_field('delete')}}
-                        <div class="modal-body">
-                                <input type="hidden" name="employee_id" id="emp_id" value="">
-                                <p class="text-left"> Are you sure you want to delete this record?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
-                            <button type="submit" id="deleteUserBtn" class="btn btn-danger">Yes, Delete</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div> 
-            {{--End of deleting--}}
 
     </div>
     @else

@@ -23,19 +23,9 @@ class HrController extends Controller
      */
     public function index(Request $request)
     {
-        // $users = User::with('latest_credit', function($query) use ($category_id){
-            
-        // })->get();
-        $users = User::with('latest_credit')->get();
         $departments = Department::all();
-        $ctrl = $this->generateControlNum();
-        $credit = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
-        // $price_total = Transaction::where('user_id',$users)->where('credit_id',$credit->id)->sum('price');
-        // $balance = $credit->amount - $price_total;
-
-
         $users = User::where('role_id', 'like', '3')->paginate(10);
-        return view('includes.table.hrTbl',compact('users', 'departments', 'ctrl' ));
+        return view('includes.table.hrTbl',compact('users', 'departments'));
     }
 
     /**
@@ -118,8 +108,9 @@ class HrController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($request->employee_id);
-        $user->name = $request->name;
+        $user->name = $request->name2;
         $user->department_id = $request->department;
+        $user->status = $request->status;
         $user->save();
 
         return 'success';
@@ -139,23 +130,9 @@ class HrController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
-    {
-        $user = User::findOrFail($request->employee_id);
-        $user->delete();
-       
-        return 'success';
-    }
-    function generateControlNum(){
-        $year = Carbon::now()->format('Y');
-        $month = Carbon::now()->format('m');
-        $day = Carbon::now()->format('d');
-        $con = 'SP'.$year.$month;
-        if ($day <= 15) {
-            $con = $con.'A';
-        } else {
-            $con = $con.'B';
-        }
-        return $con;
-    }
+    
+
+
+
+    
 }

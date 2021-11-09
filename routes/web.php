@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,11 +39,14 @@ Route::resources([
     'hrc' => 'HrController',
     'ctn' => 'CanteenController',
     'usrtrct' => 'TransactionController',
-
+    'crdc' => 'CreditController',
 ]);
-Route::post('updateAmount', 'HrController@updateAmount');
+
+
+
 // HR Registration
 Route::post('registerUser', 'HrController@store');
+
 /*
     EJ - Start
 */

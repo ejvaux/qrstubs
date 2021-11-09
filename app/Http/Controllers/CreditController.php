@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\credit;
 use Illuminate\Http\Request;
+use App\User;
+use App\credit;
+use App\transaction;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 
 class CreditController extends Controller
 {
@@ -12,9 +17,13 @@ class CreditController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $users = User::with('latest_credit')->where('role_id', '3');
+        $ctrl = $this->generateControlNum();
+        $expr = $this->generateExpirationNum();
+        $users = $users->paginate(10);
+        return view('includes.table.creditTbl', compact('users','ctrl','expr'));
     }
     
     /**
@@ -82,4 +91,32 @@ class CreditController extends Controller
     {
         //
     }
+    function generateControlNum(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $day = Carbon::now()->format('d');
+        $con = 'SPI'.$year.$month;
+        if ($day <= 15) {
+            $con = $con.'A';
+        } else {
+            $con = $con.'B';
+        }
+        return $con;
+    }
+    function generateExpirationNum(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $day = Carbon::now()->format('d');
+        $ldate = Carbon::now()->format('t');
+        $con = $month.'-'.$year;
+        if ($day <= 15) {
+            $con = '16-'.$con;
+        } else {
+            $con = $ldate.'-'.$month.'-'.$year;
+        }
+        
+        
+        return $con;
+    }
+
 }
