@@ -98,7 +98,7 @@
                 <!-- ____________ FORM END __________________ -->
                 </div>
                 <div class="modal-footer text-center">
-                    <button id="transactBtn" type="button" class="btn btn-primary scan d-none">TRANSACT</button>
+                    <button id="transactBtn" type="button" class="btn btn-success scan d-none">TRANSACT</button>
                     <button id="scanqrBtn" type="button" class="btn btn-primary">SCAN</button>
                 </div>
                 </form>
