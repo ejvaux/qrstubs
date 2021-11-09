@@ -66,6 +66,7 @@ $(document).ready(function(){
         var button = $(event.relatedTarget)
     
         var emp_id = button.data('myid') 
+        var ctrl = button.data('myctrl')
         var name = button.data('myname')
         var amount = button.data('myamount')
         var modal = $(this)
@@ -73,6 +74,7 @@ $(document).ready(function(){
         modal.find('.modal-body #emp_id').val(emp_id);
         modal.find('.modal-body #name').val(name);
         modal.find('.modal-body #amount').val(amount);
+        modal.find('.modal-body #ctrl').val(ctrl);
         });
 
 
@@ -94,6 +96,7 @@ $('#addUserForm').on('submit', function(e){
             $('#regModal').modal("hide");
             // Load The tables
             LoadhrTbl();
+            LoadcreditTbl();
 
             if (data == 'success') {
                 iziToast.success({
@@ -131,6 +134,7 @@ $('#editUserForm').on('submit', function(e){
             $('#editModal').modal("hide");
             // Load The tables
             LoadhrTbl();
+            LoadcreditTbl();
 
             if (data == 'success') {
                 iziToast.success({

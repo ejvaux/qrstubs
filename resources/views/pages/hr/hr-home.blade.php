@@ -129,7 +129,14 @@
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                          
                                     <div class="col-md-7">
-                                            <input id="name" name="name" type="text" class="form-control" required>
+                                            <input disabled id="name" name="name" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="control_no" class="col-md-4 col-form-label text-md-right">Control No.</label>
+                         
+                                    <div class="col-md-7">
+                                            <input disabled id="ctrl" name="ctrl" type="text" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
