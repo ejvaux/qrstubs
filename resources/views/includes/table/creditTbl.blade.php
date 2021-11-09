@@ -22,6 +22,11 @@
                                         <td>{{$user->latest_credit->amount}}</td>
                                         <td></td>
                                         <td>{{$expr}}</td>
+                                    @else
+                                        <td>None</td>
+                                        <td>None</td>
+                                        <td>None</td>
+                                        <td>None</td>
                                     @endif
                                 @else
                                     <td>None</td>
