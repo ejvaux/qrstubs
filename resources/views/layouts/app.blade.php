@@ -126,10 +126,10 @@
                             <b>Name:</b>&nbsp; Divine Goce<br>
                             <b>Email:</b>&nbsp; divine_goce@sercomm.com<br>
                             <b>Extension #:</b>&nbsp; 80911<br>
-                            <br>
+                            {{-- <br>
                             <b>Name:</b>&nbsp; Karen Alinsod<br>
                             <b>Email:</b>&nbsp;  karen_alinsod@sercomm.com<br>
-                            <b>Extension #:</b>&nbsp; 80919
+                            <b>Extension #:</b>&nbsp; 80919 --}}
                             <br><br>
                             <h3>Developer</h3>
                             <b>Name:</b>&nbsp; Lawrence Bondad<br>

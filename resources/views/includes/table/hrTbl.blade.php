@@ -23,7 +23,7 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->department->name}}</td>
                                 <td style="text-align:center">
-                                    <button class="btn btn-primary" style="padding:0px 2px;" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-mydepartment="{{$user->department_id}}" data-mystatus="{{$user->status}}" data-toggle="modal" data-target="#editModal" >Edit Info</button>    
+                                    <button class="btn btn-primary" style="padding:0px 4px;" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-mydepartment="{{$user->department_id}}" data-mystatus="{{$user->status}}" data-toggle="modal" data-target="#editModal" >Edit Info</button>    
                                 </td>
                             </tr>
                         @endforeach
