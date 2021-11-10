@@ -11,5 +11,5 @@
 <i class="far fa-copyright"></i> 2021 Sercomm Phils., Inc.
 </span> 
 <br>Designed and built by:<br> 
-<span class="font-italic font-weight-bold" style='font-size: 1.5rem'>Rence Bondad & Ej Mati</span>
+<span class="font-italic font-weight-bold" style='font-size: 1.5rem'>Lawrence Bondad & Ej Mati</span>
 </div>

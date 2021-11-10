@@ -39,17 +39,17 @@
         <div class="card-body">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#allemp-tab" role="tab">Users</a>
+                    <a class="nav-link active" data-toggle="tab" href="#allemp-tab" role="tab">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
+                    <a class="nav-link" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane" id="allemp-tab" role="tabpanel">
+                <div class="tab-pane active" id="allemp-tab" role="tabpanel">
                     @include('pages.hr.empTab')
                 </div>
-                <div class="tab-pane active" id="allcredit-tab" role="tabpanel">
+                <div class="tab-pane" id="allcredit-tab" role="tabpanel">
                     @include('pages.hr.creditTab')
                 </div>
             </div>
@@ -130,7 +130,14 @@
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                                     <div class="col-md-7">
-                                            <input id="name" name="name" type="text" class="form-control" required>
+                                            <input disabled id="name" name="name" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="control_no" class="col-md-4 col-form-label text-md-right">Control No.</label>
+                         
+                                    <div class="col-md-7">
+                                            <input disabled id="ctrl" name="ctrl" type="text" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
