@@ -56,4 +56,21 @@ $(document).ready(function () {
     $(document).ajaxComplete(function(){
         $("#wait").css("display", "none");
     });
+    $('.select2').select2({width: '100%'});
 });
+
+function downloadWait(btn){
+    i = 15;
+    $(btn).attr('disabled',true);
+    var t = setInterval(function(){
+        if (i > 0) {
+            $(btn).html('The download will start shortly '+('0'+i).slice(-2));
+            i--;
+        }
+        else {
+            clearInterval(t);
+            $(btn).attr('disabled',false);
+            $(btn).html('Re-download');
+        }
+    },1000);
+}

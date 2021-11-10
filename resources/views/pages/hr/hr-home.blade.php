@@ -2,6 +2,7 @@
 
 @section('js')
     <script src="{{ asset('js\hr.js') }}" defer></script>
+    <script src="{{ asset('js\userExport.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -15,11 +16,11 @@
                     <button style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
                 </div>
                 <div class="col-md-4">
-                    <h1 style="text-align:center;"> HR </h1>   
-                </div> 
+                    <h1 style="text-align:center;"> HR </h1>
+                </div>
                 <div class="col-md-4 ">
                     {{-- <form id="searchNForm" method="POST">
-                    {{ csrf_field() }}                        
+                    {{ csrf_field() }}
                         <div class="input-group">
                             <input type="search" class="form-control" name="searchtxt"
                                 placeholder="Search name here.." > <span class="input-group-btn"></span>
@@ -66,7 +67,7 @@
                         <form id="addUserForm" method="POST" action="{{ url('registerUser') }}">
                             @csrf
                         <div class="modal-body">
-                            @include('includes.regform') 
+                            @include('includes.regform')
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -75,7 +76,7 @@
                         </form>
                     </div>
                 </div>
-            </div>             
+            </div>
             {{-- End of Registration --}}
 
             {{-- Editing content--}}
@@ -101,11 +102,11 @@
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
-            </div>    
-                
+            </div>
+
             {{--End of editing --}}
 
             {{-- Editing Amount Content--}}
@@ -127,7 +128,7 @@
                             <div class="modal-body">
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
-                         
+
                                     <div class="col-md-7">
                                             <input id="name" name="name" type="text" class="form-control" required>
                                     </div>
@@ -144,13 +145,13 @@
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
-            </div>    
+            </div>
 
             {{--End of editing --}}
-            
+
 
     </div>
     @else
