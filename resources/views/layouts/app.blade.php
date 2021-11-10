@@ -23,7 +23,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet">--}}
 
     <!-- Scanner -->
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
@@ -61,7 +61,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -144,11 +144,11 @@
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
-                    
+
                 </div>
             </div>
-        </div>    
-            
+        </div>
+
         {{--End of editing --}}
 
         <main class="py-4">

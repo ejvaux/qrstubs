@@ -46,7 +46,7 @@ class ExportController extends Controller
     }
     public function userModal()
     {
-        $credits = Credit::get()->unique('control_no');
+        $credits = Credit::orderBy('id','DESC')->get()->unique('control_no');
         return view('includes.modal.userExportModal',compact('credits'));
     }
 }
