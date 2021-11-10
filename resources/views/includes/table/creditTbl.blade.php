@@ -38,11 +38,7 @@
                                 <td style="text-align:center">
                                 @if ($user->latest_credit != NULL)
                                     @if ($user->latest_credit->control_no == $ctrl)
-<<<<<<< HEAD
-                                        <button class="btn btn-primary" style="padding:0px 4px;" data-myid="{{$user->latest_credit->id}}" data-myname="{{$user->name}}" data-myctrl="{{$user->latest_credit->control_no}}" data-myamount="{{$user->latest_credit->amount}}" data-toggle="modal" data-target="#amountModal" >Edit Credit</button>
-=======
                                         <button class="btn btn-success" style="padding:0px 4px;" data-myid="{{$user->latest_credit->id}}" data-myctrl="{{$user->latest_credit->control_no}}" data-myname="{{$user->name}}" data-myamount="{{$user->latest_credit->amount}}" data-toggle="modal" data-target="#amountModal" >Edit Credit</button>
->>>>>>> f5d5cb22a4f4e6d0da41f9827e5f20e6b95d60ac
                                     @endif
                                 @else
                                     
