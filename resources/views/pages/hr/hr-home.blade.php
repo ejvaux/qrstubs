@@ -38,17 +38,17 @@
         <div class="card-body">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#allemp-tab" role="tab">Users</a>
+                    <a class="nav-link active" data-toggle="tab" href="#allemp-tab" role="tab">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
+                    <a class="nav-link" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane" id="allemp-tab" role="tabpanel">
+                <div class="tab-pane active" id="allemp-tab" role="tabpanel">
                     @include('pages.hr.empTab')
                 </div>
-                <div class="tab-pane active" id="allcredit-tab" role="tabpanel">
+                <div class="tab-pane" id="allcredit-tab" role="tabpanel">
                     @include('pages.hr.creditTab')
                 </div>
             </div>
