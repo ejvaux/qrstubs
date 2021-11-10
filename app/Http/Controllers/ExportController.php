@@ -8,6 +8,7 @@ use App\User;
 use App\Credit;
 use App\Exports\UsersExport;
 use App\Exports\TransactionsExport;
+use App\Exports\UsersCreditExport;
 use Carbon\Carbon;
 //use Maatwebsite\Excel\Facades\Excel;
 
@@ -44,6 +45,11 @@ class ExportController extends Controller
     {
         return (new TransactionsExport($req->input('fromDate'),$req->input('toDate'),$req->input('canteenId')))->download('Transactions_'.Date('Ymd').'.xlsx');
     }
+    public function exportCredit(Request $req)
+    {
+        return (new UsersCreditExport)->download("User's Credits.xlsx");
+    }
+    
     public function userModal()
     {
         $credits = Credit::orderBy('id','DESC')->get()->unique('control_no');

@@ -1,6 +1,7 @@
 <?php
 
-
+use App\Exports\RequestsExport;
+use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,7 @@
 //Show the Auth
 Auth::routes();
 
+// Pages
 Route::get('/', 'HomeController@pages');
 Route::get('/home', 'HomeController@pages')->name('home');
 
@@ -35,6 +37,7 @@ Route::get('/usrtransact', 'HomeController@usrtransact');
 Route::get('/ctntransact', 'HomeController@ctntransact');
 Route::get('/error', 'HomeController@error');
 
+//Get Resources of Controller
 Route::resources([
     'hrc' => 'HrController',
     'ctn' => 'CanteenController',
@@ -42,10 +45,12 @@ Route::resources([
     'crdc' => 'CreditController',
 ]);
 
-
-
 // HR Registration
 Route::post('registerUser', 'HrController@store');
+
+// EXPORTING
+Route::get('export/usercredits', 'ExportController@exportCredit');
+
 
 /*
     EJ - Start
