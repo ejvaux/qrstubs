@@ -12,6 +12,7 @@ window.Vue = require('vue');
 import print from 'print-js';
 window.iziToast = require('izitoast');
 window.Swal = require('sweetalert2');
+require('select2');
 
 /**
  * The following block of code may be used to automatically register your

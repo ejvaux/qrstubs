@@ -1,11 +1,14 @@
-<br><div class="row">
-    
-    <div class="col"></div>
-    <div class="col-2 text-left">
-        <button id="creditBtn" class="btn btn-outline-success">Export Credit</button>
+<div id="userModalDiv"></div>
+<div class="row mt-2">
+    <div class="col text-right">
+        <button id="userExportBtn" class="btn btn-outline-secondary">Export</button>
     </div>
 </div>
-<div id="creditTable">
-    {{-- FUNCTION IN JS HAS AUTO RELOAD --}}
-    {{-- @include('includes.table.creditTbl') --}}
+<div class="row">
+    <div class="col">
+        <div id="creditTable">
+            {{-- FUNCTION IN JS HAS AUTO RELOAD --}}
+            {{-- @include('includes.table.creditTbl') --}}
+        </div>
+    </div>
 </div>

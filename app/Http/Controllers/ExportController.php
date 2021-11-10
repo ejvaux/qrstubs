@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Credit;
 use App\Exports\UsersExport;
 use App\Exports\TransactionsExport;
 use App\Exports\UsersCreditExport;
@@ -38,15 +39,23 @@ class ExportController extends Controller
     public function userDownload(Request $req)
     {
         //return Excel::download(new UsersExport, 'Employee Credits.xlsx');
-        return (new UsersExport)->download('Employee Credits.xlsx');
+        return (new UsersExport($req->ctrl))->download('Employee Credits '.$req->ctrl.'.xlsx');
     }
     public function transactionDownload(Request $req)
     {
         return (new TransactionsExport($req->input('fromDate'),$req->input('toDate'),$req->input('canteenId')))->download('Transactions_'.Date('Ymd').'.xlsx');
     }
+<<<<<<< HEAD
     public function exportCredit(Request $req)
     {
         return (new UsersCreditExport)->download("User's Credits.xlsx");
     }
     
+=======
+    public function userModal()
+    {
+        $credits = Credit::get()->unique('control_no');
+        return view('includes.modal.userExportModal',compact('credits'));
+    }
+>>>>>>> f5d5cb22a4f4e6d0da41f9827e5f20e6b95d60ac
 }

@@ -26,6 +26,7 @@
     "dependencies": {
         "izitoast": "^1.4.0",
         "print-js": "^1.6.0",
+        "select2": "^4.1.0-rc.0",
         "sweetalert2": "^11.1.9"
     }
 }

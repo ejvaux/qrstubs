@@ -22,11 +22,14 @@ use Maatwebsite\Excel\Facades\Excel;
 // Auth::routes(['register' => false]);
 
 //Show the Auth
-Auth::routes(['register' => false]);
+Auth::routes();
 
 // Pages
 Route::get('/', 'HomeController@pages');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@pages')->name('home');
+
+
+// Pages
 Route::get('/hr', 'HomeController@hr');
 Route::get('/canteen', 'HomeController@canteen');
 Route::get('/user', 'HomeController@user');
@@ -64,13 +67,11 @@ Route::post ('/transact', 'TransactionController@transact');
 
 Route::get ('/export/user/page', 'ExportController@userExportPage');
 Route::get ('/export/user/download', 'ExportController@userDownload');
+Route::get ('/export/user/modal', 'ExportController@userModal');
 Route::get ('/export/transaction/download', 'ExportController@transactionDownload');
 
-Route::get ('/test', function(){
-    $users =  App\User::where('role_id',3)->with(['department','latest_credit','transactions'])->get();
-    return $users;
-});
-
+Route::get ('/test', 'TestController@index');
+Route::get ('/importuser', 'ImportController@importUser');
 
 /*
     EJ - End

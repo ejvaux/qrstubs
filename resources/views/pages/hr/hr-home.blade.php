@@ -2,6 +2,7 @@
 
 @section('js')
     <script src="{{ asset('js\hr.js') }}" defer></script>
+    <script src="{{ asset('js\userExport.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -15,11 +16,11 @@
                     <button style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
                 </div>
                 <div class="col-md-4">
-                    <h1 style="text-align:center;"> HR </h1>   
-                </div> 
+                    <h1 style="text-align:center;"> HR </h1>
+                </div>
                 <div class="col-md-4 ">
                     {{-- <form id="searchNForm" method="POST">
-                    {{ csrf_field() }}                        
+                    {{ csrf_field() }}
                         <div class="input-group">
                             <input type="search" class="form-control" name="searchtxt"
                                 placeholder="Search name here.." > <span class="input-group-btn"></span>
@@ -38,17 +39,17 @@
         <div class="card-body">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#allemp-tab" role="tab">Users</a>
+                    <a class="nav-link active" data-toggle="tab" href="#allemp-tab" role="tab">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
+                    <a class="nav-link" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane" id="allemp-tab" role="tabpanel">
+                <div class="tab-pane active" id="allemp-tab" role="tabpanel">
                     @include('pages.hr.empTab')
                 </div>
-                <div class="tab-pane active" id="allcredit-tab" role="tabpanel">
+                <div class="tab-pane" id="allcredit-tab" role="tabpanel">
                     @include('pages.hr.creditTab')
                 </div>
             </div>
@@ -66,7 +67,7 @@
                         <form id="addUserForm" method="POST" action="{{ url('registerUser') }}">
                             @csrf
                         <div class="modal-body">
-                            @include('includes.regform') 
+                            @include('includes.regform')
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -75,7 +76,7 @@
                         </form>
                     </div>
                 </div>
-            </div>             
+            </div>
             {{-- End of Registration --}}
 
             {{-- Editing content--}}
@@ -101,11 +102,11 @@
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
-            </div>    
-                
+            </div>
+
             {{--End of editing --}}
 
             {{-- Editing Amount Content--}}
@@ -127,7 +128,7 @@
                             <div class="modal-body">
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
-                         
+
                                     <div class="col-md-7">
                                             <input disabled id="name" name="name" type="text" class="form-control" required>
                                     </div>
@@ -151,13 +152,13 @@
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
-            </div>    
+            </div>
 
             {{--End of editing --}}
-            
+
 
     </div>
     @else
