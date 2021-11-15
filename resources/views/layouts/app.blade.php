@@ -74,11 +74,9 @@
                                 </li>
                             @endif
                         @else
-                            @if(Auth::user()->role_id==2 || Auth::user()->role_id==3)
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                             </li>
-                            @endif
                             @if(Auth::user()->role_id==2)
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('ctntransact') }}">{{ __('Transactions') }}</a>
@@ -99,6 +97,9 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Disconnect Me') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('password') }}">{{ __('Change Password') }}
+                                        
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

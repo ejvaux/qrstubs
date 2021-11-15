@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\credit;
-use App\transaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -19,11 +17,13 @@ class CreditController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::with('latest_credit')->where('role_id', '3')->where('status', '0');
         $ctrl = $this->generateControlNum();
-        $expr = $this->generateExpirationNum();
-        $transactions = transaction::where('control_no', $ctrl)->sum('price');
+        $users = User::query()->where('role_id', 3)->where('status', 0)
+            ->with(['latest_credit', 'transactions' => function($q) use($ctrl){
+                $q->where('transactions.control_no', $ctrl);
+            }]);
 
+        $expr = $this->generateExpirationNum();
         
         $users = $users->paginate(10);
         return view('includes.table.creditTbl', compact('users','ctrl','expr'));

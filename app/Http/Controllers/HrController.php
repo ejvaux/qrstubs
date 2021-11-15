@@ -117,9 +117,9 @@ class HrController extends Controller
     }
     public function updateAmount(Request $request, $id)
     {
-        $credit_amount = credit::findOrFail($request->employee_id);
-        $credit_amount = $request->amount;
-        $user->save();
+        $credit = credit::findOrFail($request->credit_id);
+        $credit->amount = $request->amount;
+        $credit->save();
 
         return 'success';
     }

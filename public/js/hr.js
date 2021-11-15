@@ -65,16 +65,16 @@ $(document).ready(function(){
         console.log('Model_opened');
         var button = $(event.relatedTarget)
     
-        var emp_id = button.data('myid') 
-        var ctrl = button.data('myctrl')
+        var cred_id = button.data('myid') 
         var name = button.data('myname')
+        var ctrl = button.data('myctrl')
         var amount = button.data('myamount')
         var modal = $(this)
     
-        modal.find('.modal-body #emp_id').val(emp_id);
+        modal.find('.modal-body #cred_id').val(cred_id);
         modal.find('.modal-body #name').val(name);
-        modal.find('.modal-body #amount').val(amount);
         modal.find('.modal-body #ctrl').val(ctrl);
+        modal.find('.modal-body #amount').val(amount);
         });
 
 
@@ -171,23 +171,23 @@ $('#editAmountForm').on('submit', function(e){
         success: function(data) {
             $('#amountModal').modal("hide");
             // Load The tables
-            LoadhrTbl();
+            LoadcreditTbl();
 
             if (data == 'success') {
                 iziToast.success({
                     title: 'Success',
                     position: 'topCenter',
-                    message: 'Editting User Success!'
+                    message: 'Editting amount Success!'
                 });
             }
         },
         error:function(error){
-            $('#amountModal').modal("hide")
+            // $('#amountModal').modal("hide")
 
             iziToast.warning({
                 title: 'Failed',
                 position: 'topCenter',
-                message: 'Editting User Failed !',
+                message: 'Editting amount Failed !',
             });
         }
 

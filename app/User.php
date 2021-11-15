@@ -9,6 +9,7 @@ use App\Department;
 use App\Status;
 use App\role;
 use App\canteen;
+use App\transaction;
 use App\Credit;
 
 class User extends Authenticatable
@@ -67,5 +68,6 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough('App\Transaction','App\Credit');
     }
+    
 
 }
