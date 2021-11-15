@@ -14,4 +14,4 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css').sourceMaps();
 /*mix.js('node_modules/iziToast/dist/js/iziToast.min.js', 'public/js');*/
-mix.copy('node_modules/iziToast/dist/css/iziToast.min.css', 'public/css/iziToast.min.css');
+/*mix.copy('node_modules/iziToast/dist/css/iziToast.min.css', 'public/css/iziToast.min.css');*/
