@@ -19,10 +19,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 
 // Hide the Built in Register button (Admin)
-// Auth::routes(['register' => false]);
+Auth::routes(['register' => false]);
 
 //Show the Auth
-Auth::routes();
+//Auth::routes();
 
 // Pages
 Route::get('/', 'HomeController@pages');
