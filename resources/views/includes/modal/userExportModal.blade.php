@@ -34,8 +34,8 @@
                 <!-- ____________ FORM END __________________ -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button id="userTransactionBtn" type="button" class="btn btn-primary">Download</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
             </form>
         </div>

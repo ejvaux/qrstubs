@@ -14,6 +14,7 @@ $('#userExportBtn').on('click', function(){
     });
 });
 $('#userModalDiv').on('click','#userTransactionBtn', function(){
+    $('#ctrl').removeClass('is-invalid');
     btn = $('#userModalDiv #userTransactionBtn');
     if ($('#ctrl').val() != '') {
         downloadWait(btn);
@@ -22,12 +23,13 @@ $('#userModalDiv').on('click','#userTransactionBtn', function(){
         window.location = url;
     }
     else{
-        iziToast.warning({
+        $('#ctrl').addClass('is-invalid');
+        /*iziToast.warning({
             title: 'Warning',
             message: 'Please select credit first.',
             position: 'topCenter',
             close: false,
             pauseOnHover: false,
-        });
+        });*/
     }
 });

@@ -1,7 +1,7 @@
 <div id="userModalDiv"></div>
 <div class="row mt-2">
     <div class="col text-right">
-        <button id="userExportBtn" class="btn btn-outline-secondary">Export</button>
+        <button id="userExportBtn" class="btn btn-outline-secondary py-1">Export</button>
     </div>
 </div>
 <div class="row">

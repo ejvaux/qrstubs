@@ -70,8 +70,10 @@ Route::get ('/export/user/download', 'ExportController@userDownload');
 Route::get ('/export/user/modal', 'ExportController@userModal');
 Route::get ('/export/transaction/download', 'ExportController@transactionDownload');
 
-Route::get ('/test', 'TestController@index');
 Route::get ('/importuser', 'ImportController@importUser');
+Route::post ('/import/credits', 'ImportController@importCredit');
+
+Route::get ('/test', 'TestController@index');
 
 /*
     EJ - End
