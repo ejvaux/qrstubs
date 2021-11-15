@@ -24,7 +24,7 @@ class CreditsImport implements  WithHeadingRow, ToModel
     */
     public function model(array $row)
     {
-        if($row['employee_no']){
+        if($row['employee_no'] != ''){
             $user = User::where('uname',$row['employee_no'])->first();
             return new Credit([
                 'user_id'       => $user->id,
