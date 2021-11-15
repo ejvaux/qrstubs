@@ -107,6 +107,10 @@ class HomeController extends Controller
     {
         return view('pages.error');
     }
+    public function password(Request $req)
+    {
+        return view('changepass');
+    }
 
     function generateControlNum(){
         $year = Carbon::now()->format('Y');

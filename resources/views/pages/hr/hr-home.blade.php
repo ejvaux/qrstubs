@@ -12,13 +12,13 @@
     <div class="card text-middle">
         <div class="card-header">
             <div class="row" style="margin: 20px 0px;">
-                <div class="col-md-4">
-                    <button style="width:150px; height:40px;" class="btn btn-success" data-toggle="modal" data-target="#regModal">REGISTER</button>
+                <div class="col-md-4 text-md-left">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#regModal">Register</button>
                 </div>
-                <div class="col-md-4">
-                    <h1 style="text-align:center;"> HR </h1>
+                <div class="col-md-4 text-md-center">
+                    <h1>HR</h1>
                 </div>
-                <div class="col-md-4 ">
+                <div class="col-md-4 text-md-right">
                     {{-- <form id="searchNForm" method="POST">
                     {{ csrf_field() }}
                         <div class="input-group">
@@ -28,11 +28,7 @@
                             height: calc(1.6em + 0.75rem + 2px);">Go</button>
                         </div>
                     </form> --}}
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4"><a href="{{ url('/download/Template.xlsx')}}" class="btn btn-success"><i class="fa fa-download"></i> Template</a></div>
-                    </div>
+                    <a href="{{ url('/download/Template.xlsx')}}" class="btn btn-success">Template</a></div>
                 </div>
             </div>
         </div>
@@ -91,7 +87,7 @@
                             </button>
                         </div>
 
-                        <form id="editUserForm" action="{{route('hrc.update','test')}}" method="post">
+                        <form id="editUserForm" action="{{route('hrc.update','test')}}" method="POST">
                                 {{csrf_field()}}
                                 {{method_field('patch')}}
                             <div class="modal-body">
@@ -123,9 +119,16 @@
 
                         <form id="editAmountForm" action="{{ url('updateAmount') }}" method="post">
                             @csrf
-                                {{-- {{csrf_field()}}
+                                {{-- {{csrf_field()}}   type="hidden"
                                 {{method_field('patch')}} --}}
                             <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="id" class="col-md-4 col-form-label text-md-right">ID</label>
+                                    <div class="col-md-7">
+                                        <input disabled class="form-control" name="credit_id" id="cred_id">
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
