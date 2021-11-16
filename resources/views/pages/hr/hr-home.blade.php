@@ -118,6 +118,7 @@
                         </div>
 
                         <form id="editAmountForm" action="{{ url('updateAmount') }}" method="post">
+                        
                             @csrf
                                 {{-- {{csrf_field()}}   type="hidden"
                                 {{method_field('patch')}} --}}
@@ -125,7 +126,7 @@
                                 <div class="form-group row">
                                     <label for="id" class="col-md-4 col-form-label text-md-right">ID</label>
                                     <div class="col-md-7">
-                                        <input disabled class="form-control" name="credit_id" id="cred_id">
+                                        <input disabled class="form-control" name="credit_id" id="credit_id">
                                     </div>
                                 </div>
                                 

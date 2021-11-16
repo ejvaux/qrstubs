@@ -71,7 +71,7 @@ $(document).ready(function(){
         var amount = button.data('myamount')
         var modal = $(this)
     
-        modal.find('.modal-body #cred_id').val(cred_id);
+        modal.find('.modal-body #credit_id').val(cred_id);
         modal.find('.modal-body #name').val(name);
         modal.find('.modal-body #ctrl').val(ctrl);
         modal.find('.modal-body #amount').val(amount);
