@@ -1,5 +1,12 @@
 /*      FUNCTIONS      */
 
+function reset()
+{
+    $('#userImportFile').val('');
+    //$('#upAlert').hide();
+    $('#creditUploadBtn').html('Upload').attr('disabled',false);
+}
+
 /*      EVENTS      */
 $('#uploadCreditsBtn').on('click',function(){
     $('#creditImportModal').modal('show')
@@ -18,8 +25,16 @@ $('#creditUploadBtn').on('click', function(){
         global: false,
         success: function (data) {
             console.log(data);
-            $('#creditUploadBtn').html('Upload').attr('disabled',false);
-            $('#upAlert').html(data.result).show();
+            reset();
+            //$('#upAlert').html(data.result).show();
+            $('#creditImportModal').modal('hide')
+            iziToast.success({
+                //title: ,
+                message: data.result,
+                position: 'topCenter',
+                close: false,
+                pauseOnHover: true,
+            });
         },
         error: function(err,status,tr){
             console.log('ERROR');
@@ -39,7 +54,5 @@ $('#creditUploadBtn').on('click', function(){
 
 $('#creditImportModal').on('hide.bs.modal', function (event) {
     console.log('close');
-    $('#userImportFile').val('');
-    $('#upAlert').hide();
-    $('#creditUploadBtn').html('Upload').attr('disabled',false);
+    reset();
 });

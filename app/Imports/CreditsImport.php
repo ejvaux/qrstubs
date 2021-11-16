@@ -34,4 +34,8 @@ class CreditsImport implements  WithHeadingRow, ToModel
         }
 
     }
+    public function headingRow(): int
+    {
+        return 3;
+    }
 }

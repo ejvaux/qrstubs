@@ -28,12 +28,12 @@
                         </span>
                     </div>
                 </div>
-                <div class="row">
+                {{--<div class="row">
                     <div class="col">
                         <div id="upAlert" class="alert alert-success" style="display: none" role="alert">
                         </div>
                     </div>
-                </div>
+                </div>--}}
                 <!-- ____________ FORM END __________________ -->
             </div>
             <div class="modal-footer">
