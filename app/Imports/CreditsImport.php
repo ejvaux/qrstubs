@@ -3,12 +3,19 @@
 namespace App\Imports;
 
 use App\Credit;
+use App\User;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class CreditsImport implements ToModel
+class CreditsImport implements  WithHeadingRow, ToModel
 {
     use Importable;
+
+    public function __construct(string $ctrl)
+    {
+        $this->ctrl = $ctrl;
+    }
 
     /**
     * @param array $row
@@ -17,8 +24,14 @@ class CreditsImport implements ToModel
     */
     public function model(array $row)
     {
-        return new Credit([
-            //
-        ]);
+        if($row['employee_no'] != ''){
+            $user = User::where('uname','=',strval($row['employee_no']))->first();
+            return new Credit([
+                'user_id'       => $user->id,
+                'control_no'    => $this->ctrl,
+                'amount'        => $row['amount'],
+            ]);
+        }
+
     }
 }

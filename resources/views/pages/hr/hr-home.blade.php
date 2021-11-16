@@ -2,7 +2,8 @@
 
 @section('js')
     <script src="{{ asset('js\hr.js') }}" defer></script>
-    <script src="{{ asset('js\userExport.js') }}" defer></script>
+    <script src="{{ asset('js\export\userExport.js') }}" defer></script>
+    <script src="{{ asset('js\import\creditImport.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -139,7 +140,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="control_no" class="col-md-4 col-form-label text-md-right">Control No.</label>
-                         
+
                                     <div class="col-md-7">
                                             <input disabled id="ctrl" name="ctrl" type="text" class="form-control" required>
                                     </div>

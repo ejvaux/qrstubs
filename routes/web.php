@@ -19,10 +19,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 
 // Hide the Built in Register button (Admin)
-// Auth::routes(['register' => false]);
+Auth::routes(['register' => false]);
 
 //Show the Auth
-Auth::routes();
+//Auth::routes();
 
 // Pages
 Route::get('/', 'HomeController@pages');
@@ -74,8 +74,10 @@ Route::get ('/export/user/download', 'ExportController@userDownload');
 Route::get ('/export/user/modal', 'ExportController@userModal');
 Route::get ('/export/transaction/download', 'ExportController@transactionDownload');
 
-Route::get ('/test', 'TestController@index');
 Route::get ('/importuser', 'ImportController@importUser');
+Route::post ('/import/credits', 'ImportController@importCredit');
+
+Route::get ('/test', 'TestController@index');
 
 /*
     EJ - End

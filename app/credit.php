@@ -9,7 +9,10 @@ use Auth;
 
 class credit extends Model
 {
-    
+    protected $fillable = [
+        'user_id','control_no','amount'
+    ];
+
     public function user()
     {
         return $this->belongsto('App\User','user_id');
