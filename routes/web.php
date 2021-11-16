@@ -37,6 +37,7 @@ Route::get('/usrtransact', 'HomeController@usrtransact');
 Route::get('/ctntransact', 'HomeController@ctntransact');
 Route::get('/error', 'HomeController@error');
 Route::get('/password', 'HomeController@password');
+Route::get('change-password', 'ChangePasswordController@index');
 
 //Get Resources of Controller
 Route::resources([
@@ -49,7 +50,7 @@ Route::resources([
 // HR Registration
 Route::post('registerUser', 'HrController@store');
 Route::post('updateAmount', 'HrController@updateAmount');
-
+Route::post('change-password', 'ChangePasswordController@store')->name('changepass');
 
 // EXPORTING
 Route::get('export/usercredits', 'ExportController@exportCredit');

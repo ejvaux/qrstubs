@@ -98,7 +98,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Disconnect Me') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('password') }}">{{ __('Change Password') }}
+                                    <a class="dropdown-item" href="{{ url('change-password') }}">{{ __('Change Password') }}
                                         
                                     </a>
 
