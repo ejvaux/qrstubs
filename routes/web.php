@@ -47,10 +47,11 @@ Route::resources([
     'crdc' => 'CreditController',
 ]);
 
-// HR Registration
+// POST Method
 Route::post('registerUser', 'HrController@store');
-Route::post('updateAmount', 'HrController@updateAmount');
+Route::post('updateAmount', 'CreditController@updateAmount');
 Route::post('change-password', 'ChangePasswordController@store')->name('changepass');
+Route::post('generateQR', 'UserController@getNewQr' );
 
 // EXPORTING
 Route::get('export/usercredits', 'ExportController@exportCredit');

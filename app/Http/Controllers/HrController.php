@@ -7,10 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\credit;
-use App\Role;
 use App\Department;
-use App\transaction;
-use App\canteen;
 use Auth;
 use Carbon\Carbon;
 
@@ -112,14 +109,6 @@ class HrController extends Controller
         $user->department_id = $request->department;
         $user->status = $request->status;
         $user->save();
-
-        return 'success';
-    }
-    public function updateAmount(Request $request, $id)
-    {
-        $credit = credit::findOrFail($request->credit_id);
-        $credit->amount = $request->amount;
-        $credit->save();
 
         return 'success';
     }

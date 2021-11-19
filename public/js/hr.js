@@ -71,7 +71,7 @@ $(document).ready(function(){
         var amount = button.data('myamount')
         var modal = $(this)
     
-        modal.find('.modal-body #credit_id').val(cred_id);
+        modal.find('.modal-body #cred_id').val(cred_id);
         modal.find('.modal-body #name').val(name);
         modal.find('.modal-body #ctrl').val(ctrl);
         modal.find('.modal-body #amount').val(amount);
@@ -172,12 +172,12 @@ $('#editAmountForm').on('submit', function(e){
             $('#amountModal').modal("hide");
             // Load The tables
             LoadcreditTbl();
-
+            
             if (data == 'success') {
                 iziToast.success({
                     title: 'Success',
                     position: 'topCenter',
-                    message: 'Editting amount Success!'
+                    message: 'Editting Amount Success!'
                 });
             }
         },
@@ -187,7 +187,7 @@ $('#editAmountForm').on('submit', function(e){
             iziToast.warning({
                 title: 'Failed',
                 position: 'topCenter',
-                message: 'Editting amount Failed !',
+                message: 'Editting Amount Failed !',
             });
         }
 

@@ -118,37 +118,28 @@
                             </button>
                         </div>
 
-                        <form id="editAmountForm" action="{{ url('updateAmount') }}" method="post">
-                        
+                        <form id="editAmountForm" method="POST" action="{{ url('updateAmount') }}">
                             @csrf
-                                {{-- {{csrf_field()}}   type="hidden"
-                                {{method_field('patch')}} --}}
                             <div class="modal-body">
-                                <div class="form-group row">
-                                    <label for="id" class="col-md-4 col-form-label text-md-right">ID</label>
-                                    <div class="col-md-7">
-                                        <input disabled class="form-control" name="credit_id" id="credit_id">
-                                    </div>
-                                </div>
-                                
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                                     <div class="col-md-7">
-                                            <input disabled id="name" name="name" type="text" class="form-control" required>
+                                        <input type="hidden" name="credit_id" id="cred_id" value="">
+                                        <input disabled id="name" name="name" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="control_no" class="col-md-4 col-form-label text-md-right">Control No.</label>
 
                                     <div class="col-md-7">
-                                            <input disabled id="ctrl" name="ctrl" type="text" class="form-control" required>
+                                            <input disabled id="ctrl" name="ctrl" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="amount" class="col-md-4 col-form-label text-md-right">Credit Amount</label>
                                     <div class="col-md-7">
-                                            <input id="amount" name="amount" type="text" class="form-control" required>
+                                            <input id="amount" name="amount" type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>

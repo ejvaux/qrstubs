@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\credit;
 use App\Role;
 use App\Department;
 use App\canteen;
 use Auth;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -99,4 +101,29 @@ class UserController extends Controller
         $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
         return $credit;
     }
+    public function getNewQr(Request $request)
+    {
+        $qrdte = Carbon::now();
+        $qrnew = 'SPO'.$request->username.$qrdte;
+        $hashedqr = Hash::make($qrnew);
+
+        $user = User::findOrFail($request->employee_id);
+        $user->qrcode = $hashedqr;
+        $user->save();
+        
+        return 'success';
+    }
+
+    // function generateNewQR(){
+    //     $year = Carbon::now()->format('Y');
+    //     $month = Carbon::now()->format('m');
+    //     $day = Carbon::now()->format('d');
+    //     $hour= Carbon::now()->format('H');
+    //     $min= Carbon::now()->format('i');
+    //     $sec= Carbon::now()->format('s');
+
+    //     $con = $year.$month.$day;
+       
+    //     return $con;
+    // }
 }

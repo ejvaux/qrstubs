@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\credit;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class CreditController extends Controller
     public function index(Request $request)
     {
         $ctrl = $this->generateControlNum();
-        $users = User::query()->where('role_id', 3)->where('status', 0)
+        $users = User::where('role_id', 3)->where('status', 0)
             ->with(['latest_credit', 'transactions' => function($q) use($ctrl){
                 $q->where('transactions.control_no', $ctrl);
             }]);
@@ -93,6 +94,15 @@ class CreditController extends Controller
     public function destroy(credit $credit)
     {
         //
+    }
+
+    public function updateAmount(Request $request)
+    {
+        $credit = credit::findOrFail($request->credit_id);
+        $credit->amount = $request->amount;
+        $credit->save(); 
+
+        return 'success';
     }
     function generateControlNum(){
         $year = Carbon::now()->format('Y');
