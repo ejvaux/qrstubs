@@ -110,7 +110,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->employee_id);
         $user->qrcode = $hashedqr;
         $user->save();
-        
+       
         return 'success';
     }
 
