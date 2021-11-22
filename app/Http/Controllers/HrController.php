@@ -21,7 +21,7 @@ class HrController extends Controller
     public function index(Request $request)
     {
         $departments = Department::all();
-        $users = User::where('role_id', 'like', '3')->orderBy('id', 'DESC')->paginate(10);
+        $users = User::where('role_id', 'like', '3')->orderBy('uname', 'DESC')->paginate(10);
         return view('includes.table.hrTbl',compact('users', 'departments'));
     }
 
@@ -44,13 +44,13 @@ class HrController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'uname' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'unique:users', 'email', 'max:50'],
+            'uname' => ['required', 'unique:users', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
             'qrcode' => ['nullable', 'string', 'max:20'],
             'role_id' => ['required', 'integer', 'max:4'],
             'department_id' => ['nullable', 'integer', 'max:20'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-            
         ]);
 
         $qrcode = 'SPO'.$request->uname;
@@ -60,6 +60,7 @@ class HrController extends Controller
 
         $register = new User;
         
+        $register->email = $request->email;
         $register->uname = $request->uname;
         $register->name = $request->name;
         $register->qrcode = $hashed;
@@ -102,7 +103,7 @@ class HrController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $user = User::findOrFail($request->employee_id);
         $user->name = $request->name2;
