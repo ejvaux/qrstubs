@@ -20,8 +20,6 @@ $.ajaxSetup({
                 iziToast.warning({
                     title: 'ERROR '+ XMLHttpRequest.status,
                     message: XMLHttpRequest.statusText + '<br>' + msg + '<br>' + file + '<br>Line: ' + line,
-                    position: 'topCenter',
-                    close: false,
                 });
             }
         }
@@ -30,16 +28,12 @@ $.ajaxSetup({
             iziToast.warning({
                 title: 'ERROR '+ XMLHttpRequest.status,
                 message: 'Network Error',
-                position: 'topCenter',
-                close: false,
             });
         }
         else {
             iziToast.warning({
                 title: 'ERROR',
                 message: 'Unknown Error',
-                position: 'topCenter',
-                close: false,
             });
             // something weird is happening
         }
@@ -57,6 +51,11 @@ $(document).ready(function () {
         $("#wait").css("display", "none");
     });
     $('.select2').select2({width: '100%'});
+    iziToast.settings({
+        position: 'topCenter',
+        close: false,
+        pauseOnHover: true,
+    });
 });
 
 function downloadWait(btn){
