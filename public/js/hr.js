@@ -47,12 +47,14 @@ $(document).ready(function(){
 
     var emp_id = button.data('myid') 
     var uname = button.data('myuname')
+    var email = button.data('myemail')
     var name = button.data('myname')
     var status = button.data('mystatus')
     var department = button.data('mydepartment');
     var modal = $(this)
 
     modal.find('.modal-body #emp_id').val(emp_id);
+    modal.find('.modal-body #email').val(email);
     modal.find('.modal-body #uname').val(uname);
     modal.find('.modal-body #name2').val(name);
     modal.find('.modal-body #status').val(status);
@@ -106,13 +108,15 @@ $('#addUserForm').on('submit', function(e){
                 });
             }
         },
-        error:function(error){
+        error:function(err){
             $('#regModal').modal("hide")
-
+            console.log('ERROR');
+            console.log(err);
+            console.log(err.responseJSON.message);
             iziToast.warning({
                 title: 'Failed',
                 position: 'topCenter',
-                message: 'User Registration! <br>Please check your input'
+                message: 'User Registration Failed! <br>Please check your input'
             });
         }
 
@@ -151,7 +155,7 @@ $('#editUserForm').on('submit', function(e){
             iziToast.warning({
                 title: 'Failed',
                 position: 'topCenter',
-                message: 'Editting User Failed !',
+                message: 'Editting User Failed!',
             });
         }
 

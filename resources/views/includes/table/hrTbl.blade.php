@@ -3,7 +3,8 @@
         <thead>
         <tr> &nbsp; &nbsp; 
             <th>STATUS</th>
-            <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;USERNAME</th>
+            <th>USERNAME</th>
+            <th>EMAIL</th>
             <th>NAME</th>
             <th>DEPARTMENT</th>
             <th style="text-align:center">ACTION</th>
@@ -20,10 +21,11 @@
                                     <td><button class="btn btn-danger" style="padding:0px 5px;">Inactive</button></td>
                                 @endif
                                 <td>{{$user->uname}}</td>
+                                <td>{{$user->email}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->department->name}}</td>
                                 <td style="text-align:center">
-                                    <button class="btn btn-primary" style="padding:0px 4px;" data-myid="{{$user->id}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-mydepartment="{{$user->department_id}}" data-mystatus="{{$user->status}}" data-toggle="modal" data-target="#editModal" >Edit Info</button>    
+                                    <button class="btn btn-primary" style="padding:0px 4px;" data-myid="{{$user->id}}" data-myemail="{{$user->email}}" data-myuname="{{$user->uname}}" data-myname="{{$user->name}}" data-mydepartment="{{$user->department_id}}" data-mystatus="{{$user->status}}" data-toggle="modal" data-target="#editModal" >Edit Info</button>    
                                 </td>
                             </tr>
                         @endforeach

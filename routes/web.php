@@ -22,7 +22,7 @@ use Maatwebsite\Excel\Facades\Excel;
 Auth::routes(['register' => false]);
 
 //Show the Auth
-// Auth::routes();
+Auth::routes();
 
 // Pages
 Route::get('/', 'HomeController@pages');
@@ -49,6 +49,7 @@ Route::resources([
 
 // POST Method
 Route::post('registerUser', 'HrController@store');
+// Route::post('register', 'HrController@store');
 Route::post('updateAmount', 'CreditController@updateAmount');
 Route::post('change-password', 'ChangePasswordController@store')->name('changepass');
 Route::post('generateQR', 'UserController@getNewQr' );
