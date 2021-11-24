@@ -71,7 +71,7 @@ class CreditsImport implements  WithHeadingRow, ToModel, WithValidation, WithBat
         $validator->after(function ($validator) {
             foreach ($validator->getData() as $key => $val) {
                 //Log::info($val['employee_no']);
-                $user = User::where('uname',strval($val['employee_no']))->first();
+                $user = User::where('uname','=',strval($val['employee_no']))->first();
                 if ($user) {
                     $ctr = Credit::where('control_no','=',$this->ctrl)->where('user_id','=',$user->id)->first();
                     if($ctr)
@@ -85,12 +85,12 @@ class CreditsImport implements  WithHeadingRow, ToModel, WithValidation, WithBat
         });
     }
 
-    /*public function prepareForValidation($data, $index)
+    public function prepareForValidation($data, $index)
     {
-        $data[3] = User::where('uname','=',strval($data['employee_no']))->first()->id;
+        $data['employee_no'] = strval($data['employee_no']);
 
         return $data;
-    }*/
+    }
 
     public function customValidationMessages()
     {

@@ -105,6 +105,9 @@ class TransactionController extends Controller
     public function transact(Request $request)
     {
         /*$request->userId."-".$request->ctrl."-".$request->amount;*/
+        $request->validate([
+            'amount' => 'integer|min:0',
+        ]);
         $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
         if ($credit) {
             $tAmount = Transaction::where('user_id',$request->userId)->where('credit_id',$credit->id)->sum('price');

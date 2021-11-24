@@ -92,7 +92,7 @@ class UserController extends Controller
 
     public function getUser(Request $request)
     {
-        $user = User::with('department')->where('qrcode',$request->qr)->first();
+        $user = User::with('department')->where('qrcode',$request->qr)->where('status',0)->first();
         return $user;
     }
 
@@ -110,7 +110,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->employee_id);
         $user->qrcode = $hashedqr;
         $user->save();
-       
+
         return 'success';
     }
 
@@ -123,7 +123,7 @@ class UserController extends Controller
     //     $sec= Carbon::now()->format('s');
 
     //     $con = $year.$month.$day;
-       
+
     //     return $con;
     // }
 }

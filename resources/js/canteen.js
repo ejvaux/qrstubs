@@ -2,7 +2,7 @@ $(document).ready(function () {
     navigator.mediaDevices.getUserMedia(
         {
             video: true
-         }
+            }
     )
     .then( function(stream){
         Instascan.Camera.getCameras().then(function (cameras) {
@@ -93,7 +93,7 @@ function loadcam(i){
 function loadUser(qr){
     /*$.ajaxSetup({
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });*/
     $.ajax({
@@ -138,7 +138,7 @@ function loadUser(qr){
                 reset();
                 Swal.fire({
                     icon: 'error',
-                    title: 'QR Code does not exist in the database.',
+                    title: 'User disabled or does not exist in the database.',
                     text: 'Please contact SPI-IAD Dept.'
                 });
             }
@@ -210,13 +210,14 @@ function generateControlNum(date){
     }
     return con;
 }
- function reset(){
+function reset(){
     $('#msg').removeClass('d-none');
     $('.scan').addClass('d-none');
     $('#amount').removeClass('is-invalid');
     $('#amount').val('0');
     //$('.invalid-feedback').hide();
- }
+}
+
 /* * * * * * EVENTS * * * * * */
 
 $('#scanqrBtn').on('click', function () {
