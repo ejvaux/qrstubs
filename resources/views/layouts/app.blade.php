@@ -136,7 +136,7 @@
                             <b>Email:</b>&nbsp;  karen_alinsod@sercomm.com<br>
                             <b>Extension #:</b>&nbsp; 80919 --}}
                             <br><br>
-                            <h3>Developer</h3>
+                            <h3>MIS</h3>
                             <b>Name:</b>&nbsp; Lawrence Bondad<br>
                             <b>Email:</b>&nbsp;  lawrence_bondad@sercomm.com<br>
                             <b>Extension #:</b>&nbsp; 80862 <br>

@@ -22,7 +22,7 @@ use Maatwebsite\Excel\Facades\Excel;
 Auth::routes(['register' => false]);
 
 //Show the Auth
-Auth::routes();
+// Auth::routes();
 
 // Pages
 Route::get('/', 'HomeController@pages');

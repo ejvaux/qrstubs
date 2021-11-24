@@ -8,8 +8,8 @@
 
 <div class="footer-copyright text-center py-3 text-muted" style="margin-top:100px;">
 <span style='font-size:1.6rem'><!--  -->
-<i class="far fa-copyright"></i> 2021 Sercomm Phils., Inc.
+<i class="far fa-copyright"></i> Sercomm Phils., Inc.
 </span> 
-<br>Designed and built by:<br> 
+{{-- <br>MIS Contact:<br> 
 <span class="font-italic font-weight-bold" style='font-size: 1.5rem'>Lawrence Bondad & Ej Mati</span>
-</div>
+</div> --}}
