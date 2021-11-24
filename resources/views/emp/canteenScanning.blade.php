@@ -85,7 +85,7 @@
                                     <label for="amount" class="col-form-label">Enter amount:</label>
                                 </div>
                                 <div class="col-8">
-                                    <input class='form-control form-control-lg' min="0" type="number" name="amount" id="amount">
+                                    <input class='form-control form-control-lg' onkeyup="if(this.value<0){this.value= this.value * -1}" min="0" type="number" name="amount" id="amount">
                                     <span class="invalid-feedback" role="alert">
                                         <strong>Please type the amount.</strong>
                                     </span>
