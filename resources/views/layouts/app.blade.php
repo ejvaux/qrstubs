@@ -77,6 +77,9 @@
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <button class="btn" style="border:none; padding-top:8px;" data-toggle="modal" data-target="#questionModal">Contact Us</button>
+                            </li>
                             @if(Auth::user()->role_id==2)
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('ctntransact') }}">{{ __('Transactions') }}</a>
@@ -132,7 +135,7 @@
                             <b>Email:</b>&nbsp;  karen_alinsod@sercomm.com<br>
                             <b>Extension #:</b>&nbsp; 80919 --}}
                             <br><br>
-                            <h3>Developer</h3>
+                            <h3>MIS</h3>
                             <b>Name:</b>&nbsp; Lawrence Bondad<br>
                             <b>Email:</b>&nbsp;  lawrence_bondad@sercomm.com<br>
                             <b>Extension #:</b>&nbsp; 80862 <br>
