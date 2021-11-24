@@ -71,7 +71,7 @@ class CreditsImport implements  WithHeadingRow, ToModel, WithValidation, WithBat
         $validator->after(function ($validator) {
             foreach ($validator->getData() as $key => $val) {
                 //Log::info($val['employee_no']);
-                $user = User::where('uname',strval($val['employee_no']))->first();
+                $user = User::where('uname','=',strval($val['employee_no']))->first();
                 if ($user) {
                     $ctr = Credit::where('control_no','=',$this->ctrl)->where('user_id','=',$user->id)->first();
                     if($ctr)
