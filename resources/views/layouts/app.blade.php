@@ -43,7 +43,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Meal Stub') }} -->
-                    MEAL STUB
+                    MEAL ALLOWANCE
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -77,6 +77,9 @@
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <button class="btn" style="border:none; padding-top:8px;" data-toggle="modal" data-target="#questionModal">Contact Us</button>
+                            </li>
                             @if(Auth::user()->role_id==2)
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('ctntransact') }}">{{ __('Transactions') }}</a>
@@ -93,14 +96,15 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('change-password') }}">{{ __('Change Password') }}
+                                        
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Disconnect Me') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('change-password') }}">{{ __('Change Password') }}
-                                        
-                                    </a>
+                                    
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -132,7 +136,7 @@
                             <b>Email:</b>&nbsp;  karen_alinsod@sercomm.com<br>
                             <b>Extension #:</b>&nbsp; 80919 --}}
                             <br><br>
-                            <h3>Developer</h3>
+                            <h3>MIS</h3>
                             <b>Name:</b>&nbsp; Lawrence Bondad<br>
                             <b>Email:</b>&nbsp;  lawrence_bondad@sercomm.com<br>
                             <b>Extension #:</b>&nbsp; 80862 <br>
