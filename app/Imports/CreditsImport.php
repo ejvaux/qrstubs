@@ -85,12 +85,12 @@ class CreditsImport implements  WithHeadingRow, ToModel, WithValidation, WithBat
         });
     }
 
-    /*public function prepareForValidation($data, $index)
+    public function prepareForValidation($data, $index)
     {
-        $data[3] = User::where('uname','=',strval($data['employee_no']))->first()->id;
+        $data['employee_no'] = strval($data['employee_no']);
 
         return $data;
-    }*/
+    }
 
     public function customValidationMessages()
     {
