@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('js')
-    <script src="{{ mix('js\canteen1.js') }}" defer></script>
+    <script src="{{ asset(mix('/js/canteen.js')) }}" defer></script>
 @endsection
 
 @section('content')
