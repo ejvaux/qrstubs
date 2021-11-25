@@ -49,7 +49,7 @@ class ExportController extends Controller
     {
         return (new UsersCreditExport)->download("User's Credits.xlsx");
     }
-    
+
     public function userModal()
     {
         $credits = Credit::orderBy('id','DESC')->get()->unique('control_no');

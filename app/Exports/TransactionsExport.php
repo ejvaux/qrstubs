@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Transaction;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -15,8 +16,13 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings
 
     public function __construct(string $fromDate,string $toDate,int $canteenId)
     {
+        if ($fromDate == $toDate) {
+            $this->toDate = Carbon::parse($toDate)->addDay();
+        }
+        else{
+            $this->toDate = $toDate;
+        }
         $this->fromDate = $fromDate;
-        $this->toDate = $toDate;
         $this->canteenId = $canteenId;
     }
 
@@ -41,6 +47,12 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings
     {
         $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate])->where('canteen_id',$this->canteenId);
         return $transactions;
+        /*if($transactions->count() > 0){
+            return $transactions;
+        }
+        else{
+            throw new \ErrorException("No Data Found");
+        }*/
     }
 
     /*
