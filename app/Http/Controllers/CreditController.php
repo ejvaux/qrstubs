@@ -20,7 +20,7 @@ class CreditController extends Controller
     {
         $ctrl = $this->generateControlNum();
         $users = User::where('role_id', 3)->where('status', 0)
-            ->with(['latest_credit', 'transactions' => function($q) use($ctrl){
+            ->with(['credits', 'transactions' => function($q) use($ctrl){
                 $q->where('transactions.control_no', $ctrl);
             }]);
 

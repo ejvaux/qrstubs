@@ -62,7 +62,7 @@ class User extends Authenticatable
     }
     public function credits()
     {
-        return $this->hasmany('App\Credit');
+        return $this->hasone('App\Credit');
     }
     public function transactions()
     {
