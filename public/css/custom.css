@@ -73,4 +73,16 @@ th, td{
          url('../fonts/nunito-v16-latin-regular.svg#Nunito') format('svg'); /* Legacy iOS */
   }
 
+  .navItem{
+    background-color: #0595d2;
+    display:inline;
+    padding: 10px;
+    margin: 5px;
+    line-height: 50px;
+  }
+  .navItem a{
+      color:white;
+      font-size: 1.5em;
+  }
+
 

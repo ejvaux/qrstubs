@@ -22,7 +22,20 @@ function LoadUsrTbl(search, url = 'usrtrct'){
         }
   });
 }
+function LoadUsrTbl2(search, url = 'usrtrct2'){
+    $.ajax({
+        url: url,
+        type:'get',
+        data: {
+            
+        },
+        success: function (data) {
+            $('#usertransact2Table').html(data); 
+        }
+  });
+}
 LoadUsrTbl();
+LoadUsrTbl2();
 
 $('#changeQRForm').on('submit', function(e){
     e.preventDefault();
