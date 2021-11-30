@@ -1,6 +1,6 @@
 {
-    "/js/app.js": "/js/app.js?id=01fe4001193558f42ebc",
-    "/css/app.css": "/css/app.css?id=5b3c15ad01de6a484c10",
-    "/js/canteen.js": "/js/canteen.js?id=7d0ffee47c641164e687",
-    "/js/cntnExport.js": "/js/cntnExport.js?id=734d89178a0bd1c7fa1d"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/canteen.js": "/js/canteen.js",
+    "/js/cntnExport.js": "/js/cntnExport.js"
 }
