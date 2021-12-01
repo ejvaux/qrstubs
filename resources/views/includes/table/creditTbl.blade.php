@@ -16,33 +16,28 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{$user->name}}</td> 
-                                @if ($user->latest_credit != NULL)
-                                    @if ($user->latest_credit->control_no == $ctrl)
-                                        <td>{{$user->latest_credit->control_no}}</td>
-                                        <td>{{$user->latest_credit->amount}}</td>
-                                        <td>{{$user->latest_credit->amount - $user->transactions->sum('price')}}</td>
-                                        <td>{{$expr}}</td>
-                                    @else
-                                        <td>None</td>
-                                        <td>None</td>
-                                        <td>None</td>
-                                        <td>None</td>
-                                    @endif
+                                @if ($user->credits != NULL)
+                                    <td>{{$user->credits->control_no}}</td>
+                                    <td>{{$user->credits->amount}}</td>
+                                    <td>{{$user->credits->amount - $user->transactions->sum('price')}}</td>
+                                    <td>{{$expr}}</td>
+                                    <td><button class="btn btn-success" style="padding:0px 4px;" data-myid="{{$user->credits->id}}" data-myname="{{$user->name}}" data-myctrl="{{$user->credits->control_no}}" data-myamount="{{$user->credits->amount}}" data-toggle="modal" data-target="#amountModal" >Edit Credit</button></td>
                                 @else
                                     <td>None</td>
                                     <td>None</td>
                                     <td>None</td>
                                     <td>None</td>
+                                    <td></td>
                                 @endif
                                 
-                                <td style="text-align:center">
-                                @if ($user->latest_credit != NULL)
-                                    @if ($user->latest_credit->control_no == $ctrl)
-                                        <button class="btn btn-success" style="padding:0px 4px;" data-myid="{{$user->latest_credit->id}}" data-myname="{{$user->name}}" data-myctrl="{{$user->latest_credit->control_no}}" data-myamount="{{$user->latest_credit->amount}}" data-toggle="modal" data-target="#amountModal" >Edit Credit</button>
+                                {{-- <td style="text-align:center">
+                                @if ($user->credits != NULL)
+                                    @if ($user->credits->control_no == $ctrl)
+                                        
                                     @endif
                                 @endif
                                                           
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     @else

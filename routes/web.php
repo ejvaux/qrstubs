@@ -22,7 +22,7 @@ use Maatwebsite\Excel\Facades\Excel;
 Auth::routes(['register' => false]);
 
 //Show the Auth
-// Auth::routes();
+//  Auth::routes();
 
 // Pages
 Route::get('/', 'HomeController@pages');
@@ -38,12 +38,14 @@ Route::get('/ctntransact', 'HomeController@ctntransact');
 Route::get('/error', 'HomeController@error');
 Route::get('/password', 'HomeController@password');
 Route::get('change-password', 'ChangePasswordController@index');
+Route::get('/FAQ', function(){ return view('FAQ'); });
 
 //Get Resources of Controller
 Route::resources([
     'hrc' => 'HrController',
     'ctn' => 'CanteenController',
     'usrtrct' => 'TransactionController',
+    'usrtrct2' => 'UserController',
     'crdc' => 'CreditController',
 ]);
 

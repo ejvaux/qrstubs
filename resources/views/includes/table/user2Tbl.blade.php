@@ -2,7 +2,7 @@
     <table id="mytable" class="table table-bordred table-striped" style="width:100%;">  
         <thead>
         <tr> &nbsp; &nbsp; 
-            <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;ID NO</th>
+            <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;ID</th>
             <th>CANTEEN</th>
             <th>PRICE</th>
             <th>DATE</th>
@@ -38,13 +38,4 @@
             @endif
         </tbody>
     </table>
-</div>
-<div class="row">
-    <div class="col-md">
-        @isset($transactions)
-            {{-- {{ $employees->appends(request()->query())->links() }} --}}
-            {!! $transactions->appends(\Request::except('page'))->render() !!}
-            {{-- Input::except(array('page')) --}}
-        @endisset                        
-    </div>    
 </div>

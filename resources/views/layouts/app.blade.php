@@ -66,19 +66,23 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <button class="btn" style="border:none; padding-top:8px;" data-toggle="modal" data-target="#questionModal">Contact Us</button>
+                                <button class="btn nav-link" style="border:none; padding-top:8px;" data-toggle="modal" data-target="#questionModal">Contact Us</button>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('FAQ') }}">{{ __('FAQ') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                            
                         @else
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                             </li>
                             <li class="nav-item">
-                                <button class="btn" style="border:none; padding-top:8px;" data-toggle="modal" data-target="#questionModal">Contact Us</button>
+                                <button class="btn nav-link" style="border:none; padding-top:8px;" data-toggle="modal" data-target="#questionModal">Contact Us</button>
                             </li>
                             @if(Auth::user()->role_id==2)
                                 <li class="nav-item">
@@ -90,6 +94,9 @@
                                     <a class="nav-link" href="{{ url('usrtransact') }}">{{ __('Transactions') }}</a>
                                 </li>
                             @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('FAQ') }}">{{ __('FAQ') }}</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

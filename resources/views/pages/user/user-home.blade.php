@@ -28,6 +28,11 @@
         </div>
         <div class="row justify-content-center">
             <h1 style="font-family: Avanta Garde; color:blue; font-size:3rem"><b> Balance: {{$balance}} </b></h1>
+        </div><br><br>
+        <h4>Last 3 transactions</h4>
+        <div id="usertransact2Table">
+            {{-- // TABLE DIRECT JS User Transaction --}}
+            {{-- @include('includes.table.user2Tbl') --}}
         </div>
     </div>
     

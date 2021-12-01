@@ -9,6 +9,7 @@ use App\credit;
 use App\Role;
 use App\Department;
 use App\canteen;
+use App\transaction;
 use Auth;
 use Carbon\Carbon;
 
@@ -21,7 +22,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = Auth::user()->id;
+
+        //Don't forget pagination when displaying table
+        $transactions = transaction::where('user_id', 'like', $users)
+                    ->orderBy('id', 'DESC')->take(3)->get();
+        if (Auth::check() && Auth::user()->role_id == 3) {
+            return view('includes.table.user2Tbl', compact('transactions'));
+        } else {
+            return redirect('error');
+        }
     }
 
     /**

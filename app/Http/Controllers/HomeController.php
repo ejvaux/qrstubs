@@ -73,7 +73,7 @@ class HomeController extends Controller
         $ctrl = $this->generateControlNum();
         $credit = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
         if($credit == NULL){
-            $balance = '"Please apply for your Credit Amount"';
+            $balance = '0';
             $qrcode = '"Please apply for your Credit Amount"';
         } else {
             $price_total = Transaction::where('user_id',$users)->where('credit_id',$credit->id)->sum('price');
@@ -106,6 +106,10 @@ class HomeController extends Controller
     public function error(Request $req)
     {
         return view('pages.error');
+    }
+    public function faq(Request $req)
+    {
+        return view('pages.FAQ');
     }
     public function password(Request $req)
     {
