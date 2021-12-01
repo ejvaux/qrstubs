@@ -7,7 +7,7 @@
 @component('mail::message')
 Dear {{ $name }},
 
-Please find attached report for {{ $date }}.
+Please find attached transaction report for {{ $date }}.
 
 Thanks,<br>
 {{ config('app.name') }}
