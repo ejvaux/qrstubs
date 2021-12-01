@@ -34,7 +34,6 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings
         return [
             'Employee Number',
             'Employee Name',
-            'Scanned By',
             'Amount',
             'Scanned At'
         ];
@@ -63,7 +62,6 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings
         return [
             $transactions->user->uname,
             $transactions->user->name,
-            $transactions->scanner->name,
             $transactions->price,
             $transactions->created_at,
         ];

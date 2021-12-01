@@ -2,7 +2,7 @@
     <td class="header">
         <div class="row text-center mb-3">
             <div class="col">
-                <img class="img-fluid" width="256" height="auto" src="{{ asset('img/sercomm-logo-nbg.png') }}" alt="logo" />
+                SERCOMM PHILIPPINES INC.
             </div>
         </div>
         <div class="row">

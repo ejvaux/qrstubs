@@ -43,8 +43,8 @@ class TransactionsExportCommand extends Command
      */
     public function handle()
     {
-        /*$today = Date('Y-m-d');*/
-        $dt = Date('2021/11/11');
+        $dt = Date('Y-m-d');
+        /*$dt = Date('2021/11/11');*/
         $d = Carbon::parse($dt)->subDay();
         $ctns = Canteen::all();
         foreach ($ctns as $ctn) {

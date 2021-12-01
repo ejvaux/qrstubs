@@ -5,7 +5,7 @@
 <p>Have a nice day!</p>--}}
 
 @component('mail::message')
-{{ $name }},
+Dear {{ $name }},
 
 Please find attached report for {{ $date }}.
 
