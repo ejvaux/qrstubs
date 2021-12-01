@@ -43,16 +43,16 @@ class TransactionsExportCommand extends Command
      */
     public function handle()
     {
-        $dt = Date('Y-m-d');
-        /*$dt = Date('2021/11/11');*/
+        /*$dt = Date('Y-m-d');*/
+        $dt = Date('2021/11/11');
         $d = Carbon::parse($dt)->subDay();
         $ctns = Canteen::all();
         foreach ($ctns as $ctn) {
             $t = Transaction::whereBetween('created_at', [$d,$dt])->where('canteen_id',$ctn->id)->first();
             if ($t) {
-                $path = 'canteen/'.$ctn->id.'/DailyReport_'.Carbon::parse($dt)->format('Y-m-d').'.xlsx';
+                $path = 'canteen/'.$ctn->id.'/DailyReport_'.$d->format('Y-m-d').'.xlsx';
                 (new TransactionsExport($d,$dt,$ctn->id))->store($path,'public');
-                Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('Y-m-d')));
+                Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
             };
         }
     }
