@@ -113,7 +113,7 @@ class TransactionController extends Controller
             $tAmount = Transaction::where('user_id',$request->userId)->where('credit_id',$credit->id)->sum('price');
             $bal = $credit->amount - $tAmount;
 
-            if ($bal > $request->amount) {
+            if ($bal >= $request->amount) {
                 $tr = new Transaction;
                 $tr->user_id = $request->userId;
                 $tr->scanner_id = Auth::id();
