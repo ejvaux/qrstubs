@@ -120,6 +120,23 @@ class CreditController extends Controller
         return $con;
     }
     function generateExpirationNum(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $day = Carbon::now()->format('d');
+        $ldate = Carbon::now()->format('t');
+        $con = $month.'-'.$year;
+
+        if ($day <= 15) {
+            $con = '16-'.$con;
+        }
+        else{
+           $con = Carbon::parse($ldate.'-'.$month.'-'.$year)->addDay()->format('d-m-Y');
+        }
+
+        return $con;
+    }
+
+    function generateExpirationNum2(){
         
         $day = Carbon::now()->format('d');
         $month = Carbon::now()->format('m');
