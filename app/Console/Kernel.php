@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('transaction:export 1')
                   ->dailyAt('00:05');
+                  /*->everyMinute();*/
         // $schedule->command('inspire')
         //          ->hourly();
     }
