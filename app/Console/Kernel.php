@@ -24,6 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('transaction:export 1')
+                  ->dailyAt('00:05');
         // $schedule->command('inspire')
         //          ->hourly();
     }

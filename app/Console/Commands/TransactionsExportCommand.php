@@ -17,14 +17,15 @@ class TransactionsExportCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'transactions:export';
+    protected $signature = 'transaction:export {frequency}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Export transactions into excel';
+    protected $description = 'Sending of transaction report.
+                            {frequency: 1 = daily, 2 = end of cut-off}';
 
     /**
      * Create a new command instance.
@@ -43,23 +44,32 @@ class TransactionsExportCommand extends Command
      */
     public function handle()
     {
-        $dt = Date('Y-m-d');
-        /*$dt = Date('2021-11-11');*/
-        $d = Carbon::parse($dt)->subDay();
-        $ctns = Canteen::all();
-        foreach ($ctns as $ctn) {
-            $t = Transaction::whereBetween('created_at', [$d,$dt])->where('canteen_id',$ctn->id)->first();
-            if ($t) {
-                $path = 'canteen/'.$ctn->id.'/DailyReport_'.$d->format('Y-m-d').'.xlsx';
-                (new TransactionsExport($d,$dt,$ctn->id))->store($path,'public');
-                if ($ctn->email) {
-                    Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
-                } else {
-                    Mail::to('edmund_mati@sercomm.com')->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
-                }
+        $freq = $this->argument('frequency');
+        if ($freq == 1) {
+            //$dt = Date('Y-m-d');
+            $dt = Date('2021-11-11');
+            $d = Carbon::parse($dt)->subDay();
+            $ctns = Canteen::all();
+            foreach ($ctns as $ctn) {
+                $t = Transaction::whereBetween('created_at', [$d,$dt])->where('canteen_id',$ctn->id)->first();
+                if ($t) {
+                    $path = 'canteen/'.$ctn->id.'/DailyReport_'.$d->format('Y-m-d').'.xlsx';
+                    (new TransactionsExport($d,$dt,$ctn->id))->store($path,'public');
+                    if ($ctn->email) {
+                        Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
+                    } else {
+                        Mail::to('edmund_mati@sercomm.com')->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
+                    }
 
-                /*Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));*/
-            };
+                    /*Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));*/
+                };
+            }
+        }
+        elseif ($freq == 2) {
+            # code...
+        }
+        else {
+            abort('Unknown Command');
         }
     }
 }

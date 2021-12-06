@@ -9,8 +9,9 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TransactionsExport implements FromQuery, WithMapping, WithHeadings
+class TransactionsExport implements FromQuery, WithMapping, WithHeadings, ShouldQueue
 {
     use Exportable;
 
