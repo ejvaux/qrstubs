@@ -74,7 +74,7 @@ class HomeController extends Controller
         $credit = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
         if($credit == NULL){
             $balance = '0';
-            $qrcode = '"Please apply for your Credit Amount"';
+            $qrcode = '0';
         } else {
             $price_total = Transaction::where('user_id',$users)->where('credit_id',$credit->id)->sum('price');
             $balance = $credit->amount - $price_total;
