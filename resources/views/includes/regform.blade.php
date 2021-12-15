@@ -1,6 +1,6 @@
 <div class="col-md-10">
     <div class="form-group">
-        <input type="text" placeholder="Email *" class="form-control" name="email" value="{{ old('email') }}" required>
+        <input type="text" placeholder="Email *" class="form-control" name="email" value="{{ old('email') }}">
             <span class="invalid-feedback" role="alert">
                 <strong>Email should be Unique</strong>
             </span>
