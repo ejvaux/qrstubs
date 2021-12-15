@@ -25,7 +25,8 @@
         </div>
     </div>
 </div>--}}
-@include('emp.canteenScanning')
+@include('emp.canteenScanning')<br>
+@include('emp.canteenTotal')
 <footer style="position:absolute; width:100%;">
     @include('includes.footer')
 </footer>
