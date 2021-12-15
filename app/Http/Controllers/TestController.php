@@ -8,23 +8,21 @@ class TestController extends Controller
 {
     public function index()
     {
-        $dt = Date('2021-12-15');
-        $d = \Carbon\Carbon::parse($dt);
-        $year = $d->format('Y');
-        $month = $d->format('m');
-        $day = $d->format('d');
-        $ldate = $d->format('t');
-        $con = $month.'-'.$year;
-        if ($day <= 15) {
-            $con = '16-'.$con;
-        } else {
-            //$con = Date($ldate.'-'.$month.'-'.$year);
-            // $con = Date($year.'-'.$month.'-'.$ldate);
-            $con = \Carbon\Carbon::parse($ldate.'-'.$month.'-'.$year)->addDay()->format('d-m-Y');
-            // $con = $con->format('d-m-Y');
+        /*$e = {
+            'Divine Goce/Sercomm',
+            'Oj Orjalo/Sercomm',
+            'Katrina Naron/Sercomm',
+            ''
+        }*/
+        $s = new \App\EmailGroup;
+        $s->name = 'TransactionsCutOffExport';
+        $s->save();
+        if($s){
+            return $s;
         }
-
-        return $con;
+        else{
+            return 0;
+        }
         /*return App\customFunctions::generateExpirationDate('SPI202110B');*/
         /*$ctrl = 'SPI202110B';
         $users =  App\User::query()->where('role_id',3)->with(['department','credits' => function($q)use($ctrl){

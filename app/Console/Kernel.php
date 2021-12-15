@@ -25,8 +25,15 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('transaction:export 1')
-                  ->dailyAt('00:05');
+                  ->dailyAt('08:00');
                   /*->everyMinute();*/
+
+        $schedule->command('transaction:export 2')
+                ->monthlyOn(1, '08:00');
+
+        $schedule->command('transaction:export 2')
+                ->monthlyOn(16, '08:00');
+
         // $schedule->command('inspire')
         //          ->hourly();
     }
