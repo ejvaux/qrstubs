@@ -14,8 +14,10 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
-
+        $response = $this->get('/test');
         $response->assertStatus(200);
+        $this->assertIsString($response->getContent());
+        //$response->assertLocation(url('/test'));
+        //$response->assertSee('Meal');
     }
 }

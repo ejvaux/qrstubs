@@ -1,13 +1,13 @@
-$(document).ready(function () {
+// $(document).ready(function () {
 
-    $.ajax({
-        url: 'user',
-        type:'GET',
-        data:{
-            'ctrl': generateControlNum(new Date())
-        }
-    });
-});
+//     $.ajax({
+//         url: 'user',
+//         type:'GET',
+//         data:{
+//             'ctrl': generateControlNum(new Date())
+//         }
+//     });
+// });
 
 
 function LoadUsrTbl(search, url = 'usrtrct'){

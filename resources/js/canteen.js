@@ -1,8 +1,9 @@
 $(document).ready(function () {
+    $("#wait").css("display", "block");
     navigator.mediaDevices.getUserMedia(
         {
             video: true
-            }
+        }
     )
     .then( function(stream){
         Instascan.Camera.getCameras().then(function (cameras) {
@@ -24,8 +25,16 @@ $(document).ready(function () {
                 $("#cameraSelect").prop("disabled",true);
                 console.error('No cameras found.');
             }
+            stream.getTracks().forEach(function(track) {
+                track.stop();
+            });
+            $("#wait").css("display", "none");
             }).catch(function (e) {
                 console.error(e);
+                $("#wait").css("display", "none");
+        });
+        stream.getTracks().forEach(function(track) {
+            track.stop();
         });
     })
     .catch(function(err) {
@@ -39,8 +48,8 @@ $(document).ready(function () {
             $('#msg').text('*** PLEASE ALLOW PERMISSION TO USE CAMERA ***');
         }
         console.error(err.name);
+        $("#wait").css("display", "none");
     });
-
     //$('#msg').text(generateControlNum(new Date()));
 });
 

@@ -2,7 +2,7 @@
 
 @section('js')
     <script src="{{ asset('js\ctn.js') }}" defer></script>
-    <script src="{{ asset('js\cntnExport.js') }}" defer></script>
+    <script src="{{ asset(mix('/js/cntnExport.js')) }}" defer></script>
 @endsection
 
 @section('content')

@@ -20,7 +20,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">From</div>
                             </div>
-                            <input type="date" class="form-control" id="fromDate" name="fromDate" placeholder="Username" value="{{Date('Y-m-d')}}">
+                            <input type="date" class="form-control" id="fromDate" name="fromDate" value="{{Date('Y-m-d')}}">
                         </div>
                     </div>
                     <div class="col">
@@ -28,7 +28,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">To</div>
                             </div>
-                            <input type="date" class="form-control" id="toDate" name="toDate" placeholder="Username" value="{{Date('Y-m-d')}}">
+                            <input type="date" class="form-control" id="toDate" name="toDate" value="{{Date('Y-m-d')}}">
                         </div>
                     </div>
                 </div>

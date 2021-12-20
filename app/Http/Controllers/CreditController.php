@@ -30,7 +30,8 @@ class CreditController extends Controller
         $expr = $this->generateExpirationNum();
         
         $users = $users->orderBy('name')->paginate(10);
-        return view('includes.table.creditTbl', compact('users','ctrl','expr'));
+        // return view('includes.table.creditTbl', compact('users','ctrl','expr'));
+        return view('includes.table.creditTbl', compact('users','expr'));
     }
     
     /**
@@ -125,12 +126,39 @@ class CreditController extends Controller
         $day = Carbon::now()->format('d');
         $ldate = Carbon::now()->format('t');
         $con = $month.'-'.$year;
+
         if ($day <= 15) {
             $con = '16-'.$con;
-        } else {
-            $con = $ldate.'-'.$month.'-'.$year;
         }
+        else{
+           $con = Carbon::parse($ldate.'-'.$month.'-'.$year)->addDay()->format('d-m-Y');
+        }
+
+        return $con;
+    }
+
+    function generateExpirationNum2(){
         
+        $day = Carbon::now()->format('d');
+        $month = Carbon::now()->format('m');
+        $newMonth = Carbon::now()->addMonth();
+        $newMonth2 =  $newMonth->format('m');
+
+        $year = Carbon::now()->format('Y');
+        $newYear = Carbon::now()->addYear();
+        $newYear2 =  $newYear->format('Y');
+        
+        if ($day <= 15) {
+            $con = '16'.'-'.$month.'-'.$year;
+        }
+        else {
+            if ($month == 12){
+                $con = '01'.'-'.$newMonth2.'-'.$newYear2;
+            }
+            else{
+                $con = '01'.'-'.$newMonth2.'-'.$year;
+            }
+        }
         
         return $con;
     }

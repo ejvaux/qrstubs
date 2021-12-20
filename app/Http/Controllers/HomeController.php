@@ -59,8 +59,22 @@ class HomeController extends Controller
     }
     public function canteen(Request $req)
     {
+        $canteen_id = Auth::user()->canteen_id;
+        $ldate = $this->generateLastDate();
+        $cdate = $this->generateCurrentDate();
+        $ctrl = $this->generateControlNum();
+        $ctrl2 = $this->generatePrevControlNum();
+        $ctotal = Transaction::where('canteen_id',$canteen_id)->where('control_no',$ctrl)->sum('price');
+        $ltotal= Transaction::where('canteen_id',$canteen_id)->where('control_no',$ctrl2)->sum('price');
+        if($ltotal == NULL){
+            $ltotal = '0';
+        }
+        if($ctotal == NULL){
+            $ctotal = '0';
+        }
+
         if (Auth::check() && Auth::user()->role_id == 2) {
-            return view('pages.canteen.ctn-home');
+            return view('pages.canteen.ctn-home', compact( 'cdate', 'ldate', 'ctrl2', 'ctrl', 'ctotal', 'ltotal'  ));
         } else {
             return redirect('error');
         }
@@ -74,7 +88,7 @@ class HomeController extends Controller
         $credit = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
         if($credit == NULL){
             $balance = '0';
-            $qrcode = '"Please apply for your Credit Amount"';
+            $qrcode = '0';
         } else {
             $price_total = Transaction::where('user_id',$users)->where('credit_id',$credit->id)->sum('price');
             $balance = $credit->amount - $price_total;
@@ -128,4 +142,85 @@ class HomeController extends Controller
         }
         return $con;
     }
+
+    function generatePrevControlNum(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $prevmonth = Carbon::now()->subMonth()->format('Ym');
+        $day = Carbon::now()->format('d');
+        $con = 'SPI'.$year.$month;
+
+        // if($month == 1){
+        //     $con = 'SPI'.$prevyear
+        // }
+        if ($day <= 15) {
+            $con = 'SPI'.$prevmonth.'B';
+        } else {
+            $con = $con.'A';
+        }
+        return $con;
+
+    }
+
+    function generateCurrentDate(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $day = Carbon::now()->format('d');
+        $ldate = Carbon::now()->format('t');
+        $con = $month.'/'.$year;
+
+        if ($day <= 15) {
+            $con1 = '01/'.$con;
+        } else {
+            $con1 = '16/'.$con;
+        }
+        if ($day <= 15) {
+            $con2 = '15/'.$con;
+        } else {
+            $con2 = $ldate.'/'.$con;
+        }
+
+        $con = $con1.' ~ '.$con2;
+        
+        return $con;
+    }
+
+    function generateLastDate(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $day = Carbon::now()->format('d');
+        $lastMonth =  Carbon::now()->subMonth()->format('m/Y');
+        $lastDayofPreviousMonth = Carbon::now()->subMonthNoOverflow()->endOfMonth()->format('d/m/Y');
+
+        $con = $month.'/'.$year;
+        
+        // if($month == 1){
+        //     if ($day <= 15) {
+        //         $con1 = '16/'.$lastMonth.'/'.$lastYear;
+        //     } else {
+        //         $con1 = '01/'.$con;
+        //     }
+        // }
+        // else{
+            
+        // }
+
+        if ($day <= 15) {
+            $con1 = '16/'.$lastMonth;
+        } else {
+            $con1 = '01/'.$con;
+        }
+        
+        if ($day <= 15) {
+            $con2 = $lastDayofPreviousMonth;
+        } else {
+            $con2 = '15/'.$con;
+        }
+
+
+        $con = $con1.' ~ '.$con2;
+
+        return $con;
+    }
 }
+
