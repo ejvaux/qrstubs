@@ -17,7 +17,7 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
 
     public function __construct(string $fromDate,string $toDate)
     {
-        $this->toDate = $toDate;
+        $this->toDate = Carbon::parse($toDate)->addDay();
         $this->fromDate = $fromDate;
     }
 
@@ -42,12 +42,6 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
     {
         $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate]);
         return $transactions;
-        /*if($transactions->count() > 0){
-            return $transactions;
-        }
-        else{
-            throw new \ErrorException("No Data Found");
-        }*/
     }
 
     /*

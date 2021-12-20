@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\Canteen;
 use App\Transaction;
+use App\Email;
 use App\Exports\TransactionsExport;
 use App\Exports\TransactionsCutOffExport;
 use App\Mail\TransactionsReport;
+use App\Mail\TransactionsCutoffReport;
+use DB;
 
 class TransactionsExportCommand extends Command
 {
@@ -68,25 +71,32 @@ class TransactionsExportCommand extends Command
             }
         }
         elseif ($freq == 2) {
-            $d = Date('2021-12-16');
+            $mail = Email::with(['email_group' => function ($query) {
+                $query->where('name', '=', 'TransactionsCutOffReport');
+            }]);
+            //$d = Date('2021-12-16');
+            $d = Date('Y-m-d');
             $dt = Carbon::parse($d);
             $from = Carbon::parse($d);
             $to =Carbon::parse($d);
-            //$dt = Carbon::now();
-            //$dte = $dt->format('d');
             if( $dt->day > 15 && $dt->day <= 31){
                 $from->startOfMonth();
                 $to->day(15);
             }
             elseif ($dt->day >= 1 && $dt->day < 16) {
-                $from->day(16);
-                $to->endOfMonth();
+                $from->subMonth()->day(16);
+                $to->subMonth()->endOfMonth()->startOfDay();
             }
             else {
                 abort('Freq2: Unknown Date.');
             }
             $path = 'cutoff/TransactionReport_'.$from->format('Y-m-d').'_'.$to->format('Y-m-d').'.xlsx';
             (new TransactionsCutOffExport($from,$to))->store($path,'public');
+            Mail::to($mail->to()->pluck('email'))
+                ->cc($mail->cc()->pluck('email'))
+                /*to('edmund_mati@sercomm.com')
+                ->cc(['ejvaux_05126@yahoo.com','ejvaux12@gmail.com'])*/
+                ->send(new TransactionsCutoffReport($path,$from,$to));
         }
         else {
             abort('Unknown Command');

@@ -17,12 +17,13 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
 
     public function __construct(string $fromDate,string $toDate,int $canteenId)
     {
-        if ($fromDate == $toDate) {
+        /*if ($fromDate == $toDate) {
             $this->toDate = Carbon::parse($toDate)->addDay();
         }
         else{
             $this->toDate = $toDate;
-        }
+        }*/
+        $this->toDate = Carbon::parse($toDate)->addDay();
         $this->fromDate = $fromDate;
         $this->canteenId = $canteenId;
     }

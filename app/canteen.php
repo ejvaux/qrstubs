@@ -8,6 +8,6 @@ class canteen extends Model
 {
     public function transactions()
     {
-        return $this->hasmany('App\Transactions');
+        return $this->hasmany('App\Transaction');
     }
 }

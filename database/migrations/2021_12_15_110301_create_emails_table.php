@@ -18,7 +18,7 @@ class CreateEmailsTable extends Migration
             $table->integer('email_group_id');
             $table->string('type');
             $table->string('name')->nullable();
-            $table->string('address');
+            $table->string('email');
             $table->string('active');
             $table->timestamps();
         });

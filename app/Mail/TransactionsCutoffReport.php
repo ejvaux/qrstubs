@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Canteen;
+use Carbon\Carbon;
+
+class TransactionsCutoffReport extends Mailable implements ShouldQueue
+{
+    use Queueable, SerializesModels;
+
+    protected $ctns;
+    protected $path;
+    protected $date_from;
+    protected $date_to;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct( $path, $date_from, $date_to)
+    {
+        $this->path = $path;
+        $this->date_from = $date_from;
+        $this->date_to = $date_to;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        $fd_from = Carbon::parse($this->date_from)->format('F d, Y');
+        $fd_to = Carbon::parse($this->date_to)->format('F d, Y');
+        $ctns = Canteen::withCount(['transactions as transactions_sum' => function($query) {
+            $query->select(\DB::raw('sum(price)'))
+                ->whereBetween('created_at', [$this->date_from, Carbon::parse($this->date_to)->addDay()]);
+        }])->get();
+        return $this->markdown('emails.transactionCutoffReport')
+                    ->subject('Sercomm Meal Allowance Cutoff Summary Report | '.$fd_from.'-'.$fd_to)
+                    ->attachFromStorageDisk('public',$this->path)
+                    ->with([
+                        'ctns' => $ctns,
+                        'from' => $fd_from,
+                        'to' => $fd_to,
+                    ]);
+    }
+}
