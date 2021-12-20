@@ -72,7 +72,7 @@ class HomeController extends Controller
     public function canteen(Request $req)
     {
         $canteen_id = Auth::user()->canteen_id;
-        $ldate = $this->generateLastDate();
+        $ldate = $this->generatePreviousDate();
         $cdate = $this->generateCurrentDate();
         $ctrl = $this->generateControlNum();
         $ctrl2 = $this->generatePrevControlNum();
