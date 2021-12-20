@@ -41,6 +41,9 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#allcredit-tab" role="tab">Credits</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#summary-tab" role="tab">Summary</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="allemp-tab" role="tabpanel">
@@ -48,6 +51,9 @@
                 </div>
                 <div class="tab-pane" id="allcredit-tab" role="tabpanel">
                     @include('pages.hr.creditTab')
+                </div>
+                <div class="tab-pane" id="summary-tab" role="tabpanel">
+                    @include('pages.hr.summaryTab')
                 </div>
             </div>
         </div>

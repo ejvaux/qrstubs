@@ -21,7 +21,8 @@ class HrController extends Controller
     public function index(Request $request)
     {
         $departments = Department::all();
-        $users = User::where('role_id', 'like', '3')->orderBy('name')->paginate(10);
+        $users = User::where('role_id', 'like', '3')->orderBy('status');
+        $users = $users->orderBy('name')->paginate(10);
         return view('includes.table.hrTbl',compact('users', 'departments'));
     }
 
@@ -44,7 +45,7 @@ class HrController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'unique:users', 'email', 'max:50'],
+            'email' => ['nullable', 'unique:users', 'email', 'max:50'],
             'uname' => ['required', 'unique:users', 'string', 'max:20'],
             'name' => ['required', 'string', 'max:20'],
             'qrcode' => ['nullable', 'string', 'max:20'],

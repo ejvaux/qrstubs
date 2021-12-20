@@ -29,7 +29,8 @@ class CreditController extends Controller
 
         $expr = $this->generateExpirationNum();
         
-        $users = $users->paginate(10);
+        $users = $users->orderBy('name')->paginate(10);
+        // return view('includes.table.creditTbl', compact('users','ctrl','expr'));
         return view('includes.table.creditTbl', compact('users','expr'));
     }
     
