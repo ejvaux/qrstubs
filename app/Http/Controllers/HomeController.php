@@ -50,9 +50,21 @@ class HomeController extends Controller
     public function hr(Request $req)
     {
         $departments = Department::all();
-        
+        $pdate = $this->generatePreviousDate();
+        $cdate = $this->generateCurrentDate();
+        $ctrl = $this->generateControlNum();
+        $ctrl2 = $this->generatePrevControlNum();
+        $ccanteen1 = Transaction::where('canteen_id', 1)->where('control_no',$ctrl)->sum('price');
+        $ccanteen2 = Transaction::where('canteen_id',2)->where('control_no',$ctrl)->sum('price');
+        $pcanteen1 = Transaction::where('canteen_id', 1)->where('control_no',$ctrl2)->sum('price');
+        $pcanteen2 = Transaction::where('canteen_id',2)->where('control_no',$ctrl2)->sum('price');
+        $ccredit = Credit::where('control_no',$ctrl)->sum('amount');
+        $pcredit = Credit::where('control_no',$ctrl2)->sum('amount');
+        $ctotal = $ccanteen1 + $ccanteen2;
+        $ptotal = $pcanteen1 + $pcanteen2;
         if (Auth::check() && Auth::user()->role_id == 1) {
-            return view('pages.hr.hr-home',compact('departments'));
+            return view('pages.hr.hr-home',compact('departments', 'ctrl', 'ctrl2', 'cdate', 'pdate', 'ccanteen1',
+            'ccanteen2', 'pcanteen1','pcanteen2', 'ccredit', 'pcredit', 'ctotal', 'ptotal'));
         } else {
             return redirect('error');
         }
@@ -185,7 +197,7 @@ class HomeController extends Controller
         return $con;
     }
 
-    function generateLastDate(){
+    function generatePreviousDate(){
         $year = Carbon::now()->format('Y');
         $month = Carbon::now()->format('m');
         $day = Carbon::now()->format('d');

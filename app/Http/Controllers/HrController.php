@@ -21,7 +21,8 @@ class HrController extends Controller
     public function index(Request $request)
     {
         $departments = Department::all();
-        $users = User::where('role_id', 'like', '3')->orderBy('name')->paginate(10);
+        $users = User::where('role_id', 'like', '3')->orderBy('status');
+        $users = $users->orderBy('name')->paginate(10);
         return view('includes.table.hrTbl',compact('users', 'departments'));
     }
 
