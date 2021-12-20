@@ -11,21 +11,14 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TransactionsExport implements FromQuery, WithMapping, WithHeadings, ShouldQueue
+class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, ShouldQueue
 {
     use Exportable;
 
-    public function __construct(string $fromDate,string $toDate,int $canteenId)
+    public function __construct(string $fromDate,string $toDate)
     {
-        /*if ($fromDate == $toDate) {
-            $this->toDate = Carbon::parse($toDate)->addDay();
-        }
-        else{
-            $this->toDate = $toDate;
-        }*/
         $this->toDate = Carbon::parse($toDate)->addDay();
         $this->fromDate = $fromDate;
-        $this->canteenId = $canteenId;
     }
 
     /*
@@ -37,6 +30,7 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
             'Employee Number',
             'Employee Name',
             'Amount',
+            'Canteen',
             'Scanned At'
         ];
     }
@@ -46,14 +40,8 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
     */
     public function query()
     {
-        $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate])->where('canteen_id',$this->canteenId);
+        $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate]);
         return $transactions;
-        /*if($transactions->count() > 0){
-            return $transactions;
-        }
-        else{
-            throw new \ErrorException("No Data Found");
-        }*/
     }
 
     /*
@@ -65,6 +53,7 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
             $transactions->user->uname,
             $transactions->user->name,
             $transactions->price,
+            $transactions->canteen->name,
             $transactions->created_at,
         ];
     }

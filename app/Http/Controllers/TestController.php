@@ -3,58 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DB;
 
 class TestController extends Controller
 {
     public function index()
     {
-        $dt = Date('2021-12-15');
-        $d = \Carbon\Carbon::parse($dt);
-        $year = $d->format('Y');
-        $month = $d->format('m');
-        $day = $d->format('d');
-        $ldate = $d->format('t');
-        $con = $month.'-'.$year;
-        if ($day <= 15) {
-            $con = '16-'.$con;
-        } else {
-            //$con = Date($ldate.'-'.$month.'-'.$year);
-            // $con = Date($year.'-'.$month.'-'.$ldate);
-            $con = \Carbon\Carbon::parse($ldate.'-'.$month.'-'.$year)->addDay()->format('d-m-Y');
-            // $con = $con->format('d-m-Y');
+        $d = Date('2021-12-1');
+        $dt = Carbon::parse($d);
+        $from = Carbon::parse($d);
+        $to =Carbon::parse($d);
+        if( $dt->day > 15 && $dt->day <= 31){
+            $from->startOfMonth();
+            $to->day(15);
         }
-
-        return $con;
-        /*return App\customFunctions::generateExpirationDate('SPI202110B');*/
-        /*$ctrl = 'SPI202110B';
-        $users =  App\User::query()->where('role_id',3)->with(['department','credits' => function($q)use($ctrl){
-            $q->where('control_no', $ctrl);
-        },'transactions' => function($q) use($ctrl){
-            $q->where('transactions.control_no', $ctrl);
+        elseif ($dt->day >= 1 && $dt->day < 16) {
+            $from->subMonth()->day(16);
+            $to->subMonth()->endOfMonth()->startOfDay();
+        }
+        //return  $from->format('Y-m-d').'--'.$to->addDay()->format('Y-m-d');
+        $ctns = \App\Canteen::withCount(['transactions as transactions_sum' => function($query) use ($from,$to) {
+            $query->select(\DB::raw('sum(price)'))
+                ->whereBetween('created_at', [$from, $to->addDay()]);
         }])->get();
-        return $users;*/
-
-        /*$users = App\User::find(['3','4']);
-        $credits = App\Credit::all();
-        $scanner = App\User::find(2);
-        $digits = 2;
-        $num = 10;
-        foreach ($users as $user) {
-            foreach ($credits as $credit) {
-                if ($credit->user_id == $user->id) {
-                    for ($i=0; $i < $num; $i++) {
-                        $c = new App\Transaction;
-                        $c->user_id = $user->id;
-                        $c->scanner_id = $scanner->id;
-                        $c->credit_id = $credit->id;
-                        $c->control_no = $credit->control_no;
-                        $c->canteen_id = $scanner->canteen_id;
-                        $c->price = rand(pow(10, $digits-1), pow(10, $digits)-1);
-                        $c->save();
-                        echo '<pre>'.$c.'</pre>';
-                    }
-                }
-            }
-        }*/
+        $path = 'cutoff/TransactionReport_'.$from->format('Y-m-d').'_'.$to->format('Y-m-d').'.xlsx';
+        return $ctns;
+        return new \App\Mail\TransactionsCutoffReport($ctns,$path,$from->format('F d, Y'),$to->format('F d, Y'));
     }
 }
