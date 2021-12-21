@@ -2,6 +2,8 @@
 
 use App\Exports\RequestsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Mail\MealAllowanceSummary;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,13 +53,14 @@ Route::resources([
 
 // POST Method
 Route::post('registerUser', 'HrController@store');
-// Route::post('register', 'HrController@store');
 Route::post('updateAmount', 'CreditController@updateAmount');
 Route::post('change-password', 'ChangePasswordController@store')->name('changepass');
 Route::post('generateQR', 'UserController@getNewQr' );
 
-// EXPORTING
-Route::get('export/usercredits', 'ExportController@exportCredit');
+Route::get('/email', function(){
+    Mail::to('lawrence_bondad@sercomm.com')->send(new MealAllowanceSummary);
+    return new MealAllowanceSummary();
+});
 
 
 /*
