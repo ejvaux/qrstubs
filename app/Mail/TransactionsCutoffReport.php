@@ -26,8 +26,10 @@ class TransactionsCutoffReport extends Mailable implements ShouldQueue
     public function __construct( $path, $date_from, $date_to)
     {
         $this->path = $path;
-        $this->date_from = $date_from;
-        $this->date_to = $date_to;
+        /*$this->date_from = $date_from;
+        $this->date_to = $date_to;*/
+        $this->date_from = Carbon::parse($date_from)->format('Y-m-d 00:00:00');
+        $this->date_to = Carbon::parse($date_to)->format('Y-m-d 23:59:59');
     }
 
     /**
@@ -41,7 +43,7 @@ class TransactionsCutoffReport extends Mailable implements ShouldQueue
         $fd_to = Carbon::parse($this->date_to)->format('F d, Y');
         $ctns = Canteen::withCount(['transactions as transactions_sum' => function($query) {
             $query->select(\DB::raw('sum(price)'))
-                ->whereBetween('created_at', [$this->date_from, Carbon::parse($this->date_to)->addDay()]);
+                ->whereBetween('created_at', [$this->date_from, $this->date_to]);
         }])->get();
         return $this->markdown('emails.transactionCutoffReport')
                     ->subject('Sercomm Meal Allowance Cutoff Summary Report for '.$fd_from.'-'.$fd_to)

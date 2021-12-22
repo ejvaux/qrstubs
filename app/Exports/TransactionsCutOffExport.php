@@ -17,8 +17,10 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
 
     public function __construct(string $fromDate,string $toDate)
     {
-        $this->toDate = Carbon::parse($toDate)->addDay();
-        $this->fromDate = $fromDate;
+        /*$this->toDate = Carbon::parse($toDate)->addDay();
+        $this->fromDate = $fromDate;*/
+        $this->fromDate = Carbon::parse($fromDate)->format('Y-m-d 00:00:00');
+        $this->toDate = Carbon::parse($toDate)->format('Y-m-d 23:59:59');
     }
 
     /*

@@ -87,7 +87,7 @@ class TransactionsExportCommand extends Command
             }
             elseif ($dt->day >= 1 && $dt->day < 16) {
                 $from->subMonth()->day(16);
-                $to->subMonth()->endOfMonth()->startOfDay();
+                $to->subMonth()->endOfMonth();
             }
             else {
                 abort('Freq2: Unknown Date.');
