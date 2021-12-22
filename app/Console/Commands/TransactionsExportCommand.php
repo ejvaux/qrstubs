@@ -61,9 +61,13 @@ class TransactionsExportCommand extends Command
                     $path = 'canteen/daily/'.$ctn->id.'/DailyReport_'.$d->format('Y-m-d').'.xlsx';
                     (new TransactionsExport($d,$d,$ctn->id))->store($path,'public');
                     if ($ctn->email) {
-                        Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
+                        Mail::to($ctn->email)
+                            /*->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));*/
+                            ->later(now()->addMinutes(5), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
                     } else {
-                        Mail::to('edmund_mati@sercomm.com')->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
+                        Mail::to('edmund_mati@sercomm.com')
+                            /*->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));*/
+                            ->later(now()->addMinutes(5), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
                     }
                 };
             }
@@ -94,7 +98,8 @@ class TransactionsExportCommand extends Command
                 ->cc($mail->cc()->pluck('email'))
                 /*to('edmund_mati@sercomm.com')
                 ->cc(['ejvaux_05126@yahoo.com','ejvaux12@gmail.com'])*/
-                ->send(new TransactionsCutoffReport($path,$from,$to));
+                /*->send(new TransactionsCutoffReport($path,$from,$to));*/
+                ->later(now()->addMinutes(5), new TransactionsCutoffReport($path,$from,$to));
         }
         else {
             abort('Unknown Command');
