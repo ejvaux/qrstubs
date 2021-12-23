@@ -23,13 +23,14 @@ class TransactionsCutoffReport extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct( $path, $date_from, $date_to)
+    public function __construct( $path, $date_from, $date_to, $cc)
     {
         $this->path = $path;
         /*$this->date_from = $date_from;
         $this->date_to = $date_to;*/
         $this->date_from = Carbon::parse($date_from)->format('Y-m-d 00:00:00');
         $this->date_to = Carbon::parse($date_to)->format('Y-m-d 23:59:59');
+        $this->cc = $cc;
     }
 
     /**
@@ -45,7 +46,8 @@ class TransactionsCutoffReport extends Mailable implements ShouldQueue
             $query->select(\DB::raw('sum(price)'))
                 ->whereBetween('created_at', [$this->date_from, $this->date_to]);
         }])->get();
-        return $this->markdown('emails.transactionCutoffReport')
+        return $this->cc($this->cc)
+                    ->markdown('emails.transactionCutoffReport')
                     ->subject('Sercomm Meal Allowance Cutoff Summary Report for '.$fd_from.'-'.$fd_to)
                     ->attachFromStorageDisk('public',$this->path)
                     ->with([
