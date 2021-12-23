@@ -94,8 +94,8 @@ class TransactionsExportCommand extends Command
             }
             $path = 'cutoff/TransactionReport_'.$from->format('Y-m-d').'_'.$to->format('Y-m-d').'.xlsx';
             (new TransactionsCutOffExport($from,$to))->store($path,'public');
-            Mail::to($mail->to()->pluck('email'))
-                ->cc($mail->cc()->pluck('email'))
+            Mail::to($mail->to()->get())
+                ->cc($mail->cc()->get())
                 /*to('edmund_mati@sercomm.com')
                 ->cc(['ejvaux_05126@yahoo.com','ejvaux12@gmail.com'])*/
                 /*->send(new TransactionsCutoffReport($path,$from,$to));*/
@@ -105,4 +105,5 @@ class TransactionsExportCommand extends Command
             abort('Unknown Command');
         }
     }
+
 }
