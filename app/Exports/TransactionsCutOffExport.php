@@ -29,6 +29,7 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
     public function headings(): array
     {
         return [
+            'ID',
             'Employee Number',
             'Employee Name',
             'Amount',
@@ -52,6 +53,7 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
     public function map($transactions): array
     {
         return [
+            $transactions->id,
             $transactions->user->uname,
             $transactions->user->name,
             $transactions->price,

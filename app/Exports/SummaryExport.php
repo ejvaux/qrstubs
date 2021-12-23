@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Transaction;
+use App\transaction;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -11,20 +11,20 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TransactionsExport implements FromQuery, WithMapping, WithHeadings, ShouldQueue
+class SummaryExport implements FromQuery, WithMapping, WithHeadings, ShouldQueue
 {
+    /**
+    * @return \Illuminate\Support\Collection
+    */
     use Exportable;
 
-    public function __construct(string $fromDate,string $toDate,int $canteenId)
+    public function __construct(string $fromDate,string $toDate)
     {
-        $this->fromDate = Carbon::parse($fromDate)->format('Y-m-d 00:00:00');
-        $this->toDate = Carbon::parse($toDate)->format('Y-m-d 23:59:59');
-        $this->canteenId = $canteenId;
+        $this->toDate = Carbon::parse($toDate)->addDay();
+        $this->fromDate = $fromDate;
     }
 
-    /*
-        HEADINGS
-    */
+    /* HEADINGS */
     public function headings(): array
     {
         return [
@@ -32,28 +32,17 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
             'Employee Number',
             'Employee Name',
             'Amount',
+            'Canteen',
             'Scanned At'
         ];
     }
 
-    /*
-        QUERY
-    */
+    /* QUERY */
     public function query()
     {
-        $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate])->where('canteen_id',$this->canteenId);
+        $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate]);
         return $transactions;
-        /*if($transactions->count() > 0){
-            return $transactions;
-        }
-        else{
-            throw new \ErrorException("No Data Found");
-        }*/
     }
-
-    /*
-        MAPPING
-    */
     public function map($transactions): array
     {
         return [
@@ -61,6 +50,7 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
             $transactions->user->uname,
             $transactions->user->name,
             $transactions->price,
+            $transactions->canteen->name,
             $transactions->created_at,
         ];
     }
