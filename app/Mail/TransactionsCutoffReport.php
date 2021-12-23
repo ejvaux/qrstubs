@@ -44,7 +44,7 @@ class TransactionsCutoffReport extends Mailable implements ShouldQueue
                 ->whereBetween('created_at', [$this->date_from, Carbon::parse($this->date_to)->addDay()]);
         }])->get();
         return $this->markdown('emails.transactionCutoffReport')
-                    ->subject('Sercomm Meal Allowance Cutoff Summary Report | '.$fd_from.'-'.$fd_to)
+                    ->subject('Sercomm Meal Allowance Cutoff Summary Report for '.$fd_from.'-'.$fd_to)
                     ->attachFromStorageDisk('public',$this->path)
                     ->with([
                         'ctns' => $ctns,

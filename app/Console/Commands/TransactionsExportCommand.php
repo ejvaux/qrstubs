@@ -51,22 +51,24 @@ class TransactionsExportCommand extends Command
     {
         $freq = $this->argument('frequency');
         if ($freq == 1) {
-            //$dt = Date('2021-11-11');
+            //$dt = Date('2021-12-02');
             $dt = Date('Y-m-d');
             $d = Carbon::parse($dt)->subDay();
             $ctns = $this->ctns;
             foreach ($ctns as $ctn) {
-                $t = Transaction::whereBetween('created_at', [$d,$dt])->where('canteen_id',$ctn->id)->first();
+                $t = Transaction::whereBetween('created_at', [$d->format('Y-m-d 00:00:00'),$d->format('Y-m-d 23:59:59')])->where('canteen_id',$ctn->id)->first();
                 if ($t) {
                     $path = 'canteen/daily/'.$ctn->id.'/DailyReport_'.$d->format('Y-m-d').'.xlsx';
-                    (new TransactionsExport($d,$dt,$ctn->id))->store($path,'public');
+                    (new TransactionsExport($d,$d,$ctn->id))->store($path,'public');
                     if ($ctn->email) {
-                        Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
+                        Mail::to($ctn->email)
+                            /*->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));*/
+                            ->later(now()->addMinutes(5), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
                     } else {
-                        Mail::to('edmund_mati@sercomm.com')->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
+                        Mail::to('edmund_mati@sercomm.com')
+                            /*->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));*/
+                            ->later(now()->addMinutes(5), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
                     }
-
-                    /*Mail::to($ctn->email)->send(new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));*/
                 };
             }
         }
@@ -96,7 +98,8 @@ class TransactionsExportCommand extends Command
                 ->cc($mail->cc()->pluck('email'))
                 /*to('edmund_mati@sercomm.com')
                 ->cc(['ejvaux_05126@yahoo.com','ejvaux12@gmail.com'])*/
-                ->send(new TransactionsCutoffReport($path,$from,$to));
+                /*->send(new TransactionsCutoffReport($path,$from,$to));*/
+                ->later(now()->addMinutes(5), new TransactionsCutoffReport($path,$from,$to));
         }
         else {
             abort('Unknown Command');
