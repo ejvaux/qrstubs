@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Transaction;
+use App\transaction;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -11,8 +11,11 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, ShouldQueue
+class SummaryExport implements FromQuery, WithMapping, WithHeadings, ShouldQueue
 {
+    /**
+    * @return \Illuminate\Support\Collection
+    */
     use Exportable;
 
     public function __construct(string $fromDate,string $toDate)
@@ -21,9 +24,7 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
         $this->fromDate = $fromDate;
     }
 
-    /*
-        HEADINGS
-    */
+    /* HEADINGS */
     public function headings(): array
     {
         return [
@@ -36,18 +37,12 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
         ];
     }
 
-    /*
-        QUERY
-    */
+    /* QUERY */
     public function query()
     {
         $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate]);
         return $transactions;
     }
-
-    /*
-        MAPPING
-    */
     public function map($transactions): array
     {
         return [

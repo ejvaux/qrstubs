@@ -34,6 +34,7 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
     public function headings(): array
     {
         return [
+            'ID',
             'Employee Number',
             'Employee Name',
             'Amount',
@@ -62,6 +63,7 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
     public function map($transactions): array
     {
         return [
+            $transactions->id,
             $transactions->user->uname,
             $transactions->user->name,
             $transactions->price,
