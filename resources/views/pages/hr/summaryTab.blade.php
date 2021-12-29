@@ -5,8 +5,8 @@
         <thead>
         <tr>  
             <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;Cut-off</th>
-            <th>Canteen 1</th>
-            <th>Canteen 2</th>
+            <th>Chantien Canteen</th>
+            <th>Chef Carlos Catering</th>
             <th>Sercomm M-Site Credit</th>
             <th>Sercomm M-Site Used</th>
         </tr>
