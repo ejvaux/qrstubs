@@ -28,11 +28,12 @@ class Kernel extends ConsoleKernel
                   ->dailyAt('08:00');
                   /*->everyMinute();*/
 
-        /*$schedule->command('transaction:export 2')
+        $schedule->command('transaction:export 2')
                 ->monthlyOn(1, '08:00');
 
         $schedule->command('transaction:export 2')
-                ->monthlyOn(16, '08:00');*/
+                ->monthlyOn(16, '08:00');
+
         $schedule->command('summary-report:file')
                 ->monthlyOn(1, '08:00');
 
@@ -40,7 +41,7 @@ class Kernel extends ConsoleKernel
                 ->monthlyOn(16, '08:00');
         // $schedule->command('inspire')
         //          ->hourly();
-        
+
     }
 
     /**
