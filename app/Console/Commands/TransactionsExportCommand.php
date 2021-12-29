@@ -94,10 +94,10 @@ class TransactionsExportCommand extends Command
             }
             $path = 'cutoff/TransactionReport_'.$from->format('Y-m-d').'_'.$to->format('Y-m-d').'.xlsx';
             (new TransactionsCutOffExport($from,$to))->store($path,'public');
-            Mail::to($mail->to()->get())
-                ->cc($mail->cc()->get())
-                /*to('edmund_mati@sercomm.com')
-                ->cc(['ejvaux_05126@yahoo.com','ejvaux12@gmail.com'])*/
+            Mail::/*to($mail->to()->get())
+                ->cc($mail->cc()->get())*/
+                to(['Divine_Goce@SERCOMM.COM','Oj_Orjalo@SERCOMM.COM','Katrina_Naron@SERCOMM.COM'])
+                ->cc(['Bruce_Dai@sercomm.com.cn','Jesse_Xia@sercomm.com.cn','Rax_Chiang@SERCOMM.COM','Edmund_Mati@SERCOMM.COM','lawrence_bondad@sercomm.com'])
                 /*->send(new TransactionsCutoffReport($path,$from,$to));*/
                 ->later(now()->addMinutes(1), new TransactionsCutoffReport($path,$from,$to));
         }
