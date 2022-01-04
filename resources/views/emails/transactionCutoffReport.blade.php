@@ -4,7 +4,7 @@ Good day!,
 Transaction Summary Report for Cutoff for {{ $from }} to {{ $to }}.
 
 @component('mail::table')
-| Canteen      | Total Amount Used |
+| Canteen      | Total Credit Used |
 | ----------------- |:--------------------:|
 @foreach($ctns as $ctn)
 | {{$ctn->name}}     | {{$ctn->transactions_sum}} |
