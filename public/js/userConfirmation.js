@@ -81,62 +81,130 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/cntnExport.js":
-/*!************************************!*\
-  !*** ./resources/js/cntnExport.js ***!
-  \************************************/
+/***/ "./resources/js/userConfirmation.js":
+/*!******************************************!*\
+  !*** ./resources/js/userConfirmation.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-/*      FUNCTIONS      */
-function exportTransaction() {
-  $formdata = $('#transactionExportForm').serialize();
-  $.ajax({
-    url: '/export/transaction/download',
-    type: 'POST',
-    //global: false,
-    data: $formdata,
-    success: function success(data) {
-      //return data;
-      console.log(data);
-    }
-  });
-}
-/*      EVENTS      */
-
-
-$('#trnsctBtn').on('click', function () {
-  $("#transactionExportModal").modal('show');
+$(function () {
+  console.log("ready!");
+  /*window.livewire.emit('loadPending');*/
 });
-$('#exportTransactionBtn').on('click', function () {
-  if ($('#fromDate').val() > $('#toDate').val()) {
-    Swal.fire({
-      icon: 'error',
-      //title: data.result,
-      text: '\"To Date\" must be greater than \"From Date\".'
+/* FUNCTIONS */
+
+/*function transactionAccept(transactionId)
+{
+    var t = {
+        transactions:{
+            id : transactionId
+        }
+    };
+    $.ajax({
+        url: 'transactAccept',
+        type:'POST',
+        data:{
+            'transactionId': transactionId,
+        },
+        success: function (data) {
+            console.log('Accepted.');
+            if(data.status == 1){
+                window.livewire.emit('removeUserTransaction',t);
+                iziToast.success({
+                    message: data.result,
+                });
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: data.result,
+                });
+            }
+        }
     });
-  } else {
-    $formdata = $('#transactionExportForm').serialize();
-    var url = $('#transactionExportForm').attr('action') + "?" + $formdata;
-    window.location = url;
-  }
+}
+
+function transactionCancel(transactionId)
+{
+    var t = {
+        transactions:{
+            id : transactionId
+        }
+    };
+    console.log(t);
+    $.ajax({
+        url: 'transactCancel',
+        type:'POST',
+        data:{
+            'transactionId': transactionId,
+        },
+        success: function (data) {
+            console.log('Accepted.');
+            if(data.status == 1){
+                window.livewire.emit('removeCanteenTransaction',t);
+                iziToast.success({
+                    message: data.result,
+                });
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: data.result,
+                });
+            }
+        }
+    });
+}*/
+
+/* EVENTS */
+
+/*$('#app').on('click','.transactionAcceptBtn', function(){
+    console.log('Accept='+$(this).data('transactionid'));
+    Swal.fire({
+        title: 'Are you sure?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Accept'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            transactionAccept($(this).data('transactionid'));
+        }
+    })
 });
+$('#app').on('click','.transactionCancelBtn', function(){
+    console.log('Cancel='+$(this).data('transactionid'));
+    Swal.fire({
+        title: 'Are you sure?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Proceed'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            transactionCancel($(this).data('transactionid'));
+        }
+    })
+});*/
 
 /***/ }),
 
-/***/ 2:
-/*!******************************************!*\
-  !*** multi ./resources/js/cntnExport.js ***!
-  \******************************************/
+/***/ 3:
+/*!************************************************!*\
+  !*** multi ./resources/js/userConfirmation.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\qrstubs\resources\js\cntnExport.js */"./resources/js/cntnExport.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\qrstubs\resources\js\userConfirmation.js */"./resources/js/userConfirmation.js");
 
 
 /***/ })

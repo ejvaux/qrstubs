@@ -11,6 +11,9 @@ class TestController extends Controller
 {
     public function index()
     {
+        //event(new \App\Events\RealTimeMessage('Hello World'));
+        return \App\Transaction::withoutGlobalScopes()->find(881);
+        event(new \App\Events\TransactionPaymentRequest(\App\Transaction::find(1)));
         $dt = Date('2021-12-02');
         //$dt = Date('Y-m-d');
         $d = Carbon::parse($dt)->subDay();

@@ -185,11 +185,16 @@ function transact(userId,ctrl,amount){
         success: function (data) {
             /*alert(data);*/
             if(data.status == 1){
+                window.livewire.emit('addCanteenTransaction',data.transaction);
                 reset();
-                Swal.fire({
+                /*Swal.fire({
                     icon: 'success',
                     title: data.result,
+                });*/
+                iziToast.success({
+                    message: data.result,
                 });
+                console.log(data.transaction);
             }
             else{
                 //reset();
@@ -223,7 +228,7 @@ function reset(){
     $('#msg').removeClass('d-none');
     $('.scan').addClass('d-none');
     $('#amount').removeClass('is-invalid');
-    $('#amount').val('0');
+    $('#amount').val('');
     //$('.invalid-feedback').hide();
 }
 

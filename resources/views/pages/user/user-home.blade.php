@@ -19,8 +19,8 @@
                 </center><br>
             </div>
             <div class="col-md-4 justify-content-center">
-                
-                
+
+
             </div>
         </div>
         <div class="row justify-content-center">
@@ -28,14 +28,16 @@
         </div>
         <div class="row justify-content-center">
             <h1 style="font-family: Avanta Garde; color:blue; font-size:3rem"><b> Balance: {{$balance}} </b></h1>
-        </div><br><br>
+        </div>
+        @livewire('user-pending-transactions')
+        <br><br>
         <h4>Last 3 transactions</h4>
         <div id="usertransact2Table">
             {{-- // TABLE DIRECT JS User Transaction --}}
             {{-- @include('includes.table.user2Tbl') --}}
         </div>
     </div>
-    
+
     {{-- Share Credit Modal--}}
     <div class="modal modal-primary fade" id="shareModal" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -66,7 +68,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     {{-- <div class="col-md-3"></div> --}}
-                    <div class="col-md-4"><h4><b>CONFIRMATION</b></h4></div> 
+                    <div class="col-md-4"><h4><b>CONFIRMATION</b></h4></div>
                     <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,7 +89,7 @@
         </div>
     </div>
 </body>
-
+@include('includes.modal.transactionConfirmModal')
 <footer style="position:absolute; width:100%;">
     @include('includes.footer')
 </footer>

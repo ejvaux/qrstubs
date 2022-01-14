@@ -12,9 +12,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    {{--<script src="{{ asset('js/iziToast.js')}}" defer></script>--}}
     <script src="{{ asset('js/instascan.min.js')}}" defer></script>
-    <script src="{{ asset('js/custom.js')}}" defer></script>
+    {{--<script src="{{ asset('js/custom.js')}}" defer></script>--}}
+    <script src="{{ asset(mix('/js/custom.js')) }}" defer></script>
 
     <!-- Fonts -->
     {{--<link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,11 +23,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-    {{--<link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet">--}}
-
-    <!-- Scanner -->
-    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
-	{{--<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>--}}
+    @livewireStyles
 
     @yield('js')
 
@@ -76,7 +72,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                            
+
                         @else
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
@@ -104,14 +100,14 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ url('change-password') }}">{{ __('Change Password') }}
-                                        
+
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Disconnect Me') }}
                                     </a>
-                                    
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -167,5 +163,7 @@
             @yield('content')
         </main>
     </div>
+    @livewireScripts
+    @stack('scripts')
 </body>
 </html>
