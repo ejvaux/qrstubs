@@ -25,7 +25,7 @@ class transaction extends Model
     {
         parent::boot();
 
-        static::addGlobalScope('Completed', function (Builder $builder) {
+        static::addGlobalScope('completed', function (Builder $builder) {
             $builder->where('status', '=', 2);
         });
     }
