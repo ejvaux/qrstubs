@@ -99,7 +99,7 @@ class TransactionsExportCommand extends Command
                 to(['Divine_Goce@SERCOMM.COM','Oj_Orjalo@SERCOMM.COM','Katrina_Naron@SERCOMM.COM'])
                 ->cc(['Bruce_Dai@sercomm.com.cn','Jesse_Xia@sercomm.com.cn','Rax_Chiang@SERCOMM.COM','Edmund_Mati@SERCOMM.COM','lawrence_bondad@sercomm.com'])
                 /*->send(new TransactionsCutoffReport($path,$from,$to));*/
-                ->later(now()->addMinutes(1), new TransactionsCutoffReport($path,$from,$to));
+                ->later(now()->addMinutes(5), new TransactionsCutoffReport($path,$from,$to));
         }
         else {
             abort('Unknown Command');
