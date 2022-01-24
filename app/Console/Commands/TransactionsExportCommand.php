@@ -73,9 +73,12 @@ class TransactionsExportCommand extends Command
             }
         }
         elseif ($freq == 2) {
-            $mail = Email::with(['email_group' => function ($query) {
+            $mail_to = Email::with(['email_group' => function ($query) {
                 $query->where('name', '=', 'TransactionsCutOffReport');
-            }]);
+            }])->to()->pluck('email')->toArray();
+            $mail_cc = Email::with(['email_group' => function ($query) {
+                $query->where('name', '=', 'TransactionsCutOffReport');
+            }])->cc()->pluck('email')->toArray();
             //$d = Date('2021-12-16');
             $d = Date('Y-m-d');
             $dt = Carbon::parse($d);
@@ -94,10 +97,10 @@ class TransactionsExportCommand extends Command
             }
             $path = 'cutoff/TransactionReport_'.$from->format('Y-m-d').'_'.$to->format('Y-m-d').'.xlsx';
             (new TransactionsCutOffExport($from,$to))->store($path,'public');
-            Mail::/*to($mail->to()->get())
-                ->cc($mail->cc()->get())*/
-                to(['Divine_Goce@SERCOMM.COM','Oj_Orjalo@SERCOMM.COM','Katrina_Naron@SERCOMM.COM'])
-                ->cc(['Bruce_Dai@sercomm.com.cn','Jesse_Xia@sercomm.com.cn','Rax_Chiang@SERCOMM.COM','Edmund_Mati@SERCOMM.COM','lawrence_bondad@sercomm.com'])
+            Mail::to($mail_to)
+                ->cc($mail_cc)
+                /*to(['Divine_Goce@SERCOMM.COM','Oj_Orjalo@SERCOMM.COM','Katrina_Naron@SERCOMM.COM'])
+                ->cc(['Bruce_Dai@sercomm.com.cn','Jesse_Xia@sercomm.com.cn','Rax_Chiang@SERCOMM.COM','Edmund_Mati@SERCOMM.COM','lawrence_bondad@sercomm.com'])*/
                 /*->send(new TransactionsCutoffReport($path,$from,$to));*/
                 ->later(now()->addMinutes(1), new TransactionsCutoffReport($path,$from,$to));
         }

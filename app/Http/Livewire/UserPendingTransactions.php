@@ -6,6 +6,7 @@ use Auth;
 use Livewire\Component;
 use App\Transaction;
 use Illuminate\Support\Facades\Log;
+use App\CustomFunctions;
 
 class UserPendingTransactions extends Component
 {
@@ -56,7 +57,23 @@ class UserPendingTransactions extends Component
         $tr->update(['status' => 2]);
         broadcast(new \App\Events\TransactionPaid($tr));
         $this->removeUserTransaction($transactionId);
+        $this->getBalance();
+        $this->emit('getTransactionHistory');
         $this->emit('alertMessage','Transaction #'.$transactionId.' Accepted.');
+    }
+
+    public function getBalance()
+    {
+        $ctrl = CustomFunctions::generateControlNum();
+        $credit = \App\Credit::where('user_id',$this->user->id)->where('control_no',$ctrl)->first();
+        if($credit == NULL){
+            $balance = '0';
+            $qrcode = '0';
+        } else {
+            $price_total = Transaction::where('user_id',$this->user->id)->where('credit_id',$credit->id)->sum('price');
+            $balance = $credit->amount - $price_total;
+        };
+        $this->emit('updateBalance',$balance);
     }
 
     public function render()

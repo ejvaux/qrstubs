@@ -14,7 +14,7 @@
                                         <div class="col">
                                             #{{$transaction->id}}
                                         </div>
-                                        <div class="col text-left font-weight-bold">
+                                        <div class="col text-left font-weight-bold" style="font-size:1rem">
                                             Price: {{$transaction->price}}
                                         </div>
                                     </div>
@@ -33,13 +33,13 @@
                                     @if ($user->role_id == 2)
                                         <div class="row">
                                             <div class="col">
-                                                <button type="button" wire:click="$emit('confirmTransaction','cancelTransaction','{{$transaction->id}}')" wire:key="{{ time().$loop->index }}" class="btn btn-warning">Cancel</button>
+                                                <button type="button" wire:click="$emit('confirmTransaction','cancelTransaction','{{$transaction->id}}','Cancel Transaction #{{$transaction->id}}?')" wire:key="{{ time().$loop->index }}" class="btn btn-warning">Cancel</button>
                                             </div>
                                         </div>
                                     @elseif ($user->role_id == 3)
                                         <div class="row">
                                             <div class="col">
-                                                <button type="button" wire:click="$emit('confirmTransaction','acceptTransaction','{{$transaction->id}}')" wire:key="{{ time().$loop->index }}" class="btn btn-primary">Accept</button>
+                                                <button type="button" wire:click="$emit('confirmTransaction','acceptTransaction','{{$transaction->id}}','Confirm Transaction #{{$transaction->id}}?')" wire:key="{{ time().$loop->index }}" class="btn btn-primary">Confirm</button>
                                             </div>
                                         </div>
                                     @endif
@@ -62,14 +62,16 @@
     document.addEventListener('livewire:load', function () {
         console.log( "Stack:ready!" );
 
-        window.livewire.on('confirmTransaction', (action,id) => {
+        window.livewire.on('confirmTransaction', (action,id,msg) => {
             Swal.fire({
             title: 'Are you sure?',
+            text: msg,
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirm'
+            confirmButtonText: 'Yes, proceed',
+            cancelButtonText: 'No',
             }).then((result) => {
                 if (result.isConfirmed) {
                     console.log('confirm');
@@ -90,6 +92,12 @@
                 message: msg,
                 layout: 2,
             });
+        });
+        window.livewire.on('updateBalance', (balance) => {
+            $('#app #userBalance').text(balance);
+        });
+        window.livewire.on('getTransactionHistory', () => {
+            LoadUsrTbl2();
         });
     })
     </script>

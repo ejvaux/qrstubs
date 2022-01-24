@@ -147,7 +147,7 @@ function loadUser(qr){
                 reset();
                 Swal.fire({
                     icon: 'error',
-                    title: 'User disabled or does not exist in the database.',
+                    title: 'User disabled, does not exist in the database or credit not available.',
                     text: 'Please contact SPI-IAD Dept.'
                 });
             }

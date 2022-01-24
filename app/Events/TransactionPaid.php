@@ -9,11 +9,11 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Auth;
 use Illuminate\Support\Facades\Log;
 
-class TransactionPaid implements ShouldBroadcastNow
+class TransactionPaid implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

@@ -27,7 +27,7 @@
             <button style="padding: 5px 70px" class="btn btn-success py-1" data-toggle="modal" data-target="#changeQRModal" >Change QRCode</button>
         </div>
         <div class="row justify-content-center">
-            <h1 style="font-family: Avanta Garde; color:blue; font-size:3rem"><b> Balance: {{$balance}} </b></h1>
+            <h1 style="font-family: Avanta Garde; color:blue; font-size:3rem"><b> Balance: {{--{{$balance}}--}} <span id='userBalance'>{{$balance}}</span> </b></h1>
         </div>
         @livewire('user-pending-transactions')
         <br><br>
