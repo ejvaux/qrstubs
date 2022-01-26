@@ -42,13 +42,14 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
     public function query()
     {
         $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate])->where('canteen_id',$this->canteenId);
-        return $transactions;
-        /*if($transactions->count() > 0){
+        //return $transactions;
+        if($transactions->count() > 0){
             return $transactions;
         }
         else{
             throw new \ErrorException("No Data Found");
-        }*/
+            //abort(404,"No Data Found");
+        }
     }
 
     /*
