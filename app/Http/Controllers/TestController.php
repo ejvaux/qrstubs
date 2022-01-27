@@ -37,6 +37,7 @@ class TestController extends Controller
         }])->get();*/
         $path = 'cutoff/TransactionReport_'.$from->format('Y-m-d').'_'.$to->format('Y-m-d').'.xlsx';
         //return $ctns;
-        return new \App\Mail\TransactionsCutoffReport($path,$from,$to);
+        // return new \App\Mail\TransactionsCutoffReport($path,$from,$to);
+        return new App\Export\SummaryCreditExport;
     }
 }

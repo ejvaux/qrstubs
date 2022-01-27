@@ -73,8 +73,8 @@ class SummaryReportCommand extends Command
             //   to($mail->to()->pluck('email'))
             // ->cc($mail->cc()->pluck('email'))
             to('lawrence_bondad@sercomm.com')
-            ->cc('renzbondad53@gmail.com')
-            ->send(new SummaryCutoffReport($path,$from,$to));
+            ->cc('lawrence_bondad@sercomm.com')
+            ->send(new SummaryCutoffReport2($path,$from,$to));
         
         // $users = [
         //     0 => ['email' => 'lawrence_bondad@sercomm.com','name' => "Lawrence Bondad"],  

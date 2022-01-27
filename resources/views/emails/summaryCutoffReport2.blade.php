@@ -7,7 +7,7 @@ Here is the summary report for the cutoff of {{ $from }} to {{ $to }}.
 <br>
 
 @component('mail::table') 
-| Cutoff Date       | Canteen 1         | Canteen 2      | Sercomm M-Site Credit | Sercomm M-Site Used
+| Cutoff Date       | Chantein Canteen   | Chef Carlos Catering | Sercomm M-Site Credit | Sercomm M-Site Used
 | ----------------- | ------------------ | -------------- | --------------------- | -------------------
 | {{ $ldate }}      | {{ $tctn1 }}       | {{ $tctn2 }}   | {{ $tcredit }}        | {{ $toverall }}       
 @endcomponent
