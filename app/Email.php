@@ -30,6 +30,6 @@ class Email extends Model
     }
     public function email_group()
     {
-        return $this->belongsto('App\EmailGroup','email_group_id');
+        return $this->belongsto('App\EmailGroup');
     }
 }

@@ -22,4 +22,17 @@ class CustomFunctions
 
         return $exp;
     }
+
+    public static function generateControlNum(){
+        $year = Carbon::now()->format('Y');
+        $month = Carbon::now()->format('m');
+        $day = Carbon::now()->format('d');
+        $con = 'SPI'.$year.$month;
+        if ($day <= 15) {
+            $con = $con.'A';
+        } else {
+            $con = $con.'B';
+        }
+        return $con;
+    }
 }

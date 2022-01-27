@@ -5,27 +5,15 @@
 @endsection
 
 @section('content')
-
-{{--<div class="container1">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <video id ="preview" width="100%">
-        </div>
-        <div class="col-md-3"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-4">
-            <label>SCAN QR CODE</label>
-            <input type="text" name="text" placeholder="Scan Qr here" id="text" readonly="readonly">
-        </div>
-        <div class="col-md-3">
-            <button id="scann">scan</button>
+@include('emp.canteenScanning')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @livewire('canteen-pending-transactions')
         </div>
     </div>
-</div>--}}
-@include('emp.canteenScanning')<br>
+</div>
+<br>
 @include('emp.canteenTotal')
 <footer style="position:absolute; width:100%;">
     @include('includes.footer')

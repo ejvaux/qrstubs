@@ -105,7 +105,7 @@ class HomeController extends Controller
             $price_total = Transaction::where('user_id',$users)->where('credit_id',$credit->id)->sum('price');
             $balance = $credit->amount - $price_total;
         }
-        
+
 
         if (Auth::check() && Auth::user()->role_id == 3) {
             return view('pages.user.user-home', compact('qrcode','balance', 'uname'));
@@ -193,7 +193,7 @@ class HomeController extends Controller
         }
 
         $con = $con1.' ~ '.$con2;
-        
+
         return $con;
     }
 
@@ -205,7 +205,7 @@ class HomeController extends Controller
         $lastDayofPreviousMonth = Carbon::now()->subMonthNoOverflow()->endOfMonth()->format('d/m/Y');
 
         $con = $month.'/'.$year;
-        
+
         // if($month == 1){
         //     if ($day <= 15) {
         //         $con1 = '16/'.$lastMonth.'/'.$lastYear;
@@ -214,7 +214,7 @@ class HomeController extends Controller
         //     }
         // }
         // else{
-            
+
         // }
 
         if ($day <= 15) {
@@ -222,7 +222,7 @@ class HomeController extends Controller
         } else {
             $con1 = '01/'.$con;
         }
-        
+
         if ($day <= 15) {
             $con2 = $lastDayofPreviousMonth;
         } else {
