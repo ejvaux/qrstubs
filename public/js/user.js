@@ -15,10 +15,10 @@ function LoadUsrTbl(search, url = 'usrtrct'){
         url: url,
         type:'get',
         data: {
-            
+
         },
         success: function (data) {
-            $('#usertransactTable').html(data); 
+            $('#usertransactTable').html(data);
         }
   });
 }
@@ -26,11 +26,12 @@ function LoadUsrTbl2(search, url = 'usrtrct2'){
     $.ajax({
         url: url,
         type:'get',
+        global: false,
         data: {
-            
+
         },
         success: function (data) {
-            $('#usertransact2Table').html(data); 
+            $('#usertransact2Table').html(data);
         }
   });
 }
@@ -72,7 +73,6 @@ $('#changeQRForm').on('submit', function(e){
     });
 });
 
-    
 
 
 
@@ -80,7 +80,8 @@ $('#changeQRForm').on('submit', function(e){
 
 
 
-// TABLE RELOAD PAGINATE 
+
+// TABLE RELOAD PAGINATE
 $('#usertransactTable').on('click', '.page-link', function(e){
     e.preventDefault();
     LoadUsrTbl('',$(this).attr('href'));

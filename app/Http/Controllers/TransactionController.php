@@ -12,6 +12,16 @@ use Illuminate\Http\Request;
 class TransactionController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -123,9 +133,11 @@ class TransactionController extends Controller
                 $tr->price = $request->amount;
 
                 if ($tr->save()) {
+                    broadcast(new \App\Events\TransactionPaymentRequest($tr));
                     return [
                         'status' => 1,
-                        'result' => 'Transaction Complete.'
+                        'result' => 'Transaction Request Sent.',
+                        'transaction' => $tr
                     ];
                 }
                 else {

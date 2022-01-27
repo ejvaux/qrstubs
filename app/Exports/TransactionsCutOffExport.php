@@ -15,12 +15,13 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
 {
     use Exportable;
 
-    public function __construct(string $fromDate,string $toDate)
+    public function __construct(string $fromDate,string $toDate, string $canteenId = null)
     {
         /*$this->toDate = Carbon::parse($toDate)->addDay();
         $this->fromDate = $fromDate;*/
         $this->fromDate = Carbon::parse($fromDate)->format('Y-m-d 00:00:00');
         $this->toDate = Carbon::parse($toDate)->format('Y-m-d 23:59:59');
+        $this->canteenId = $canteenId;
     }
 
     /*
@@ -44,7 +45,17 @@ class TransactionsCutOffExport implements FromQuery, WithMapping, WithHeadings, 
     public function query()
     {
         $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate]);
-        return $transactions;
+        if($this->canteenId){
+            $transactions->where('canteen_id','=',$this->canteenId);
+        }
+        //return $transactions;
+        if($transactions->count() > 0){
+            return $transactions;
+        }
+        else{
+            throw new \ErrorException("No Data Found");
+            //abort(404,"No Data Found");
+        }
     }
 
     /*
