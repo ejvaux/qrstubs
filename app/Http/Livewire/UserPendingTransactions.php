@@ -18,7 +18,7 @@ class UserPendingTransactions extends Component
     {
         $this->user = Auth::user();
         $this->user_id = $this->user->id;
-        $this->transactions = Transaction::withoutGlobalScopes()->where('user_id','=',$this->user->id)->pending()->get();
+        $this->loadTransactions();
     }
 
     public function getListeners()
@@ -26,13 +26,16 @@ class UserPendingTransactions extends Component
         return [
             "echo-private:transaction.User.{$this->user_id},TransactionPaymentRequest" => 'addUserTransaction',
             "echo-private:transaction.User.{$this->user_id},TransactionCancelled" => 'cancelUserTransaction',
-            "acceptTransaction",
+            "confirmTransaction",
+            "confirmAllTransaction",
         ];
     }
     public function addUserTransaction($e)
     {
-        $this->transactions->push(Transaction::withoutGlobalScopes()->where('id','=',$e['transactions']['id'])->first());
-        $this->emit('notifyMessage','New Transaction Request','Transaction #'.$e['transactions']['id'].' received.');
+        $id = $e['transactions']['id'];
+        $this->transactions->push(Transaction::withoutGlobalScopes()->where('id','=',$id)->first());
+        $this->emit('notifyMessage','New Transaction Request','Transaction #'.$id.' received.');
+        $this->emit('focusTransaction',$id);
     }
 
     public function cancelUserTransaction($e)
@@ -51,7 +54,7 @@ class UserPendingTransactions extends Component
         }
     }
 
-    public function acceptTransaction($transactionId)
+    public function confirmTransaction($transactionId)
     {
         $tr = Transaction::withoutGlobalScopes()->find($transactionId);
         $tr->update(['status' => 2]);
@@ -60,6 +63,20 @@ class UserPendingTransactions extends Component
         $this->getBalance();
         $this->emit('getTransactionHistory');
         $this->emit('alertMessage','Transaction #'.$transactionId.' Accepted.');
+    }
+
+    public function confirmAllTransaction()
+    {
+        $trs = Transaction::withoutGlobalScopes()->where('user_id','=',$this->user->id)->pending()->get();
+        Transaction::withoutGlobalScopes()->where('user_id','=',$this->user->id)->pending()->update(['status' => 2]);
+        Log::info(json_encode($trs));
+        $this->loadTransactions();
+        foreach ($trs as $tr) {
+            broadcast(new \App\Events\TransactionPaid($tr));
+        }
+        $this->getBalance();
+        $this->emit('getTransactionHistory');
+        $this->emit('alertMessage','All Transactions Accepted.');
     }
 
     public function getBalance()
@@ -74,6 +91,11 @@ class UserPendingTransactions extends Component
             $balance = $credit->amount - $price_total;
         };
         $this->emit('updateBalance',$balance);
+    }
+
+    public function loadTransactions()
+    {
+        $this->transactions = Transaction::withoutGlobalScopes()->where('user_id','=',$this->user->id)->pending()->get();
     }
 
     public function render()

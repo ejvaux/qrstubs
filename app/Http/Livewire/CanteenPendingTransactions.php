@@ -17,7 +17,7 @@ class CanteenPendingTransactions extends Component
     {
         $this->user = Auth::user();
         $this->user_id = $this->user->id;
-        $this->transactions = $this->query()->where('scanner_id','=',$this->user->id)->pending()->get();
+        $this->loadTransactions();
     }
 
     public function getListeners()
@@ -26,12 +26,13 @@ class CanteenPendingTransactions extends Component
             "echo-private:transaction.Canteen.{$this->user_id},TransactionPaid" => 'paidCanteenTransaction',
             "addCanteenTransaction",
             "cancelTransaction",
+            "cancelAllTransaction",
         ];
     }
 
     public function addCanteenTransaction($e)
     {
-        $this->transactions->push($this->query()->where('id','=',$e['id'])->first());
+        $this->transactions->push(Transaction::withoutGlobalScopes()->where('id','=',$e['id'])->first());
     }
 
     public function paidCanteenTransaction($e)
@@ -50,11 +51,6 @@ class CanteenPendingTransactions extends Component
         }
     }
 
-    public function query()
-    {
-        return Transaction::with(['canteen'])->select('id','price','canteen_id','created_at')->withoutGlobalScopes();
-    }
-
     public function cancelTransaction($transactionId)
     {
         $tr = Transaction::withoutGlobalScopes()->find($transactionId);
@@ -62,6 +58,22 @@ class CanteenPendingTransactions extends Component
         $this->removeCanteenTransaction($transactionId);
         broadcast(new \App\Events\TransactionCancelled($tr));
         $this->emit('alertMessage','Transaction #'.$transactionId.' Cancelled.');
+    }
+
+    public function cancelAllTransaction()
+    {
+        $trs = Transaction::withoutGlobalScopes()->where('scanner_id','=',$this->user->id)->pending()->get();
+        Transaction::withoutGlobalScopes()->where('scanner_id','=',$this->user->id)->pending()->update(['status' => 3]);
+        $this->loadTransactions();
+        foreach ($trs as $tr) {
+            broadcast(new \App\Events\TransactionCancelled($tr));
+        }
+        $this->emit('alertMessage','All Transactions Cancelled.');
+    }
+
+    public function loadTransactions()
+    {
+        $this->transactions = Transaction::withoutGlobalScopes()->where('scanner_id','=',$this->user->id)->pending()->get();
     }
 
     public function render()
