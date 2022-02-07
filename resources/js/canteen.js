@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    $("#wait").css("display", "block");
+    try {
+        $("#wait").css("display", "block");
     navigator.mediaDevices.getUserMedia(
         {
             video: true
@@ -41,15 +42,28 @@ $(document).ready(function () {
         if(err.name === 'NotAllowedError'){
             $("#cameraSelect option[value='check']").remove();
             var opt = document.createElement('option');
-            opt.text = "Camera "+err.message;
+            opt.text = err.message;
             $("#cameraSelect").append(opt);
             $("#cameraSelect").prop("disabled",true);
             $('#msg').css('color','red');
             $('#msg').text('*** PLEASE ALLOW PERMISSION TO USE CAMERA ***');
+            $("#wait").css("display", "none");
         }
         console.error(err.name);
         $("#wait").css("display", "none");
     });
+    } catch (err) {
+        $("#cameraSelect option[value='check']").remove();
+        var opt = document.createElement('option');
+        opt.text = "Camera "+err.message;
+        $("#cameraSelect").append(opt);
+        $("#cameraSelect").prop("disabled",true);
+        $('#msg').css('color','red');
+        $('#msg').text('*** Contact System Administrator ***');
+        $("#wait").css("display", "none");
+        console.error(err.name);
+    }
+
     //$('#msg').text(generateControlNum(new Date()));
 });
 
