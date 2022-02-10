@@ -78,7 +78,7 @@ class TransactionsExportCommand extends Command
                     $email = 'edmund_mati@sercomm.com';
                 }
                 Mail::to($email)
-                    ->later(now()->addMinutes(1), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
+                    ->later(now()->addMinutes(5), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
             } catch (\Throwable $th) {
                 Log::info('Daily Transaction Report: '.$th->getMessage().' | '.$d->format('Y-m-d').' | '.$ctn->name);
             }
@@ -95,7 +95,7 @@ class TransactionsExportCommand extends Command
         (new TransactionsCutOffExport($dte['from'],$dte['to']))->store($path,'public');
         Mail::to($mail_to)
             ->cc($mail_cc)
-            ->later(now()->addMinutes(1), new TransactionsCutoffReport($path,$dte['from'],$dte['to']));
+            ->later(now()->addMinutes(5), new TransactionsCutoffReport($path,$dte['from'],$dte['to']));
     }
     public function cutoffCanteenReport()
     {
@@ -112,7 +112,7 @@ class TransactionsExportCommand extends Command
                 }
                 Mail::to($email)
                     ->bcc('edmund_mati@sercomm.com')
-                    ->later(now()->addMinutes(1), new TransactionsCutoffReport($path,$dte['from'],$dte['to'],$ctn->id));
+                    ->later(now()->addMinutes(5), new TransactionsCutoffReport($path,$dte['from'],$dte['to'],$ctn->id));
             } catch (\Throwable $th) {
                 Log::info('Cutoff Transaction Report: '.$th->getMessage().' | '.$dte['from']->format('Y-m-d').'-'.$dte['to']->format('Y-m-d').' | '.$ctn->name);
             }        }
