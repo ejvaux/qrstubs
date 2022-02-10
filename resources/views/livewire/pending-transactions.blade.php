@@ -20,7 +20,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            {{$transaction->canteen->name}}
+                                            @if ($user->role_id == 2)
+                                                {{$transaction->user->uname}} - {{$transaction->user->name}}
+                                            @elseif ($user->role_id == 3)
+                                                {{$transaction->canteen->name}}
+                                            @endif
+                                            {{--{{$transaction->canteen->name}}--}}
                                         </div>
                                     </div>
                                     <div class="row">
