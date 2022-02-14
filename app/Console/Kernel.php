@@ -39,6 +39,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('summary-report:file')
                 ->monthlyOn(16, '08:00');
+
+        $schedule->command('websockets:clean')->daily();
         // $schedule->command('inspire')
         //          ->hourly();
 
