@@ -120,7 +120,11 @@ class TransactionController extends Controller
         ]);
         $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
         if ($credit) {
-            $tAmount = Transaction::where('user_id',$request->userId)->where('credit_id',$credit->id)->sum('price');
+            $tAmount = Transaction::withoutGlobalScopes()
+                                    ->where('user_id',$request->userId)
+                                    ->where('credit_id',$credit->id)
+                                    ->whereIn('status',[1,2])
+                                    ->sum('price');
             $bal = $credit->amount - $tAmount;
 
             if ($bal >= $request->amount) {
