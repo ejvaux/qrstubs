@@ -26,19 +26,12 @@
             </div>
         </div>
         <div class="row text-center mt-3">
-            {{--<div class="col"></div>--}}
             <div class="col">
-                {{--<h1 style="font-family: Avanta Garde; color:blue; font-size:3rem">
-                    <b> Balance:<span id='userBalance'>{{$balance}}</span> </b>
-                </h1>--}}
-                <div class="card" style="font-size: 1.8rem">
-                    <div class="card-header font-weight-bold p-0">
+                <div class="card">
+                    <div class="card-header font-weight-bold p-0" style="font-size: 1.8rem">
                       TOTAL BALANCE
                     </div>
                     <div class="card-body">
-                        {{--<h1 style="font-family: Avanta Garde; color:blue;">
-                            <b> REMAINING: <span id='userBalance'>{{$balance}}</span> </b>
-                        </h1>--}}
                         <div class="row">
                             <div class="col">
                                 <span id='totalBalance' style="font-size: 3.5rem">Loading ...</span>
@@ -58,14 +51,27 @@
                     </div>
                 </div>
             </div>
-            {{--<div class="col"></div>--}}
         </div>
-        @livewire('user-pending-transactions')
-        <br><br>
-        <h4>Last 3 transactions</h4>
-        <div id="usertransact2Table">
-            {{-- // TABLE DIRECT JS User Transaction --}}
-            {{-- @include('includes.table.user2Tbl') --}}
+        <div class="row mt-3">
+            <div class="col">
+                @livewire('user-pending-transactions')
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header font-weight-bold">
+                        Previous Transactions
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col">
+                                <div id="usertransact2Table"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
