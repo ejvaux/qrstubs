@@ -27,11 +27,13 @@ class UserPendingTransactions extends Component
             "echo-private:transaction.User.{$this->user_id},TransactionPaymentRequest" => 'addUserTransaction',
             "echo-private:transaction.User.{$this->user_id},TransactionCancelled" => 'cancelUserTransaction',
             "acceptTransaction",
+            "getBalance",
         ];
     }
     public function addUserTransaction($e)
     {
         $this->transactions->push(Transaction::withoutGlobalScopes()->where('id','=',$e['transactions']['id'])->first());
+        $this->getBalance();
         $this->emit('notifyMessage','New Transaction Request','Transaction #'.$e['transactions']['id'].' received.');
     }
 
@@ -39,6 +41,7 @@ class UserPendingTransactions extends Component
     {
         $id = $e['transactions']['id'];
         $this->removeUserTransaction($id);
+        $this->getBalance();
         $this->emit('notifyMessage','Transaction Cancelled','Transaction #'.$id.' cancelled.');
     }
 
@@ -68,10 +71,19 @@ class UserPendingTransactions extends Component
         $credit = \App\Credit::where('user_id',$this->user->id)->where('control_no',$ctrl)->first();
         if($credit == NULL){
             $balance = '0';
-            $qrcode = '0';
         } else {
             $price_total = Transaction::where('user_id',$this->user->id)->where('credit_id',$credit->id)->sum('price');
-            $balance = $credit->amount - $price_total;
+            $pending = Transaction::withoutGlobalScopes()
+                                    ->where('user_id',$this->user->id)
+                                    ->where('credit_id',$credit->id)
+                                    ->pending()
+                                    ->sum('price');
+            $balance = [
+                "total" => $credit->amount - $price_total - $pending,
+                "completed" => $price_total,
+                "pending" => $pending,
+                "credit" => $credit->amount,
+            ];
         };
         $this->emit('updateBalance',$balance);
     }

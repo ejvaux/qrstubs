@@ -8,26 +8,57 @@
 
 <body class="body">
     <div class="container1">
-        <div class="row justify-content-center">
-            <h1 style="font-family: Avanta Garde; font-size:4rem"><b>ID: {{$uname}} </b></h1><br>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 justify-content-center">
-                <center>
-                {!! QrCode::size(250)->generate($qrcode); !!}
-                </center><br>
-            </div>
-            <div class="col-md-4 justify-content-center">
-
-
+        <div class="row text-center">
+            <div class="col">
+                <h1 class="p-0 m-0" style="font-family: Avanta Garde; font-size:4rem"><b>{{$user->uname}} </b></h1><br>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <button style="padding: 5px 70px" class="btn btn-success py-1" data-toggle="modal" data-target="#changeQRModal" >Change QRCode</button>
+        <div class="row text-center">
+            <div class="col-md"></div>
+            <div class="col-md">
+                {!! QrCode::size(250)->generate($user->qrcode); !!}
+            </div>
+            <div class="col-md"></div>
         </div>
-        <div class="row justify-content-center">
-            <h1 style="font-family: Avanta Garde; color:blue; font-size:3rem"><b> Balance: {{--{{$balance}}--}} <span id='userBalance'>{{$balance}}</span> </b></h1>
+        <div class="row text-center mt-3">
+            <div class="col">
+                <button class="btn btn-success px-5" data-toggle="modal" data-target="#changeQRModal" >Change QRCode</button>
+            </div>
+        </div>
+        <div class="row text-center mt-3">
+            {{--<div class="col"></div>--}}
+            <div class="col">
+                {{--<h1 style="font-family: Avanta Garde; color:blue; font-size:3rem">
+                    <b> Balance:<span id='userBalance'>{{$balance}}</span> </b>
+                </h1>--}}
+                <div class="card" style="font-size: 1.8rem">
+                    <div class="card-header font-weight-bold p-0">
+                      TOTAL BALANCE
+                    </div>
+                    <div class="card-body">
+                        {{--<h1 style="font-family: Avanta Garde; color:blue;">
+                            <b> REMAINING: <span id='userBalance'>{{$balance}}</span> </b>
+                        </h1>--}}
+                        <div class="row">
+                            <div class="col">
+                                <span id='totalBalance' style="font-size: 3.5rem">Loading ...</span>
+                            </div>
+                        </div>
+                        <div class="row" style="font-size: 1.5rem">
+                            <div class="col">
+                                Credits:<br><span id='creditBalance' class="font-weight-bold">----</span>
+                            </div>
+                            <div class="col">
+                                Used:<br><span id='completedBalance' class="font-weight-bold">----</span>
+                            </div>
+                            <div class="col">
+                                Pending:<br><span id='pendingBalance' class="font-weight-bold">---</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{--<div class="col"></div>--}}
         </div>
         @livewire('user-pending-transactions')
         <br><br>

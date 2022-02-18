@@ -41,6 +41,10 @@ class transaction extends Model
     {
         return $this->belongsto('App\User','scanner_id');
     }
+    public function stat()
+    {
+        return $this->belongsto('App\Status','status','id');
+    }
     public function scopePending($query)
     {
         return $query->where('status', '=', 1);

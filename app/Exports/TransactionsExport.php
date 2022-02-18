@@ -32,6 +32,7 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
             'Employee Number',
             'Employee Name',
             'Amount',
+            'Status',
             'Scanned At'
         ];
     }
@@ -41,7 +42,10 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
     */
     public function query()
     {
-        $transactions =  Transaction::query()->whereBetween('created_at', [$this->fromDate,$this->toDate])->where('canteen_id',$this->canteenId);
+        $transactions =  Transaction::query()->withoutGlobalScopes()
+                                    ->whereBetween('created_at', [$this->fromDate,$this->toDate])
+                                    ->where('canteen_id',$this->canteenId)
+                                    ->whereIn('status',[1,2]);
         //return $transactions;
         if($transactions->count() > 0){
             return $transactions;
@@ -62,6 +66,7 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
             $transactions->user->uname,
             $transactions->user->name,
             $transactions->price,
+            $transactions->stat->name,
             $transactions->created_at,
         ];
     }

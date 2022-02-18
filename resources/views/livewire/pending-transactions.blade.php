@@ -20,7 +20,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            {{$transaction->canteen->name}}
+                                            @if ($user->role_id == 2)
+                                                {{$transaction->user->uname}} - {{$transaction->user->name}}
+                                            @elseif ($user->role_id == 3)
+                                                {{$transaction->canteen->name}}
+                                            @endif
+                                            {{--{{$transaction->canteen->name}}--}}
                                         </div>
                                     </div>
                                     <div class="row">
@@ -61,7 +66,7 @@
 <script type="text/javascript">
     document.addEventListener('livewire:load', function () {
         console.log( "Stack:ready!" );
-
+        window.livewire.emit('getBalance');
         window.livewire.on('confirmTransaction', (action,id,msg) => {
             Swal.fire({
             title: 'Are you sure?',
@@ -94,7 +99,10 @@
             });
         });
         window.livewire.on('updateBalance', (balance) => {
-            $('#app #userBalance').text(balance);
+            $('#app #totalBalance').text(balance['total']);
+            $('#app #completedBalance').text(balance['completed']);
+            $('#app #pendingBalance').text(balance['pending']);
+            $('#app #creditBalance').text(balance['credit']);
         });
         window.livewire.on('getTransactionHistory', () => {
             LoadUsrTbl2();
