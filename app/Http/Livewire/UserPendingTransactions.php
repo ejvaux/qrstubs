@@ -28,6 +28,7 @@ class UserPendingTransactions extends Component
             "echo-private:transaction.User.{$this->user_id},TransactionCancelled" => 'cancelUserTransaction',
             "acceptTransaction",
             "getBalance",
+            "checkPendingTransactions",
         ];
     }
     public function addUserTransaction($e)
@@ -35,14 +36,17 @@ class UserPendingTransactions extends Component
         $this->transactions->push(Transaction::withoutGlobalScopes()->where('id','=',$e['transactions']['id'])->first());
         $this->getBalance();
         $this->emit('notifyMessage','New Transaction Request','Transaction #'.$e['transactions']['id'].' received.');
+        $this->checkPendingTransactions();
     }
 
     public function cancelUserTransaction($e)
     {
         $id = $e['transactions']['id'];
         $this->removeUserTransaction($id);
+        //$this->checkPendingTransactions();
         $this->getBalance();
         $this->emit('notifyMessage','Transaction Cancelled','Transaction #'.$id.' cancelled.');
+        $this->checkPendingTransactions();
     }
 
     public function removeUserTransaction($e)
@@ -61,6 +65,7 @@ class UserPendingTransactions extends Component
         broadcast(new \App\Events\TransactionPaid($tr));
         $this->removeUserTransaction($transactionId);
         $this->getBalance();
+        $this->checkPendingTransactions();
         $this->emit('getTransactionHistory');
         $this->emit('alertMessage','Transaction #'.$transactionId.' Accepted.');
     }
@@ -86,6 +91,16 @@ class UserPendingTransactions extends Component
             ];
         };
         $this->emit('updateBalance',$balance);
+    }
+
+    public function checkPendingTransactions()
+    {
+        if ($this->transactions->count() > 0) {
+            $this->emit('hasPending',true);
+        }
+        else{
+            $this->emit('hasPending',false);
+        }
     }
 
     public function render()

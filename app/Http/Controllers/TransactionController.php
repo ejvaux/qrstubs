@@ -114,55 +114,78 @@ class TransactionController extends Controller
 
     public function transact(Request $request)
     {
-        /*$request->userId."-".$request->ctrl."-".$request->amount;*/
         $request->validate([
             'amount' => 'integer|min:0',
         ]);
-        $credit = Credit::where('user_id',$request->userId)->where('control_no',$request->ctrl)->first();
-        if ($credit) {
-            $tAmount = Transaction::withoutGlobalScopes()
-                                    ->where('user_id',$request->userId)
-                                    ->where('credit_id',$credit->id)
-                                    ->whereIn('status',[1,2])
-                                    ->sum('price');
-            $bal = $credit->amount - $tAmount;
 
-            if ($bal >= $request->amount) {
-                $tr = new Transaction;
-                $tr->user_id = $request->userId;
-                $tr->scanner_id = Auth::id();
-                $tr->credit_id = $credit->id;
-                $tr->control_no = $request->ctrl;
-                $tr->canteen_id = Auth::user()->canteen_id;
-                $tr->price = $request->amount;
-
-                if ($tr->save()) {
-                    broadcast(new \App\Events\TransactionPaymentRequest($tr));
-                    return [
-                        'status' => 1,
-                        'result' => 'Transaction Request Sent.',
-                        'transaction' => $tr
-                    ];
-                }
-                else {
-                    return [
-                        'status' => 2,
-                        'result' => 'Transaction Failed'
-                    ];
-                }
-
-            } else {
-                return [
-                    'status' => 2,
-                    'result' => "Not enough credit balance."
-                ];
-            }
-        }
-        else{
+        // Check pending transactions
+        if ($this->checkPendingTransactions($request->userId)) {
             return [
                 'status' => 2,
-                'result' => "No credit found."
+                'result' => "Please ask the employee to confirm the Pending Transactions first."
             ];
+        }
+
+        // Get credit
+        $credit = $this->getCredit($request->userId,$request->ctrl);
+
+        // get user balance credit - pending - completed
+        $balance = $this->getBalance($request->userId,$request->ctrl);
+
+        if($balance < $request->amount){
+            return [
+                'status' => 2,
+                'result' => "Not enough credit balance."
+            ];
+        }
+
+        $tr = new Transaction;
+        $tr->user_id = $request->userId;
+        $tr->scanner_id = Auth::id();
+        $tr->credit_id = $credit->id;
+        $tr->control_no = $request->ctrl;
+        $tr->canteen_id = Auth::user()->canteen_id;
+        $tr->price = $request->amount;
+        $tr->save();
+        broadcast(new \App\Events\TransactionPaymentRequest($tr));
+        return [
+            'status' => 1,
+            'result' => 'Transaction Request Sent.',
+            'transaction' => $tr
+        ];
+    }
+
+    public function getBalance($user_id, $control_no)
+    {
+        $credit = Credit::where('user_id',$user_id)->where('control_no',$control_no)->first();
+        $used = Transaction::withoutGlobalScopes()
+                ->where('user_id',$user_id)
+                ->where('credit_id',$credit->id)
+                ->used()
+                ->sum('price');
+        $balance = $credit->amount - $used;
+        return $balance;
+    }
+
+    public function getCredit($user_id, $control_no)
+    {
+        $credit = Credit::where('user_id',$user_id)->where('control_no',$control_no)->first();
+        if(!$credit){
+            abort(404,'Credit does not exist.');
+        }
+        else {
+            return $credit;
+        }
+    }
+
+    public function checkPendingTransactions($user_id)
+    {
+        $pending = Transaction::withoutGlobalScopes()
+                ->where('user_id',$user_id)
+                ->pending()
+                ->first();
+        if ($pending) {
+            return true;
         }
     }
 }

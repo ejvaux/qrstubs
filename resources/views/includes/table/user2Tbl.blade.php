@@ -5,7 +5,7 @@
             <th>CANTEEN</th>
             <th>PRICE</th>
             <th>DATE</th>
-            <th>SCANNED BY</th>
+            {{--<th>SCANNED BY</th>--}}
         </tr>
     </thead>
     <tbody>
@@ -18,17 +18,17 @@
                             <td>{{$transaction->canteen->name}}</td>
                             <td>{{$transaction->price}}</td>
                             <td>{{$transaction->created_at}}</td>
-                            <td>{{$transaction->scanner->name}}</td>
+                            {{--<td>{{$transaction->scanner->name}}</td>--}}
                         </tr>
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="7">NO DATA</td>
+                        <td colspan="4">NO DATA</td>
                     </tr>
                 @endif
             @else
                 <tr>
-                    <td colspan="7">NO DATA</td>
+                    <td colspan="4">NO DATA</td>
                 </tr>
             @endisset
 

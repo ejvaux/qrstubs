@@ -49,8 +49,16 @@ class transaction extends Model
     {
         return $query->where('status', '=', 1);
     }
+    public function scopeConfirmed($query)
+    {
+        return $query->where('status', '=', 2);
+    }
     public function scopeCancelled($query)
     {
         return $query->where('status', '=', 3);
+    }
+    public function scopeUsed($query)
+    {
+        return $query->whereIn('status', [1,2]);
     }
 }

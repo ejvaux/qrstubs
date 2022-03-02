@@ -1,21 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<script type="text/javascript">
-        $(".tag-filter li").click(function (e) {
-            var currentTag = this.className;
-            if (currentTag == "all") {
-                $(".faqElement").show();
-            } else {
-                $(".faqElement").hide();
-                $(".faqElement" + "." + currentTag).show();
-            }
-            e.preventDefault();
-        });
-</script>
 <div class="container1">
     <div class="row justify-content-center">
-        <h1>Frequently Asked Questions</h1> 
+        <h1>Frequently Asked Questions</h1>
     </div><br>
     <div class="tag-filter">
         <ul>
@@ -40,7 +28,7 @@
             <br><br>
             If you are still having trouble accessing your account, please use the contact information.
             <br><br>
-        </p>    
+        </p>
     </div>
     <div id="inactive-user" class="faqElement change-password">
         <h2>In-active User</h2>
@@ -54,11 +42,4 @@
     </div>
 
 </div>
-<footer style="position:absolute; width:100%;">
-    @include('includes.footer')
-</footer>
-
-
-
-
 @endsection

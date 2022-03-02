@@ -53,10 +53,10 @@
                         </li>
                     @endforeach
                 @else
-                    <li class="list-group-item">No Pending Transactions</li>
+                    <li class="list-group-item text-center">No Pending Transactions</li>
                 @endif
             @else
-                <li class="list-group-item">No Pending Transactions</li>
+                <li class="list-group-item text-center">No Pending Transactions</li>
             @endisset
         </ul>
     </div>
@@ -67,6 +67,7 @@
     document.addEventListener('livewire:load', function () {
         console.log( "Stack:ready!" );
         window.livewire.emit('getBalance');
+        window.livewire.emit('checkPendingTransactions');
         window.livewire.on('confirmTransaction', (action,id,msg) => {
             Swal.fire({
             title: 'Are you sure?',
@@ -99,10 +100,33 @@
             });
         });
         window.livewire.on('updateBalance', (balance) => {
-            $('#app #totalBalance').text(balance['total']);
-            $('#app #completedBalance').text(balance['completed']);
-            $('#app #pendingBalance').text(balance['pending']);
-            $('#app #creditBalance').text(balance['credit']);
+            console.log(balance);
+            if (balance['total']) {
+                $('#app #totalBalance').html('<span style="font-size: 3.5rem">'+balance['total']+'</span>');
+                $('#app #completedBalance').text(balance['completed']);
+                $('#app #pendingBalance').text(balance['pending']);
+                $('#app #creditBalance').text(balance['credit']);
+            } else {
+                $('#app #totalBalance').html('<span class="text-danger" style="font-size: 2rem">NO CREDIT FOUND</span>');
+            }
+        });
+        window.livewire.on('hasPending', (a) => {
+            console.log('pending');
+            if (a) {
+                iziToast.warning({
+                    class: 'has-pending',
+                    title: 'SCANNING DISABLED',
+                    message: 'Please confirm the pending transaction first.',
+                    timeout: false,
+                    position: 'bottomCenter'
+                });
+            } else {
+                var toast = document.querySelector('.has-pending');
+                if(toast){
+                    iziToast.hide({}, toast);
+                }
+                //iziToast.destroy();
+            }
         });
         window.livewire.on('getTransactionHistory', () => {
             LoadUsrTbl2();
