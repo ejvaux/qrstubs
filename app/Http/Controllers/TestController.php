@@ -10,8 +10,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class TestController extends Controller
 {
+    use \App\Traits\CustomMethods;
+
     public function index()
     {
+        return self::generateControlNum();
+
         $pending = \App\Transaction::withoutGlobalScopes()
                 ->where('user_id',38)
                 ->pending()
