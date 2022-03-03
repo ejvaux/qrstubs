@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 
 class TestController extends Controller
 {
@@ -42,5 +43,14 @@ class TestController extends Controller
             'pending' => $t2,
             'used' => $t3,
         ];
+        $user = \App\User::whereHas('transactions2', function ($query) {
+            $query->pending();
+        })
+        ->with(['transactions2'=> function ($query) {
+            $query->pending();
+        }])
+        ->get();
+        $ids = $user->pluck('transactions2')->flatten(1)->pluck('id');
+        return $user;
     }
 }
