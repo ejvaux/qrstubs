@@ -1,7 +1,7 @@
 @component('mail::message')
 Hi {{$name}}!,
 
-Below are the transactions that are changed to confirmed status.
+Below transactions are changed to confirmed.
 
 @component('mail::table')
 

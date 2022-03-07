@@ -10,19 +10,17 @@
     <div class="container1">
         <div class="row text-center">
             <div class="col">
-                <h1 class="p-0 m-0" style="font-family: Avanta Garde; font-size:4rem"><b>{{$user->uname}} </b></h1><br>
+                <h1 class="p-0 m-0" style="font-family: Avanta Garde; font-size:4rem"><b>{{$user->uname}} </b></h1>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md"></div>
+        <div class="row text-center mt-3">
             <div class="col-md">
                 {!! QrCode::size(250)->generate($user->qrcode); !!}
             </div>
-            <div class="col-md"></div>
         </div>
         <div class="row text-center mt-3">
             <div class="col">
-                <button class="btn btn-success px-5" data-toggle="modal" data-target="#changeQRModal" >Change QRCode</button>
+                <button class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#changeQRModal" >CHANGE QR CODE</button>
             </div>
         </div>
         <div class="row text-center mt-2">
