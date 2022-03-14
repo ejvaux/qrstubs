@@ -8,7 +8,7 @@ trait TransactionTraits
 {
     public function isGuest($id)
     {
-        $user = User::where('id','=',$id)->where('uname','like','Guest%')->first();
+        $user = User::where('id','=',$id)->where('department_id','=','5')->first();
         if ($user) {
             return true;
         }
