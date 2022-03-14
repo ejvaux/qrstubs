@@ -7,9 +7,12 @@ use Livewire\Component;
 use App\Transaction;
 use Illuminate\Support\Facades\Log;
 use App\CustomFunctions;
+use App\Traits\TransactionTraits;
 
 class UserPendingTransactions extends Component
 {
+    use TransactionTraits;
+
     public $transactions;
     public $user;
     public $user_id;
@@ -95,12 +98,13 @@ class UserPendingTransactions extends Component
 
     public function checkPendingTransactions()
     {
-        if ($this->transactions->count() > 0) {
-            $this->emit('hasPending',true);
+        $condition = false;
+
+        if ($this->transactions->count() > 0 && !$this->isGuest($this->user_id)) {
+            $condition = true;
         }
-        else{
-            $this->emit('hasPending',false);
-        }
+
+        $this->emit('hasPending',$condition);
     }
 
     public function render()

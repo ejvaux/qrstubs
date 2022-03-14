@@ -8,9 +8,12 @@ use App\Credit;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Traits\TransactionTraits;
 
 class TransactionController extends Controller
 {
+    use TransactionTraits;
+
     /**
      * Create a new controller instance.
      *
@@ -180,6 +183,9 @@ class TransactionController extends Controller
 
     public function checkPendingTransactions($user_id)
     {
+        if($this->isGuest($user_id)){
+            return false;
+        }
         $pending = Transaction::withoutGlobalScopes()
                 ->where('user_id',$user_id)
                 ->pending()

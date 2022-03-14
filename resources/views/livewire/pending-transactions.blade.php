@@ -63,7 +63,7 @@
 </div>
 
 @push('scripts')
-<script type="text/javascript">
+    <script type="text/javascript">
     document.addEventListener('livewire:load', function () {
         console.log( "Stack:ready!" );
         window.livewire.emit('getBalance');
@@ -80,7 +80,7 @@
             cancelButtonText: 'No',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log('confirm');
+                    //console.log('confirm');
                     window.livewire.emit(action,id);
                 }
             })
@@ -100,7 +100,7 @@
             });
         });
         window.livewire.on('updateBalance', (balance) => {
-            console.log(balance);
+            //console.log(balance);
             if (balance['total']) {
                 $('#app #totalBalance').html('<span style="font-size: 3.5rem">'+balance['total']+'</span>');
                 $('#app #completedBalance').text(balance['completed']);
@@ -111,7 +111,7 @@
             }
         });
         window.livewire.on('hasPending', (a) => {
-            console.log('pending');
+            //console.log('pending');
             if (a) {
                 iziToast.warning({
                     class: 'has-pending',
