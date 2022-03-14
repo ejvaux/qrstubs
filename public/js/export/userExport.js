@@ -1,5 +1,20 @@
 /*      FUNCTIONS      */
 
+function downloadWait(btn){
+    i = 5;
+    $(btn).attr('disabled',true);
+    var t = setInterval(function(){
+        if (i > 0) {
+            $(btn).html('The download will start shortly '+('0'+i).slice(-2));
+            i--;
+        }
+        else {
+            clearInterval(t);
+            $(btn).attr('disabled',false);
+            $(btn).html('Re-download');
+        }
+    },1000);
+}
 
 /*     EVENTS      */
 $('#userExportBtn').on('click', function(){
