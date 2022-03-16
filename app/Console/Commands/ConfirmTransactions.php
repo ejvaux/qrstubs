@@ -52,7 +52,10 @@ class ConfirmTransactions extends Command
                         ->whereIn('id',$ids)
                         ->update(['status' => 2]);
         foreach ($users as $user) {
-            Mail::send(new TransactionCompleted($user,$user->transactions2));
+            if ($user->email) {
+                Mail::to($user->email)
+                    ->send(new TransactionCompleted($user,$user->transactions2));
+            }
         }
     }
 }

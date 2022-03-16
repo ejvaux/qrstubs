@@ -57,4 +57,12 @@ class TestController extends Controller
         $ids = $user->pluck('transactions2')->flatten(1)->pluck('id');
         return $user;
     }
+
+    public function getFailedJobsPayload($id)
+    {
+        $payload = DB::table('failed_jobs')->select()->where('id',$id)->first()->payload;
+        $jsonpayload = json_decode($payload);
+        $data = unserialize($jsonpayload->data->command);
+        return json_encode($data);
+    }
 }
