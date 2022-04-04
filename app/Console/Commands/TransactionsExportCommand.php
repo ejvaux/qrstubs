@@ -78,7 +78,7 @@ class TransactionsExportCommand extends Command
                     $email = 'edmund_mati@sercomm.com';
                 }
                 Mail::to($email)
-                    ->later(now()->addMinutes(5), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
+                    ->later(now()->addMinutes(3), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
             } catch (\Throwable $th) {
                 Log::info('Daily Transaction Report: '.$th->getMessage().' | '.$d->format('Y-m-d').' | '.$ctn->name);
             }

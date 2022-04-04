@@ -15,6 +15,8 @@ class UsersExport implements FromQuery, WithMapping, WithHeadings
 {
     use Exportable;
 
+    private $ctrl;
+
     public function __construct(string $ctrl)
     {
         $this->ctrl = $ctrl;
@@ -45,11 +47,18 @@ class UsersExport implements FromQuery, WithMapping, WithHeadings
             $q->where('control_no', $this->ctrl);
         }]);*/
         $ctrl = $this->ctrl;
-        $users = User::query()->where('role_id',3)->with(['department','credits' => function($q) use ($ctrl) {
+        /*$users = User::query()->where('role_id',3)->with(['department','credits' => function($q) use ($ctrl) {
             $q->where('control_no', $ctrl);
         },'transactions' => function($q) use($ctrl){
             $q->where('transactions.control_no', $ctrl);
-        }]);
+        }]);*/
+        $users = User::query()->with(['transactions' => function ($query) use($ctrl) {
+            $query->where('transactions.control_no', $ctrl);
+        },
+        'credits' => function ($query) use($ctrl) {
+            $query->where('control_no', $ctrl);
+        }])->where('role_id',3);
+
         return $users;
     }
 
@@ -58,9 +67,9 @@ class UsersExport implements FromQuery, WithMapping, WithHeadings
     */
     public function map($users): array
     {
-        if (isset($users->credits[0])) {
-            $ctrln = $users->credits[0]->control_no;
-            $amount = $users->credits[0]->amount;
+        if (isset($users->credits)) {
+            $ctrln = $users->credits->control_no;
+            $amount = $users->credits->amount;
             /*$ctrln = 'SPI202110B';
             $amount = 2000;*/
             $balance = $amount - $users->transactions->sum('price');

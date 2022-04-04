@@ -93,22 +93,9 @@ class HomeController extends Controller
     }
     public function user(Request $req)
     {
-        $users = Auth::user()->id;
-        $uname = Auth::user()->uname;
-        $qrcode = Auth::user()->qrcode;
-        $ctrl = $this->generateControlNum();
-        $credit = Credit::where('user_id',$users)->where('control_no',$ctrl)->first();
-        if($credit == NULL){
-            $balance = '0';
-            $qrcode = '0';
-        } else {
-            $price_total = Transaction::where('user_id',$users)->where('credit_id',$credit->id)->sum('price');
-            $balance = $credit->amount - $price_total;
-        }
-
-
-        if (Auth::check() && Auth::user()->role_id == 3) {
-            return view('pages.user.user-home', compact('qrcode','balance', 'uname'));
+        $user = Auth::user();
+        if (Auth::check() && $user->role_id == 3) {
+            return view('pages.user.user-home', compact('user'));
         } else {
             return redirect('error');
         }

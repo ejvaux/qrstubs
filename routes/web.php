@@ -78,6 +78,7 @@ Route::get ('/importuser', 'ImportController@importUser');
 Route::post ('/import/credits', 'ImportController@importCredit');
 
 Route::get ('/test', 'TestController@index');
+Route::get ('/jobs/failed/payload/view/{id}', 'TestController@getFailedJobsPayload');
 
 /*
     EJ - End

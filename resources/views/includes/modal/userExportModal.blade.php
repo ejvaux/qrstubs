@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Export Transactions</h5>
+                <h5 class="modal-title">Export Credits</h5>
             </div>
             <form class='form_to_submit' id="userExportForm" action='{{ URL::asset('/export/user/download') }}'>
             <div class="modal-body">

@@ -13,20 +13,13 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/instascan.min.js')}}" defer></script>
-    {{--<script src="{{ asset('js/custom.js')}}" defer></script>--}}
     <script src="{{ asset(mix('/js/custom.js')) }}" defer></script>
-
-    <!-- Fonts -->
-    {{--<link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">--}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @livewireStyles
-
     @yield('js')
-
 </head>
 <body>
     <div id="app">
@@ -38,8 +31,9 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <!-- {{ config('app.name', 'Meal Stub') }} -->
-                    MEAL ALLOWANCE
+                    <img src="{{ asset('img/sercomm-logo-nbg.png')}}" style='width:10rem;height:auto'>
+                    {{--{{ config('app.name', 'Meal Stub') }}--}}
+                    {{--MEAL ALLOWANCE--}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -57,7 +51,6 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -72,7 +65,6 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-
                         @else
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
@@ -119,50 +111,12 @@
                 </div>
             </div>
         </nav>
-        <div class="modal modal-primary fade" id="questionModal" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1><b>Contact Information</b></h1>
-                        <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            <h3>HR Department</h3>
-                            <b>Name:</b>&nbsp; Divine Goce<br>
-                            <b>Email:</b>&nbsp; divine_goce@sercomm.com<br>
-                            <b>Extension #:</b>&nbsp; 80911<br>
-                            {{-- <br>
-                            <b>Name:</b>&nbsp; Karen Alinsod<br>
-                            <b>Email:</b>&nbsp;  karen_alinsod@sercomm.com<br>
-                            <b>Extension #:</b>&nbsp; 80919 --}}
-                            <br><br>
-                            <h3>MIS</h3>
-                            <b>Name:</b>&nbsp; Lawrence Bondad<br>
-                            <b>Email:</b>&nbsp;  lawrence_bondad@sercomm.com<br>
-                            <b>Extension #:</b>&nbsp; 80862 <br>
-                            <br>
-                            <b>Name:</b>&nbsp; Edmund Mati<br>
-                            <b>Email:</b>&nbsp; edmund_mati@sercomm.com<br>
-                            <b>Extension #:</b>&nbsp; 80861
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        {{--End of editing --}}
-
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+    @include('includes.modal.contactUsModal')
+    @include('includes.footer')
     @livewireScripts
     @stack('scripts')
 </body>

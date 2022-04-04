@@ -14,10 +14,6 @@
     </div>
 </div>
 
-<footer style="position:absolute; width:100%;">
-    @include('includes.footer')
-</footer>
-
 <script type="text/javascript">
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     scanner.addListener('scan', function (content) {

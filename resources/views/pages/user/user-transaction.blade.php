@@ -13,7 +13,7 @@
                 <div class="row" style="margin: 20px 0px;">
                     <div class="col-md">
                         <h1 style="text-align:center;">Transactions</h1>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -22,7 +22,7 @@
                     {{-- @include('includes.table.userTbl') --}}
                 </div>
             </div>
-            
+
         </div>
         @else
             <div class="row justify-content-center" style="margin-bottom: 15%;">
@@ -30,12 +30,6 @@
             </div>
         @endif
 
-    </div> 
+    </div>
 </body>
-
-<footer style="position:absolute; width:100%;">
-    @include('includes.footer')
-</footer>
-
-
 @endsection

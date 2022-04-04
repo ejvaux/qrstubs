@@ -41,12 +41,28 @@ class transaction extends Model
     {
         return $this->belongsto('App\User','scanner_id');
     }
+    public function stat()
+    {
+        return $this->belongsto('App\Status','status','id');
+    }
+    public function credit()
+    {
+        return $this->belongsto('App\Credit','credit_id');
+    }
     public function scopePending($query)
     {
         return $query->where('status', '=', 1);
     }
+    public function scopeConfirmed($query)
+    {
+        return $query->where('status', '=', 2);
+    }
     public function scopeCancelled($query)
     {
         return $query->where('status', '=', 3);
+    }
+    public function scopeUsed($query)
+    {
+        return $query->whereIn('status', [1,2]);
     }
 }

@@ -47,27 +47,36 @@ class User extends Authenticatable
     {
         return $this->belongsto('App\Department','department_id');
     }
+
     public function role()
     {
         return $this->belongsto('App\Role','role_id');
     }
-    
+
     public function canteen()
     {
         return $this->belongsto('App\canteen','canteen_id');
     }
+
     public function latest_credit()
     {
         return $this->hasone('App\Credit')->latest();
     }
+
     public function credits()
     {
         return $this->hasone('App\Credit');
     }
+
     public function transactions()
     {
         return $this->hasManyThrough('App\Transaction','App\Credit');
     }
-    
+
+    public function transactions2()
+    {
+        return $this->hasMany('App\Transaction')->withoutGlobalScopes()->with('credit');
+    }
+
 
 }

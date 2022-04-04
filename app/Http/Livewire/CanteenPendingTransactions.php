@@ -52,7 +52,7 @@ class CanteenPendingTransactions extends Component
 
     public function query()
     {
-        return Transaction::with(['canteen'])->select('id','price','canteen_id','created_at')->withoutGlobalScopes();
+        return Transaction::with(['canteen','user'])->select('id','user_id','price','canteen_id','created_at')->withoutGlobalScopes();
     }
 
     public function cancelTransaction($transactionId)

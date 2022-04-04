@@ -20,7 +20,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            {{$transaction->canteen->name}}
+                                            @if ($user->role_id == 2)
+                                                {{$transaction->user->uname}} - {{$transaction->user->name}}
+                                            @elseif ($user->role_id == 3)
+                                                {{$transaction->canteen->name}}
+                                            @endif
+                                            {{--{{$transaction->canteen->name}}--}}
                                         </div>
                                     </div>
                                     <div class="row">
@@ -48,20 +53,21 @@
                         </li>
                     @endforeach
                 @else
-                    <li class="list-group-item">No Pending Transactions</li>
+                    <li class="list-group-item text-center">No Pending Transactions</li>
                 @endif
             @else
-                <li class="list-group-item">No Pending Transactions</li>
+                <li class="list-group-item text-center">No Pending Transactions</li>
             @endisset
         </ul>
     </div>
 </div>
 
 @push('scripts')
-<script type="text/javascript">
+    <script type="text/javascript">
     document.addEventListener('livewire:load', function () {
         console.log( "Stack:ready!" );
-
+        window.livewire.emit('getBalance');
+        window.livewire.emit('checkPendingTransactions');
         window.livewire.on('confirmTransaction', (action,id,msg) => {
             Swal.fire({
             title: 'Are you sure?',
@@ -74,7 +80,7 @@
             cancelButtonText: 'No',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log('confirm');
+                    //console.log('confirm');
                     window.livewire.emit(action,id);
                 }
             })
@@ -94,7 +100,33 @@
             });
         });
         window.livewire.on('updateBalance', (balance) => {
-            $('#app #userBalance').text(balance);
+            //console.log(balance);
+            if (balance['total']) {
+                $('#app #totalBalance').html('<span style="font-size: 3.5rem">'+balance['total']+'</span>');
+                $('#app #completedBalance').text(balance['completed']);
+                $('#app #pendingBalance').text(balance['pending']);
+                $('#app #creditBalance').text(balance['credit']);
+            } else {
+                $('#app #totalBalance').html('<span class="text-danger" style="font-size: 2rem">NO CREDIT FOUND</span>');
+            }
+        });
+        window.livewire.on('hasPending', (a) => {
+            //console.log('pending');
+            if (a) {
+                iziToast.warning({
+                    class: 'has-pending',
+                    title: 'SCANNING DISABLED',
+                    message: 'Please confirm the pending transaction first.',
+                    timeout: false,
+                    position: 'bottomCenter'
+                });
+            } else {
+                var toast = document.querySelector('.has-pending');
+                if(toast){
+                    iziToast.hide({}, toast);
+                }
+                //iziToast.destroy();
+            }
         });
         window.livewire.on('getTransactionHistory', () => {
             LoadUsrTbl2();
