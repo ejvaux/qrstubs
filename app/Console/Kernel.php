@@ -51,6 +51,9 @@ class Kernel extends ConsoleKernel
         // Delete websockets statistics entry
         $schedule->command('websockets:clean')->daily();
 
+        // Check Failed Jobs
+        $schedule->command('job:fail')->daily();
+
         // $schedule->command('inspire')
         //          ->hourly();
 

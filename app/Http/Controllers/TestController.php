@@ -60,9 +60,10 @@ class TestController extends Controller
 
     public function getFailedJobsPayload($id)
     {
-        $payload = DB::table('failed_jobs')->select()->where('id',$id)->first()->payload;
+        $payload = DB::table('failed_jobs')->select('payload')->where('id',$id)->first()->payload;
         $jsonpayload = json_decode($payload);
         $data = unserialize($jsonpayload->data->command);
-        return json_encode($data);
+        $jsonpayload->data->command = $data;
+        return json_encode($jsonpayload);
     }
 }

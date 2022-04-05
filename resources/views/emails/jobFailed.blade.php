@@ -1,16 +1,13 @@
 @component('mail::message')
-# FAILED JOB REPORT <br><br>
+# FAILED JOB REPORT
 
-{{$jobs->payload}}
-
-{{--@component('mail::table')
-| Exception      | Failed at |
-| ----------------- |:--------------------:|
+@component('mail::table')
+| Task | Details | Failed at |
+| ----------------- | -------------------- | -------------------- |
 @foreach($jobs as $job)
-| {{$job->exception}}     | {{$job->failed_at}} |
-{{json_decode($job->payload)}}
+| {{json_decode($job->payload)->displayName}}  | [View]({{ url('/jobs/failed/payload/view/'.$job->id) }}) | {{$job->failed_at}} |
 @endforeach
 
-@endcomponent--}}
+@endcomponent
 
 @endcomponent

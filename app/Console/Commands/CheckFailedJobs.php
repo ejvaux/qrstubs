@@ -40,10 +40,8 @@ class CheckFailedJobs extends Command
      */
     public function handle()
     {
-        $jobs = DB::table('failed_jobs')->select('payload')->get();
-        $jobs = json_decode($jobs[0]->payload)->data->command;
-        $jobs = unserialize($jobs);
+        $jobs = DB::table('failed_jobs')->get();
         Mail::to('edmund_mati@sercomm.com')
-                    ->later(now()->addMinutes(1), new TaskFailed($jobs));
+                    ->send(new TaskFailed($jobs));
     }
 }
