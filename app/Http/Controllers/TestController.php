@@ -14,48 +14,15 @@ class TestController extends Controller
 
     public function index()
     {
-        return self::generateControlNum();
-
-        $pending = \App\Transaction::withoutGlobalScopes()
-                ->where('user_id',38)
-                ->pending()
-                ->first();
-        if ($pending) {
-            return $pending;
-        } else {
-            return $pending->count();
-        }
-
-
-        $t1 = \App\Transaction::withoutGlobalScopes()
-                    ->where('user_id',11)
-                    ->where('credit_id',5)
-                    ->confirmed()
-                    ->sum('price');
-        $t2 = \App\Transaction::withoutGlobalScopes()
-                    ->where('user_id',11)
-                    ->where('credit_id',5)
-                    ->pending()
-                    ->sum('price');
-        $t3 = \App\Transaction::withoutGlobalScopes()
-                    ->where('user_id',11)
-                    ->where('credit_id',5)
-                    ->used()
-                    ->sum('price');
-        return [
-            'confirmed'=> $t1,
-            'pending' => $t2,
-            'used' => $t3,
-        ];
-        $user = \App\User::whereHas('transactions2', function ($query) {
-            $query->pending();
-        })
-        ->with(['transactions2'=> function ($query) {
-            $query->pending();
-        }])
-        ->get();
-        $ids = $user->pluck('transactions2')->flatten(1)->pluck('id');
-        return $user;
+        $ctns = \App\canteen::withCount(['transactions as transactions_sum' => function($query) {
+            $query->select(\DB::raw('sum(price)'))
+                ->whereBetween('created_at', [Date('2021-12-01'), Date('2021-12-15')]);
+        }])->with(['transactions' => function($q){
+            $q->select('canteen_id','control_no')
+                ->whereBetween('created_at', [Date('2021-12-01'), Date('2021-12-15')])
+                ->groupBy('canteen_id','control_no');
+        }]);
+        return $ctns->get();
     }
 
     public function getFailedJobsPayload($id)

@@ -44,11 +44,16 @@ class TransactionsCutoffReport extends Mailable implements ShouldQueue
         $ctns = Canteen::withCount(['transactions as transactions_sum' => function($query) {
             $query->select(\DB::raw('sum(price)'))
                 ->whereBetween('created_at', [$this->date_from, $this->date_to]);
+        }])->with(['transactions' => function($q){
+            $q->select('canteen_id','control_no')
+                ->whereBetween('created_at', [$this->date_from, $this->date_to])
+                ->groupBy('canteen_id','control_no');
         }]);
         if($this->canteenId){
             $ctns = $ctns->where('id','=',$this->canteenId);
         }
         $ctns = $ctns->get();
+        $totalCredit = \App\Credit::where('control_no',$ctns[0]->transactions[0]->control_no)->sum('amount');
         return $this->markdown('emails.transactionCutoffReport')
                     ->subject('Sercomm Meal Allowance Cutoff Summary Report for '.$fd_from.'-'.$fd_to)
                     ->attachFromStorageDisk('public',$this->path)
@@ -56,6 +61,7 @@ class TransactionsCutoffReport extends Mailable implements ShouldQueue
                         'ctns' => $ctns,
                         'from' => $fd_from,
                         'to' => $fd_to,
+                        'total_credit' => $totalCredit,
                     ]);
     }
 }

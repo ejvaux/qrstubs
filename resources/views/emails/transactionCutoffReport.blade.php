@@ -3,9 +3,19 @@ Good day!,
 
 Transaction Summary Report for Cutoff {{ $from }} to {{ $to }}.
 
+Control Number: **{{ $ctns[0]->transactions[0]->control_no }}**
+
+@if ($ctns->count() > 1)
 @component('mail::table')
-| Canteen      | Total Credit Used |
-| ----------------- |:--------------------:|
+| Site | Total Credit | Total Used | Balance |
+| :------------: | :----------: | :--------: | :--------: |
+| M-site | {{$total_credit}}       | {{$ctns->sum('transactions_sum')}}   | {{$total_credit - $ctns->sum('transactions_sum')}}
+@endcomponent
+@endif
+
+@component('mail::table')
+| Canteen | Credit Used |
+| :-----: | :---------: |
 @foreach($ctns as $ctn)
 | {{$ctn->name}}     | {{$ctn->transactions_sum? $ctn->transactions_sum : 0}} |
 @endforeach

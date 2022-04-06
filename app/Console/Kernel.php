@@ -42,11 +42,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('transaction:export 2')
                 ->monthlyOn(16, '08:00');
 
-        $schedule->command('summary-report:file')
+        /*$schedule->command('summary-report:file')
                 ->monthlyOn(1, '08:00');
 
         $schedule->command('summary-report:file')
-                ->monthlyOn(16, '08:00');
+                ->monthlyOn(16, '08:00');*/
 
         // Delete websockets statistics entry
         $schedule->command('websockets:clean')->daily();
