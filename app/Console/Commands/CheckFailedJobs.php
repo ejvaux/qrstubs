@@ -41,7 +41,8 @@ class CheckFailedJobs extends Command
     public function handle()
     {
         $jobs = DB::table('failed_jobs')->get();
-        Mail::to('edmund_mati@sercomm.com')
+        $emailTo = App\EmailGroup::where('name','=','CheckFailedJobs')->first()->emails()->to()->pluck('email')->toArray();
+        Mail::to($emailTo)
                     ->send(new TaskFailed($jobs));
     }
 }
