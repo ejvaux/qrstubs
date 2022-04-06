@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Sercomm Phils. Inc.</title>
-    <link rel="shortcut icon" href="{{ asset('img/favicon2.png') }}">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
