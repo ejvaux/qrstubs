@@ -1,0 +1,31 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: AcceptanceTester
+modules:
+    enabled:
+        #- PhpBrowser:
+        #    url: http://localhost:8000/qrstubs
+        #    auth: ['P000199', '12345678']
+        - WebDriver:
+            url: http://localhost:8000/qrstubs
+            browser: chrome
+            wait: 1
+            capabilities:
+              goog:chromeOptions:
+                  args: [
+                          #"--headless",
+                          #"--disable-gpu",
+                          "--no-sandbox",
+                          "window-size=1920x1080",
+                          "use-fake-device-for-media-stream",
+                          "use-fake-ui-for-media-stream",
+                          "--use-file-for-fake-video-capture=C:/xampp/htdocs/qrstubs/tests/vid/newfile.y4m"
+                        ]
+                  prefs:
+                          "profile.default_content_setting_values.media_stream_camera": 1
+        - \Helper\Acceptance
+step_decorators: ~
