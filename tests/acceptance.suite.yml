@@ -17,8 +17,8 @@ modules:
             capabilities:
               goog:chromeOptions:
                   args: [
-                          #"--headless",
-                          #"--disable-gpu",
+                          "--headless",
+                          "--disable-gpu",
                           "--no-sandbox",
                           "window-size=1920x1080",
                           "use-fake-device-for-media-stream",
