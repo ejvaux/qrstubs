@@ -29,10 +29,10 @@
                     <div class="card-header font-weight-bold p-0" style="font-size: 1.8rem">
                       TOTAL BALANCE
                     </div>
-                    <div class="card-body">
+                    <div class="card-body pt-0 pb-1">
                         <div class="row">
                             <div class="col">
-                                <span id='totalBalance'><span style="font-size: 3.5rem">Loading ...</span></span>
+                                <span style="font-size: 3.2rem"><span id='totalBalance'>Loading ...</span></span>
                             </div>
                         </div>
                         <div class="row" style="font-size: 1.5rem">
@@ -46,6 +46,9 @@
                                 Pending:<br><span id='pendingBalance' class="font-weight-bold">---</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer">
+                       <span style="font-size: 1.2rem">Credits valid until <span class='font-weight-bold' style="font-size: 1.3rem">{{$expirationDate}}</span></span>
                     </div>
                 </div>
             </div>

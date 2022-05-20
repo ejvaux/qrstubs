@@ -14,6 +14,7 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
+    use \App\Traits\CustomMethods;
     /**
      * Create a new controller instance.
      *
@@ -94,8 +95,9 @@ class HomeController extends Controller
     public function user(Request $req)
     {
         $user = Auth::user();
+        $expirationDate = Carbon::parse($this->generateExpirationDate($this->generateControlNum()))->subDay()->toFormattedDateString();
         if (Auth::check() && $user->role_id == 3) {
-            return view('pages.user.user-home', compact('user'));
+            return view('pages.user.user-home', compact('user','expirationDate'));
         } else {
             return redirect('error');
         }
