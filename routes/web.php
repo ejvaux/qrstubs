@@ -19,7 +19,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 
 // Hide the Built in Register button (Admin)
-Auth::routes(['register' => false]);
+Auth::routes(['register' => env('APP_REGISTER', false)]);
 
 //Show the Auth
 //  Auth::routes();

@@ -23,8 +23,8 @@ class FirstCest
         $I->see('P000199');
         $I->see('EJ Mati');
         $I->click('EJ Mati');
-        $I->see('Disconnect Me');
-        $I->click('Disconnect Me');
+        $I->see('Sign Out');
+        $I->click('Sign Out');
         $I->seeInCurrentUrl('/login');
     }
 

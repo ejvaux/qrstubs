@@ -102,7 +102,7 @@
         window.livewire.on('updateBalance', (balance) => {
             //console.log(balance);
             if (balance['total']) {
-                $('#app #totalBalance').html('<span style="font-size: 3.5rem">'+balance['total']+'</span>');
+                $('#app #totalBalance').text(balance['total']);
                 $('#app #completedBalance').text(balance['completed']);
                 $('#app #pendingBalance').text(balance['pending']);
                 $('#app #creditBalance').text(balance['credit']);
