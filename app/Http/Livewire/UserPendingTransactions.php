@@ -78,7 +78,7 @@ class UserPendingTransactions extends Component
         $ctrl = CustomFunctions::generateControlNum();
         $credit = \App\Credit::where('user_id',$this->user->id)->where('control_no',$ctrl)->first();
         if($credit == NULL){
-            $balance = '0';
+            $balance = NULL;
         } else {
             $price_total = Transaction::where('user_id',$this->user->id)->where('credit_id',$credit->id)->sum('price');
             $pending = Transaction::withoutGlobalScopes()

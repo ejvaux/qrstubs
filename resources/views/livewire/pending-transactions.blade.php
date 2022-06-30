@@ -101,7 +101,7 @@
         });
         window.livewire.on('updateBalance', (balance) => {
             //console.log(balance);
-            if (balance['total']) {
+            if (balance) {
                 $('#app #totalBalance').text(balance['total']);
                 $('#app #completedBalance').text(balance['completed']);
                 $('#app #pendingBalance').text(balance['pending']);
