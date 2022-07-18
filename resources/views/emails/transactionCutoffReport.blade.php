@@ -17,7 +17,9 @@ Control Number: **{{ $ctns[0]->transactions[0]->control_no }}**
 | Canteen | Credit Used |
 | :-----: | :---------: |
 @foreach($ctns as $ctn)
-| {{$ctn->name}}     | {{$ctn->transactions_sum? $ctn->transactions_sum : 0}} |
+@isset($ctn->transactions_sum)
+    | {{$ctn->name}}     | {{$ctn->transactions_sum}} |
+@endisset
 @endforeach
 @if ($ctns->count() > 1)
 |  Total | {{$ctns->sum('transactions_sum')}} |
