@@ -38,7 +38,7 @@ class SummaryReportCommand extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->ctns = Canteen::all();
+        //$this->ctns = Canteen::all();
     }
 
     /**
@@ -76,9 +76,9 @@ class SummaryReportCommand extends Command
             ->cc(['lawrence_bondad@sercomm.com', 'Edmund_Mati@SERCOMM.COM', 'Oj_Orjalo@SERCOMM.COM', 'Rax_Chiang@SERCOMM.COM', 'Bruce_Dai@sercomm.com.cn', 'Jesse_Xia@sercomm.com.cn'])
             // ->send(new SummaryCutoffReport2($path,$from,$to));
             ->later(now()->addMinutes(1), new SummaryCutoffReport2($path,$from,$to));
-        
+
         // $users = [
-        //     0 => ['email' => 'lawrence_bondad@sercomm.com','name' => "Lawrence Bondad"],  
+        //     0 => ['email' => 'lawrence_bondad@sercomm.com','name' => "Lawrence Bondad"],
         //     1 => ['email' => 'lawrence_bondad@sercomm.com','name' => "Lawrence Bondad"],
         // ];
         // foreach ($users as $user){

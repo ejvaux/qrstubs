@@ -7,6 +7,7 @@ use Auth;
 use App\User;
 use App\transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CanteenController extends Controller
 {
@@ -45,7 +46,29 @@ class CanteenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'email' => ['required', 'unique:users', 'email', 'max:50'],
+            'uname' => ['required', 'unique:users', 'string', 'max:20'],
+            'name' => ['required', 'unique:canteens', 'string', 'max:20'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        $qrcode = 'SPO'.$request->uname;
+
+        $canteen = new canteen;
+        $canteen->name = $request->name;
+        $canteen->email = $request->email;
+        $canteen->save();
+
+        return User::create([
+            'email' => $request->email,
+            'uname' => $request->uname,
+            'name' => $request->name,
+            'qrcode' => Hash::make($qrcode),
+            'role_id' => 2,
+            'canteen_id' => $canteen->id,
+            'password' => Hash::make($request->password),
+        ]);
     }
 
     /**
