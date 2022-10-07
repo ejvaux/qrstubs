@@ -14,7 +14,8 @@
         <div class="card-header">
             <div class="row" style="margin: 20px 0px;">
                 <div class="col-md-4 text-md-left">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#regModal">Register</button>
+                    <button class="btn btn-primary py-1" data-toggle="modal" data-target="#regModal">Register</button>
+                    <button id="createCanteenBtn" class="btn btn-primary py-1">Add Canteen</button>
                 </div>
                 <div class="col-md-4 text-md-center">
                     <h1>HR</h1>
@@ -29,7 +30,7 @@
                             height: calc(1.6em + 0.75rem + 2px);">Go</button>
                         </div>
                     </form> --}}
-                    <a href="{{ url('/download/Template.xlsx')}}" class="btn btn-success">Template</a></div>
+                    <a href="{{ url('/download/Template.xlsx')}}" class="btn btn-primary py-1">Template</a></div>
                 </div>
             </div>
         </div>
@@ -168,6 +169,7 @@
             <p style="font-size:40px">* YOU DON'T HAVE ACCESS</p>
         </div>
     @endif
+    @include('includes.modal.addCanteenModal')
 </div>
 </body>
 @endsection

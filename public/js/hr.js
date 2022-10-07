@@ -3,10 +3,10 @@ function LoadhrTbl(search, url = 'hrc'){
       url: url,
       type:'get',
       data: {
-          
+
       },
       success: function (data) {
-          $('#hrTable').html(data); 
+          $('#hrTable').html(data);
       }
   });
 }
@@ -15,10 +15,10 @@ function LoadcreditTbl(search, url = 'crdc'){
       url: url,
       type:'get',
       data: {
-          
+
       },
       success: function (data) {
-          $('#creditTable').html(data); 
+          $('#creditTable').html(data);
       }
   });
 }
@@ -38,14 +38,14 @@ $(document).ready(function(){
     //     LoadhrTbl(form);
     // });
 
-    
+
 
     //  EDIT USER FORM
     $('#editModal').on('show.bs.modal', function(event){
     console.log('Model_opened');
     var button = $(event.relatedTarget)
 
-    var emp_id = button.data('myid') 
+    var emp_id = button.data('myid')
     var uname = button.data('myuname')
     var email = button.data('myemail')
     var name = button.data('myname')
@@ -59,20 +59,20 @@ $(document).ready(function(){
     modal.find('.modal-body #name2').val(name);
     modal.find('.modal-body #status').val(status);
     modal.find('.modal-body #department').val(department);
-    
+
     });
 
     //  EDIT AMOUNT FORM
     $('#amountModal').on('show.bs.modal', function(event){
         console.log('Model_opened');
         var button = $(event.relatedTarget)
-    
-        var cred_id = button.data('myid') 
+
+        var cred_id = button.data('myid')
         var name = button.data('myname')
         var ctrl = button.data('myctrl')
         var amount = button.data('myamount')
         var modal = $(this)
-    
+
         modal.find('.modal-body #cred_id').val(cred_id);
         modal.find('.modal-body #name').val(name);
         modal.find('.modal-body #ctrl').val(ctrl);
@@ -176,7 +176,7 @@ $('#editAmountForm').on('submit', function(e){
             $('#amountModal').modal("hide");
             // Load The tables
             LoadcreditTbl();
-            
+
             if (data == 'success') {
                 iziToast.success({
                     title: 'Success',
@@ -241,7 +241,7 @@ $('#editAmountForm').on('submit', function(e){
 
 
 
-        
+
 
 
 
@@ -252,4 +252,34 @@ $('#hrTable').on('click', '.page-link', function(e){
 $('#creditTable').on('click', '.page-link', function(e){
     e.preventDefault();
     LoadcreditTbl('',$(this).attr('href'));
+});
+
+/* Added */
+$('#createCanteenBtn').on('click', function(e){
+    $('#addcanteenmodal').modal('show');
+});
+
+$('#addCanteenForm').on('submit', function(e){
+    e.preventDefault();
+
+    var form = $('#addCanteenForm').serialize();
+    var url = $(this).attr('action');
+    console.log(form);
+    console.log(url);
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: form,
+        success: function(data) {
+            iziToast.success({
+                title: 'OK',
+                message: 'Successfully added canteen!',
+            });
+            $('#addcanteenmodal').modal('hide');
+        }
+    });
+});
+
+$('#addcanteenmodal').on('hidden.bs.modal', function(e){
+    $('#addCanteenForm').trigger('reset');
 });

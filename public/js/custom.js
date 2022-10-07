@@ -112,6 +112,16 @@ $.ajaxSetup({
       // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
       if (XMLHttpRequest.status == '419' || XMLHttpRequest.status == '401') {
         window.location.reload();
+      } else if (XMLHttpRequest.status == '422') {
+        var response = XMLHttpRequest.responseJSON.errors;
+        var errmsgs = '';
+        $.each(response, function (key, val) {
+          errmsgs += val + '<br>';
+        });
+        iziToast.warning({
+          title: 'ERROR',
+          message: errmsgs
+        });
       } else {
         iziToast.warning({
           title: 'ERROR ' + XMLHttpRequest.status,

@@ -14,15 +14,24 @@ class TestController extends Controller
 
     public function index()
     {
-        $ctns = \App\canteen::withCount(['transactions as transactions_sum' => function($query) {
-            $query->select(\DB::raw('sum(price)'))
-                ->whereBetween('created_at', [Date('2021-12-01'), Date('2021-12-15')]);
-        }])->with(['transactions' => function($q){
-            $q->select('canteen_id','control_no')
-                ->whereBetween('created_at', [Date('2021-12-01'), Date('2021-12-15')])
-                ->groupBy('canteen_id','control_no');
-        }]);
-        return $ctns->get();
+        $input = "How much is that doggie in the window? I do hope that doggie's for sale.";
+        $max = 10;
+        $out = '';
+        $c = 0;
+        $s = preg_split("[[\.\?\!\r\n]]",$input,-1,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
+        foreach ($s as $i => $w) {
+            $c += count(explode(' ',trim($w[0])));
+            if ($c <= $max) {
+                if(isset($s[$i+1])){
+                    $end = $s[$i+1][1];
+                }
+                else{
+                    $end = strlen($input);
+                }
+                $out .= substr($input,$w[1],$end);
+            }
+        }
+        return $out;
     }
 
     public function getFailedJobsPayload($id)
