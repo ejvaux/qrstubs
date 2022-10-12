@@ -47,7 +47,7 @@ class CanteenController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'unique:users', 'email', 'max:50'],
+            'email' => ['required', 'unique:canteens', 'email', 'max:50'],
             'uname' => ['required', 'unique:users', 'string', 'max:20'],
             'name' => ['required', 'unique:canteens', 'string', 'max:20'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
