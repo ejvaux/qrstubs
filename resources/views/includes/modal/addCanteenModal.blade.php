@@ -8,10 +8,10 @@
                 <form id="addCanteenForm" method="POST" action="{{ url('/ctn') }}">
                     @csrf
                     <div class="form-group row">
-                        <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                        <label for="canteen_uname" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                         <div class="col-md-6">
-                            <input id="uname" type="text" class="form-control{{ $errors->has('uname') ? ' is-invalid' : '' }}" value="{{ old('uname') }}" name="uname" required autofocus>
+                            <input id="canteen_uname" type="text" class="form-control{{ $errors->has('uname') ? ' is-invalid' : '' }}" value="{{ old('uname') }}" name="uname" required autofocus>
                             @if ($errors->has('uname'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('uname') }}</strong>
@@ -20,10 +20,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <label for="canteen_email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" name="email" autofocus>
+                            <input id="canteen_email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" name="email" autofocus>
 
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
@@ -34,10 +34,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                        <label for="canteen_name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                            <input id="canteen_name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
                             @if ($errors->has('name'))
                                 <span class="invalid-feedback" role="alert">

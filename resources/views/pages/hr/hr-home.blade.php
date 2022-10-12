@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('js')
-    <script src="{{ asset('js\hr.js') }}" defer></script>
+    <script src="{{ asset('js\hr.js?v=1') }}" defer></script>
     <script src="{{ asset('js\export\userExport.js') }}" defer></script>
     <script src="{{ asset('js\import\creditImport.js') }}" defer></script>
 @endsection
