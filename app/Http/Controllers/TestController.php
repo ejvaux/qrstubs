@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
+use App\Events\RealTimeMessage;
 
 class TestController extends Controller
 {
@@ -41,5 +42,10 @@ class TestController extends Controller
         $data = unserialize($jsonpayload->data->command);
         $jsonpayload->data->command = $data;
         return json_encode($jsonpayload);
+    }
+
+    public function testBroadcast()
+    {
+        event(new RealTimeMessage());
     }
 }

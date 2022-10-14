@@ -67,4 +67,20 @@ $(document).ready(function () {
         close: false,
         pauseOnHover: true,
     });
+
+    Echo.channel('events')
+    .listen('RealTimeMessage', (e) => {
+        console.log('Clicked!');
+    });
+
+    $('#app').on('click', '#testnotif', function(e){
+        $.ajax({
+            url: 'testBroadcast',
+            type: "get",
+            global: false,
+            error: function(XMLHttpRequest){
+                console.log(XMLHttpRequest);
+            }
+        });
+    });
 });

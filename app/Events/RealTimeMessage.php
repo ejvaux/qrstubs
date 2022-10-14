@@ -14,11 +14,9 @@ class RealTimeMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public string $message;
-
-    public function __construct(string $message)
+    public function __construct()
     {
-        $this->message = $message;
+
     }
 
     public function broadcastOn(): Channel
