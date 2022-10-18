@@ -10,13 +10,13 @@
             <div class="modal-body">
                 <p>
                     <h3>MIS</h3>
-                    {{--<b>Name:</b>&nbsp; Francis Habana<br>
-                    <b>Email:</b>&nbsp;  francisco_habana@sercomm.com<br>
-                    <b>Extension #:</b>&nbsp; 80860 <br>
-                    <br>--}}
+                    <br>                    
                     <b>Name:</b>&nbsp; Francis Habana<br>
                     <b>Email:</b>&nbsp; francisco_habana@sercomm.com<br>
                     <b>Extension #:</b>&nbsp; 80860
+                    <b>Name:</b>&nbsp; James Benedict Tiengo<br>
+                    <b>Email:</b>&nbsp;  james_tiengo@sercomm.com<br>
+                    <b>Extension #:</b>&nbsp; 80861 <br>
                     <br><br>
                     <h3>HR Department</h3>
                     <b>Name:</b>&nbsp; Divine Goce<br>
