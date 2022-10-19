@@ -1,10 +1,10 @@
-{{--@include('includes.modal.creditImportModal')
-<div class="row mt-2">
-    <div class="col text-right">
-        <button id="uploadCreditsBtn" class="btn btn-outline-secondary py-1">Upload Credits</button>
+<div class="row mb-0 mt-2">
+    <div class="col-md-4">
+        <input class="form-control" type="text" name="" id="userSearch" placeholder="Type NAME or USERNAME and press ENTER">
     </div>
-</div>--}}
-<div id="hrTable">
-    {{-- FUNCTION IN JS HAS AUTO RELOAD --}}
-    {{-- @include('includes.table.hrTbl') --}}
+</div>
+<div class="row mt-2">
+    <div class="col">
+        <div id="hrTable"></div>
+    </div>
 </div>

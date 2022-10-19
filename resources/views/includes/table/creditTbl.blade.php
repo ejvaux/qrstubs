@@ -1,7 +1,7 @@
 <div style="overflow-x:auto;">
-    <table id="mytable" class="table table-bordred table-striped" style="width:100%;">  
+    <table id="mytable" class="table table-bordred table-striped" style="width:100%;">
         <thead>
-        <tr> &nbsp; &nbsp; 
+        <tr>
             <th><i class="fa fa-users"></i>&nbsp; &nbsp; &nbsp;NAME</th>
             <th>CONTROL NO</th>
             <th>CREDIT AMOUNT</th>
@@ -15,7 +15,7 @@
                     @if ($users->count() > 0)
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{$user->name}}</td> 
+                                <td>{{$user->name}}</td>
                                 @if ($user->credits != NULL)
                                     <td>{{$user->credits->control_no}}</td>
                                     <td>{{$user->credits->amount}}</td>
@@ -29,14 +29,14 @@
                                     <td>None</td>
                                     <td></td>
                                 @endif
-                                
+
                                 {{-- <td style="text-align:center">
                                 @if ($user->credits != NULL)
                                     @if ($user->credits->control_no == $ctrl)
-                                        
+
                                     @endif
                                 @endif
-                                                          
+
                                 </td> --}}
                             </tr>
                         @endforeach
@@ -59,6 +59,6 @@
             {{-- {{ $employees->appends(request()->query())->links() }} --}}
             {!! $users->appends(\Request::except('page'))->render() !!}
             {{-- Input::except(array('page')) --}}
-        @endisset                        
-    </div>    
+        @endisset
+    </div>
 </div>

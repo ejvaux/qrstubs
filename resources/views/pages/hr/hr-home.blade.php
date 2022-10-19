@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('js')
-    <script src="{{ asset('js\hr.js?v=1') }}" defer></script>
+    <script src="{{ asset('js\hr.js?v=2') }}" defer></script>
     <script src="{{ asset('js\export\userExport.js') }}" defer></script>
     <script src="{{ asset('js\import\creditImport.js') }}" defer></script>
 @endsection
@@ -10,27 +10,18 @@
 <body class="body">
 <div class="container1">
     @if(Auth::check() && Auth::user()->role_id == 1)
-    <div class="card text-middle">
+    <div class="card">
         <div class="card-header">
-            <div class="row" style="margin: 20px 0px;">
-                <div class="col-md-4 text-md-left">
-                    <button class="btn btn-primary py-1" data-toggle="modal" data-target="#regModal">Register</button>
-                    <button id="createCanteenBtn" class="btn btn-primary py-1">Add Canteen</button>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <button class="btn btn-outline-secondary py-1" data-toggle="modal" data-target="#regModal">Register</button>
+                    <button id="createCanteenBtn" class="btn btn-outline-secondary py-1">Add Canteen</button>
                 </div>
-                <div class="col-md-4 text-md-center">
+                <div class="col-md-4 text-center">
                     <h1>HR</h1>
                 </div>
-                <div class="col-md-4 text-md-right">
-                    {{-- <form id="searchNForm" method="POST">
-                    {{ csrf_field() }}
-                        <div class="input-group">
-                            <input type="search" class="form-control" name="searchtxt"
-                                placeholder="Search name here.." > <span class="input-group-btn"></span>
-                            <button type="submit" id="sn-search-button" style="
-                            height: calc(1.6em + 0.75rem + 2px);">Go</button>
-                        </div>
-                    </form> --}}
-                    <a href="{{ url('/download/Template.xlsx')}}" class="btn btn-primary py-1">Template</a></div>
+                <div class="col-md-4 text-right">
+                    <a href="{{ url('/download/Template.xlsx')}}" class="btn btn-outline-secondary py-1">Template</a>
                 </div>
             </div>
         </div>

@@ -21,8 +21,11 @@ class HrController extends Controller
     public function index(Request $request)
     {
         $departments = Department::all();
-        $users = User::where('role_id', 'like', '3')->orderBy('status');
-        $users = $users->orderBy('name')->paginate(10);
+        $users = User::where('role_id', 'like', '3');
+        if(isset($request->search) && $request->search != null && $request->search != ''){
+            $users = $users->where('name','LIKE','%'.$request->search.'%')->orwhere('uname','LIKE','%'.$request->search.'%');
+        }
+        $users = $users->orderBy('status')->orderBy('name')->paginate(10);
         return view('includes.table.hrTbl',compact('users', 'departments'));
     }
 
@@ -60,7 +63,7 @@ class HrController extends Controller
         $hashed2 = Hash::make($password);
 
         $register = new User;
-        
+
         $register->email = $request->email;
         $register->uname = $request->uname;
         $register->name = $request->name;
@@ -68,8 +71,8 @@ class HrController extends Controller
         $register->role_id = $request->role_id;
         $register->department_id = $request->department_id;
         $register->password = $hashed2;
-        
-        
+
+
         $register->save();
 
         return 'success';
@@ -121,9 +124,9 @@ class HrController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
 
 
 
-    
+
+
 }

@@ -3,8 +3,9 @@ function LoadhrTbl(search, url = 'hrc'){
       url: url,
       type:'get',
       data: {
-
+        'search': search
       },
+      global: false,
       success: function (data) {
           $('#hrTable').html(data);
       }
@@ -15,8 +16,9 @@ function LoadcreditTbl(search, url = 'crdc'){
       url: url,
       type:'get',
       data: {
-
+        'search': search
       },
+      global: false,
       success: function (data) {
           $('#creditTable').html(data);
       }
@@ -283,3 +285,19 @@ $('#addCanteenForm').on('submit', function(e){
 $('#addcanteenmodal').on('hidden.bs.modal', function(e){
     $('#addCanteenForm').trigger('reset');
 });
+
+$('#userSearch').on('keypress',function(e){
+    var search = $(this).val();
+    if (e.code == 'Enter') {
+        console.log(search);
+        LoadhrTbl(search);
+    }
+})
+
+$('#creditSearch').on('keypress',function(e){
+    var search = $(this).val();
+    if (e.code == 'Enter') {
+        console.log(search);
+        LoadcreditTbl(search);
+    }
+})

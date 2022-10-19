@@ -105,6 +105,7 @@ class EmailController extends Controller
      */
     public function destroy(Email $email)
     {
-        //
+        $email->delete();
+        return redirect('/admin/report')->with('success', 'Email deleted!');
     }
 }

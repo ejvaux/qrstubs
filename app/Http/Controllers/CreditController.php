@@ -22,18 +22,20 @@ class CreditController extends Controller
         $users = User::where('role_id', 3)->where('status', 0)
             ->with(['credits' => function($q) use($ctrl){
                 $q->where('credits.control_no', $ctrl);
-            }, 
+            },
                     'transactions' => function($q) use($ctrl){
                 $q->where('transactions.control_no', $ctrl);
             }]);
-
+        if(isset($request->search) && $request->search != null && $request->search != ''){
+            $users = $users->where('name','LIKE','%'.$request->search.'%')->orwhere('uname','LIKE','%'.$request->search.'%');
+        }
         $expr = $this->generateExpirationNum();
-        
+
         $users = $users->orderBy('name')->paginate(10);
         // return view('includes.table.creditTbl', compact('users','ctrl','expr'));
         return view('includes.table.creditTbl', compact('users','expr'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -104,7 +106,7 @@ class CreditController extends Controller
     {
         $credit = credit::findOrFail($request->credit_id);
         $credit->amount = $request->amount;
-        $credit->save(); 
+        $credit->save();
 
         return 'success';
     }
@@ -138,7 +140,7 @@ class CreditController extends Controller
     }
 
     function generateExpirationNum2(){
-        
+
         $day = Carbon::now()->format('d');
         $month = Carbon::now()->format('m');
         $newMonth = Carbon::now()->addMonth();
@@ -147,7 +149,7 @@ class CreditController extends Controller
         $year = Carbon::now()->format('Y');
         $newYear = Carbon::now()->addYear();
         $newYear2 =  $newYear->format('Y');
-        
+
         if ($day <= 15) {
             $con = '16'.'-'.$month.'-'.$year;
         }
@@ -159,7 +161,7 @@ class CreditController extends Controller
                 $con = '01'.'-'.$newMonth2.'-'.$year;
             }
         }
-        
+
         return $con;
     }
 

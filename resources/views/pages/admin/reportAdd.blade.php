@@ -5,12 +5,12 @@
 @endsection
 
 @section('content')
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center mt-2">
         <div class="col-md-5">
             <div class="row">
                 <div class="col-md">
-                    <a class="btn btn-outline-primary" href="{{url('/admin/report')}}"><i class="fas fa-times"></i>Back</a>
+                    <a class="btn btn-outline-secondary" href="{{url('/admin/report')}}"><i class="fas fa-times"></i>Back</a>
                 </div>
             </div>
             <div class="row mt-2">
@@ -30,7 +30,7 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-outline-success" name="submit" id="emailSubmitBtn"><i class="far fa-save"></i> Submit</button>
+                                    <button type="submit" class="btn btn-outline-primary" name="submit" id="emailSubmitBtn"><i class="far fa-save"></i> Submit</button>
                                 </div>
                                 </form>
                             </div>

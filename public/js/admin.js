@@ -8,7 +8,7 @@ $('.activebtn').on('click',function(e) {
     console.log(url);
     $.ajax({
         url: url,
-        type: "PUT",
+        type: "POST",
         data: form_data,
         global: false,
         success: function(data) {
@@ -19,6 +19,26 @@ $('.activebtn').on('click',function(e) {
                 title: 'SUCCESS',
                 message: 'Email status changed!',
             });
+        }
+    });
+})
+
+$('.deletebtn').on('click', function(){
+    console.log('TEST');
+    var form = $('#'+this.id+'_form');
+    console.log('#'+this.id+'_form');
+    console.log(this.id);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.trigger('submit');
         }
     });
 })
