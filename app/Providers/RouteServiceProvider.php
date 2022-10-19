@@ -26,6 +26,10 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        Route::bind('email', function($id) {
+            return \App\Email::withoutGlobalScopes()->findOrFail($id);
+        });
     }
 
     /**

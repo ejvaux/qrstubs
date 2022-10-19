@@ -88,6 +88,16 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('FAQ') }}">{{ __('FAQ') }}</a>
                             </li>
+                            @if(Auth::user()->role_id==1 && Auth::user()->uname==env('ADMIN_USERNAME', null))
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Admin <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ url('/admin/report') }}">{{ __('Report Settings') }}</a>
+                                </div>
+                            </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

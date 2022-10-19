@@ -39,6 +39,9 @@ Route::get('/error', 'HomeController@error');
 Route::get('/password', 'HomeController@password');
 Route::get('change-password', 'ChangePasswordController@index');
 Route::get('/FAQ', function(){ return view('FAQ'); });
+Route::get('/admin/report', 'AdminController@report');
+Route::get('/admin/report/edit/{id}', 'AdminController@reportEdit');
+Route::get('/admin/report/add', 'AdminController@reportAdd');
 
 //Get Resources of Controller
 Route::resources([
@@ -47,6 +50,7 @@ Route::resources([
     'usrtrct' => 'TransactionController',
     'usrtrct2' => 'UserController',
     'crdc' => 'CreditController',
+    'email' => 'EmailController',
 ]);
 
 // POST Method
