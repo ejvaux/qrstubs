@@ -34,7 +34,7 @@ class TransactionCompleted extends Mailable implements ShouldQueue
     {
         return $this->markdown('emails.transactionCompleted')
                     ->subject('Pending Transactions status update')
-                    ->bcc('edmund_mati@sercomm.com')
+                    ->bcc('edmund_mati@sercomm.com','francisco_habana@sercomm.com')
                     ->with([
                         'name' => $this->user->name,
                         'transactions' => $this->transactions,

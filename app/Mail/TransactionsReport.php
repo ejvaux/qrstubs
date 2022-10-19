@@ -37,7 +37,7 @@ class TransactionsReport extends Mailable implements ShouldQueue
         return $this->markdown('emails.transactionReport')
                     ->subject('Sercomm Meal Allowance Transaction Report')
                     ->attachFromStorageDisk('public',$this->path)
-                    ->bcc('edmund_mati@sercomm.com')
+                    ->bcc('edmund_mati@sercomm.com','francisco_habana@sercomm.com')
                     ->with([
                         'name' => $this->name,
                         'date' => $this->date,

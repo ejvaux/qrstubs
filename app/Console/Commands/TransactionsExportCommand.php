@@ -75,7 +75,7 @@ class TransactionsExportCommand extends Command
                 if ($ctn->email) {
                     $email = $ctn->email;
                 } else {
-                    $email = 'edmund_mati@sercomm.com';
+                    $email = 'francisco_habana@sercomm.com';
                 }
                 Mail::to($email)
                     ->later(now()->addMinutes(3), new TransactionsReport($ctn->name,$path,$d->format('F d, Y')));
@@ -108,10 +108,10 @@ class TransactionsExportCommand extends Command
                 if ($ctn->email) {
                     $email = $ctn->email;
                 } else {
-                    $email = 'edmund_mati@sercomm.com';
+                    $email = 'francis_habana@sercomm.com';
                 }
                 Mail::to($email)
-                    ->bcc('edmund_mati@sercomm.com')
+                    ->bcc('edmund_mati@sercomm.com','francisco_habana@sercomm.com')
                     ->later(now()->addMinutes(5), new TransactionsCutoffReport($path,$dte['from'],$dte['to'],$ctn->id));
             } catch (\Throwable $th) {
                 Log::info('Cutoff Transaction Report: '.$th->getMessage().' | '.$dte['from']->format('Y-m-d').'-'.$dte['to']->format('Y-m-d').' | '.$ctn->name);
