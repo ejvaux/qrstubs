@@ -18,6 +18,11 @@ HR Account
  - create account with **HR** role
  - set **APP_REGISTER=false** after registration
 
+Admin Account
+
+ - set **ADMIN_USERNAME** in **.env** file with a username
+ - the username must be a **HR** account
+
 ## Developers
 
  1. [Edmund Orario Mati Jr.](https://github.com/ejvaux)
