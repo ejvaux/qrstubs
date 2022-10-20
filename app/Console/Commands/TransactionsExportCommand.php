@@ -64,8 +64,8 @@ class TransactionsExportCommand extends Command
 
     public function dailyReport()
     {
-        //$dt = Date('2021-12-02');
-        $dt = Date('Y-m-d');
+        $dt = Date('2021-12-02');
+        //$dt = Date('Y-m-d');
         $d = Carbon::parse($dt)->subDay();
         $ctns = Canteen::all();
         foreach ($ctns as $ctn) {
@@ -111,7 +111,7 @@ class TransactionsExportCommand extends Command
                     $email = 'francis_habana@sercomm.com';
                 }
                 Mail::to($email)
-                    ->bcc('edmund_mati@sercomm.com','francisco_habana@sercomm.com')
+                    ->bcc(['edmund_mati@sercomm.com','francisco_habana@sercomm.com'])
                     ->later(now()->addMinutes(5), new TransactionsCutoffReport($path,$dte['from'],$dte['to'],$ctn->id));
             } catch (\Throwable $th) {
                 Log::info('Cutoff Transaction Report: '.$th->getMessage().' | '.$dte['from']->format('Y-m-d').'-'.$dte['to']->format('Y-m-d').' | '.$ctn->name);
