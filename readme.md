@@ -8,8 +8,8 @@
 6. setup **Queue Worker** service, run **`php artisan  queue:work`**
 7. setup **Websockets** service, run **`artisan websockets:serve --debug`**
 
-## Environment differences 
-- For **Development** or **Test**, set **APP_ENV=loca**l in **.env** file
+## Environment differences
+- For **Development** or **Test**, set **APP_ENV=local** in **.env** file
 - For **Production**, set **APP_ENV=production** and **APP_DEBUG=false** in **.env** file
 ## Account
 HR Account
