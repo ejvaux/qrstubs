@@ -27,7 +27,11 @@ class CreditController extends Controller
                 $q->where('transactions.control_no', $ctrl);
             }]);
         if(isset($request->search) && $request->search != null && $request->search != ''){
-            $users = $users->where('name','LIKE','%'.$request->search.'%')->orwhere('uname','LIKE','%'.$request->search.'%');
+            //$users = $users->where('name','LIKE','%'.$request->search.'%')->orwhere('uname','LIKE','%'.$request->search.'%');
+            $users = $users->where(function ($query) use($request) {
+                $query->where('name','LIKE','%'.$request->search.'%')
+                        ->orwhere('uname','LIKE','%'.$request->search.'%');
+            });
         }
         $expr = $this->generateExpirationNum();
 
